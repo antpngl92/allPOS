@@ -5,10 +5,15 @@ from employee.models import Employee
 
 class EmployeeBackend(ModelBackend):
 
-    def authenticate(self, request, **kwargs):
-        pin = kwargs['pin']
+    def authenticate(self, pin):
         try:
-            employee = Employee.objects.get(pin=pin)
-            return employee
-        except Employee.DoesNotExist:
-            pass
+            return Employee.objects.get(pin=pin)
+        except User.DoesNotExist:
+            return None
+
+    def get_user(self, user_pk):
+        try:
+            return Employee.objects.get(pk=user_pk)
+        except: 
+            User.DoesNotExist
+            return None

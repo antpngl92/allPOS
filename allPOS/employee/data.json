@@ -1,0 +1,31 @@
+[
+    {
+        "model": "employee.employee",
+        "pk": 1,
+        "fields": {
+            "password": "!QcXbODcdTqnsso8f6S59vtewJSvBOZCIyikj0hBg",
+            "first_name": "mark",
+            "second_name": "",
+            "last_name": "morrison",
+            "date_of_bith": "2020-03-03",
+            "address": "",
+            "tel_number": "",
+            "email": "",
+            "position": "",
+            "hourly_pay_rate": null,
+            "start_date": null,
+            "end_date": null,
+            "is_employeed": null,
+            "nin": null,
+            "permission_level": 1,
+            "profile_picture": "employee_profile_picture/default.png",
+            "pin": 1111,
+            "date_joined": "2020-12-09T02:31:01.647Z",
+            "last_login": "2020-12-09T02:31:01.647Z",
+            "is_admin": true,
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true
+        }
+    }
+]

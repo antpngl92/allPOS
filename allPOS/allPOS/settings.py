@@ -37,7 +37,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Added apps
     'employee',
+    'epos',
+    'order',
+    'timestamp',
+    'ingredient',
+    'product',
+    'supplier',
+    'report',
+    'schedule',
+    'stock',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +62,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'allPOS.urls'
-
+LOGIN_URL = '/login/'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -118,7 +129,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
 
 
 AUTHENTICATION_BACKENDS = [

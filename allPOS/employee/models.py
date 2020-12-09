@@ -48,28 +48,27 @@ class Employee(AbstractBaseUser):
 
     # Person related fields
     first_name          = models.CharField(max_length=20)
-    second_name         = models.CharField(max_length=20)
+    second_name         = models.CharField(blank=True, max_length=20)
     last_name           = models.CharField(max_length=20)
-    date_of_bith        = models.DateField(blank=True, null=True)
+    date_of_birth        = models.DateField(blank=True)
     address             = models.CharField(max_length=60, blank=True)
     tel_number          = models.CharField(blank=True, max_length=12)
     email               = models.EmailField(blank=True)
 
     # Job related fields
     position            = models.CharField(blank=False, max_length=20)
-    hourly_pay_rate     = models.DecimalField(max_digits=5, decimal_places=2, null=True)
-    start_date          = models.DateField(null=True)
-    end_date            = models.DateField(null=True)
-    is_employeed        = models.BooleanField(null=True)
-    nin                 = models.CharField(max_length=9, null=True, unique=True)
+    hourly_pay_rate     = models.DecimalField(max_digits=5, decimal_places=2,null=True, blank=True)
+    start_date          = models.DateField(blank=True, null=True,)
+    end_date            = models.DateField(blank=True, null=True,)
+    is_employeed        = models.BooleanField(blank=True, null=True,)
+    nin                 = models.CharField(max_length=9, blank=True, unique=True)
     permission_level    = models.IntegerField(choices=AUTHORIZATION, default=EMPLOYEE)
-    profile_picture     = models.ImageField(upload_to='employee_profile_picture/', default='employee_profile_picture/default.png')
+    profile_picture     = models.ImageField(upload_to='staticfiles/img/employee_profile_picture/', default='staticfiles/img/employee_profile_picture/default.png')
     pin                 = models.IntegerField('Pincode', unique=True)
-
+    password            = models.CharField(blank=True, max_length=100)
 
     
     # REQUIRED for AbstractBaseUser class
-  
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now_add=True)
     is_admin = models.BooleanField(default=False)
@@ -85,7 +84,7 @@ class Employee(AbstractBaseUser):
     # Returns the full name of an employee
     def get_full_name(self):
         full_name = f"{self.first_name} {self.second_name} {self.last_name}"
-        return first_name.strip() 
+        return full_name.strip() 
 
     # Returns the short name of an employee
     def get_short_name(self):

@@ -1,16 +1,44 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/login.css'%}">
+  <title>Login</title>
 </head>
+
 <body>
-    {{request.user.first_name}}
-    <form method="POST">
-        {%csrf_token%}
-    <input type="number" name="pin" placeholder="Pin" >
-    <button type="submit">test</button>
+  <div class="container">
+
+    <div id="screen">
+      <div id="time"></div>
+      <div id="date"></div>
+    </div>
+
+    <form method="POST" class="box">{%csrf_token%}
+      <h1>Login</h1>
+      <input type="number" name="pin" placeholder="Pin" autocomplete="off">
+
+      {% for field in login_form %}
+      <p>
+        {% for error in field.errors %}
+      <p style="color: red;">{{error}}</p>
+      {% endfor %}
+      </p>
+      {% endfor %}
+      {% if login_form.non_field_errors %}
+      <div style="color: red">
+        <p>{{login_form.non_field_errors}}</p>
+      </div>
+      {% endif %}
+
+      <input type="submit" name="" value="Login">
     </form>
+    {% include 'epos/scripts.html' %}
+  </div>
+  <script type="text/javascript" src="{% static 'js/login_date_time.js' %}"></script>
 </body>
 </html>

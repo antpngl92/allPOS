@@ -1,17 +1,16 @@
 {% extends 'epos/base.html' %}
 {% block content %}
 
-<a href="{% url 'logout' %}">Logout</a>
-<h1>Hello {{user.get_full_name}}</h1>
-<p>Date of birth: {{user.date_of_birth}} <br>
-<Address>{{user.address}}</Address>
-Telephone number: {{user.tel_number}} <br>
-Email: {{user.email}} <br>
-Position: {{user.position}} <br>
-Pay Rate: {{user.hourly_pay_rate}} <br>
-Start Date: <date>{{user.start_date}}</date>
-</p>
-
-
-
+<div class="container">
+    <a href="{% url 'logout' %}">Logout</a>
+    <h1>Hello {{user.get_full_name}}</h1>
+    <p>Date of birth: {{user.date_of_birth}} <br>
+    <Address>{{user.address}}</Address>
+    Telephone number: {{user.tel_number}} <br>
+    Email: {{user.email}} <br>
+    Position: {{user.position}} <br>
+    Pay Rate: {{user.hourly_pay_rate}} <br>
+    Start Date: <date>{{user.start_date}}</date>
+    </p>
+</div>
 {% endblock %}

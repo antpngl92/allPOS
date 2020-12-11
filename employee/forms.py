@@ -15,5 +15,4 @@ class AccountAuthenticationForm(forms.ModelForm):
     def clean(self):
         if self.is_valid():
             pin = self.cleaned_data['pin']
-            if not authenticate(pin=pin):
-                raise forms.ValidationError('Invalid login')
+            

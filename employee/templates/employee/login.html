@@ -5,7 +5,7 @@
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{% static 'css/login.css'%}">
   <title>Login</title>
 </head>
@@ -13,33 +13,34 @@
 <body>
   <div class="container">
 
+    <div class="header">
+      <img class="logo" src="{% static 'img/logo.png' %}">
+    </div>
+    
+
     <div id="screen">
       <div id="time"></div>
       <div id="date"></div>
     </div>
 
-
+  <div id='form'>
     <form method="POST" class="box">{%csrf_token%}
-      <h1>Enter Pin</h1>
-      <input type="number" name="pin" placeholder="Pin" autocomplete="off">
+    
 
-      {% for field in login_form %}
-      <p>
-        {% for error in field.errors %}
-      <p style="color: red;">{{error}}</p>
-      {% endfor %}
-      </p>
-      {% endfor %}
-      {% if login_form.non_field_errors %}
-      <div style="color: red">
-        <p>{{login_form.non_field_errors}}</p>
-      </div>
-      {% endif %}
-
+      <input type="number" name="pin" placeholder="Enter Pin" required inputmode="numeric" autofocus autocomplete="off">
       <input type="submit" name="" value="Login">
     </form>
+  </div>
     {% include 'epos/scripts.html' %}
   </div>
   <script type="text/javascript" src="{% static 'js/login_date_time.js' %}"></script>
+
+
+  <footer id="footer">
+    <p>
+      All payments are sent to the payment processor.<br>
+      All orders are sent to the server.
+    </p>
+  </footer>
 </body>
 </html>

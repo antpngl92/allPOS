@@ -1,92 +1,143 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    background: #34495e;
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+  background: #006FAE;
 }
 
 .box {
-    width: 300px;
-    padding: 40px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #191919;
-    text-align: center;
-    border-radius: 20%;
-
+  width: 300px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  text-align: center;
+  border-radius: 20%;
 }
 
-.box h1 {
-    color: white;
-    font-weight: 500;
-}
+
 
 .box input[type="number"] {
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid cadetblue;
-    padding: 14px 10px;
-  
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s;
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  padding: 14px 10px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  font-family: 'Open Sans';
 }
 
-.box input[type="number"]:focus{
-    width: 240px;
-    border-color: cadetblue;
+.box input[type="number"]:focus {
+  width: 240px;
+  border-color: white;
 }
 
 .box input[type="submit"] {
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid rgb(4, 88, 84);
-    padding: 14px 40px;
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s;
-    cursor: pointer;
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 1px solid white;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .box input[type="submit"]:hover {
-    background: cadetblue;
+  background: white;
+  color: #006FAE;
 }
 
 /* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   -webkit-appearance: none;
-  
 }
 
 /* Firefox */
+
 input[type=number] {
   -moz-appearance: textfield;
 }
 
+#screen {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+}
 
-div#screen {  
-    display: block;
-    position: relative;
-    text-align: center;  
-    opacity: 1;
-    font-family: 'Open Sans', sans-serif;
-    color: white;
+div#time {
+  font-size: 72px;
+}
+
+::placeholder {
+  color: white;
+  opacity: 1;
+}
+.header {
+  background-color: transparent;
+  color: #ffffff;
+  padding: 10px;
+}
+.logo{
+  height: 60px;
+ 
+}
+
+
+/* For phones: below 481 x px*/
+@media screen and (max-height: 481px), screen and(max-width: 321px) {
+   #time{
+    font-size: 20px !important;
+  }
+  .box{
+    top: 60%;
+  }
+  .header{
+    padding: 1px;
+    width: 100%;
+  }
+  #footer{
+    font-size: 10px;
+  }
+  .logo{
+    height: 40px;
+  }
+}
+/* For Tablets: after 600px*/
+@media only screen and (min-width: 600px) {
+
 
 }
-div#time {
-    font-size: 72px;
-    margin: 60px auto 0px;
-  
-  }
-  
+/* For desktop: after 768px*/
+@media (min-width: 768px) and (min-height: 800px){
+
+    div#time {
+      margin-top: 120px;
+    }
+    .box{
+      top: 45%;
+    }
+
+}
+
+
+#footer{
+  position: absolute;
+  bottom: 0;
+  width: 80%;
+  height: 4rem; 
+  color: #ffffff;
+  left: 20px
+}

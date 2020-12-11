@@ -6,13 +6,12 @@ from django.core.validators import MinLengthValidator
 
 class EmployeeModelManager(BaseUserManager):
 
-    def create_user(self, pin, first_name, last_name, permission_level, date_of_bith,  password=None,**extra_fields):
+    def create_user(self, pin, first_name, last_name, permission_level,  password=None,**extra_fields):
         if not pin:
             raise ValueError("You must provide pin")
         user = self.model(
             pin=pin,
             permission_level=permission_level,
-            date_of_bith=date_of_bith,
             first_name=first_name,
             last_name=last_name,
         )
@@ -20,17 +19,17 @@ class EmployeeModelManager(BaseUserManager):
         user.save(using=self._db)
         return user
     
-    def create_superuser(self, pin,first_name,last_name, permission_level,date_of_bith, password=None, **extra_fields):
+    def create_superuser(self, pin,first_name,last_name, permission_level, password=None, **extra_fields):
         user = self.create_user(
             pin=pin,
             permission_level=permission_level,
-            date_of_bith=date_of_bith, 
             first_name=first_name,
             last_name=last_name,
         )
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
+        user.set_unusable_password()
         user.save(using=self._db)
         return user
 
@@ -50,7 +49,7 @@ class Employee(AbstractBaseUser):
     first_name          = models.CharField(max_length=20)
     second_name         = models.CharField(blank=True, max_length=20)
     last_name           = models.CharField(max_length=20)
-    date_of_birth        = models.DateField(blank=True)
+    date_of_birth        = models.DateField(blank=True, null=True)
     address             = models.CharField(max_length=60, blank=True)
     tel_number          = models.CharField(blank=True, max_length=12)
     email               = models.EmailField(blank=True)
@@ -79,7 +78,7 @@ class Employee(AbstractBaseUser):
     objects = EmployeeModelManager()
 
     USERNAME_FIELD = 'pin'
-    REQUIRED_FIELDS = ['first_name', 'last_name','permission_level', 'date_of_bith']
+    REQUIRED_FIELDS = ['first_name', 'last_name','permission_level']
 
     # Returns the full name of an employee
     def get_full_name(self):

@@ -25,7 +25,9 @@ SECRET_KEY = ')$sm!(c4*azsm1#1!&458%0(ybzn26v+z*j!)owece_=i0y=#u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['127.0.0.1','localhost','.apps.okd.eecs.qmul.ac.uk']
+ALLOWED_CIDR_NETS = ['10.128.0.0/14']
 
 
 # Application definition
@@ -59,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allow_cidr.middleware.AllowCIDRMiddleware',
 ]
 
 ROOT_URLCONF = 'allPOS.urls'

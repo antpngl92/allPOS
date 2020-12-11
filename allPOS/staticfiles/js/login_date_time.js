@@ -21,7 +21,4 @@ function showTime() {
     showDate(date);
     setTimeout(showTime, 1000);
   }
-
-
   showTime();
- 

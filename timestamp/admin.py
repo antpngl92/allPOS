@@ -1,3 +1,6 @@
 from django.contrib import admin
+from timestamp.models import TimeStapm
 
-# Register your models here.
+
+
+admin.site.register(TimeStapm)

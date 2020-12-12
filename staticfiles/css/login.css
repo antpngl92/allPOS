@@ -141,3 +141,9 @@ div#time {
   color: #ffffff;
   left: 20px
 }
+#clock{
+  color:red;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}

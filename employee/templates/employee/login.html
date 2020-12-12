@@ -21,20 +21,20 @@
     <div id="screen">
       <div id="time"></div>
       <div id="date"></div>
+      <div id="clock">{{clocked }}</div>
     </div>
 
   <div id='form'>
     <form method="POST" class="box">{%csrf_token%}
-    
-
-      <input type="number" name="pin" placeholder="Enter Pin" required inputmode="numeric" autofocus autocomplete="off">
-      <input type="submit" name="" value="Login">
+      <input type="number" id="pin" name="pin" placeholder="Enter Pin" required inputmode="numeric" autofocus autocomplete="off">
+      <button type="submit" >Login</button>
+      <button id="clock_in_out" >Clock In/Out</button>
     </form>
+    
   </div>
+
     {% include 'epos/scripts.html' %}
   </div>
-  <script type="text/javascript" src="{% static 'js/login_date_time.js' %}"></script>
-
 
   <footer id="footer">
     <p>
@@ -42,5 +42,10 @@
       All orders are sent to the server.
     </p>
   </footer>
+  <script>
+    var CLOCK_API = "{% url 'clock' %}"
+
+  </script>
+
 </body>
 </html>

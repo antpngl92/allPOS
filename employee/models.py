@@ -60,7 +60,7 @@ class Employee(AbstractBaseUser):
     start_date          = models.DateField(blank=True, null=True,)
     end_date            = models.DateField(blank=True, null=True,)
     is_employeed        = models.BooleanField(blank=True, null=True,)
-    nin                 = models.CharField(max_length=9, blank=True, unique=True)
+    nin                 = models.CharField(max_length=9, blank=True, null=True, unique=True)
     permission_level    = models.IntegerField(choices=AUTHORIZATION, default=EMPLOYEE)
     profile_picture     = models.ImageField(upload_to='staticfiles/img/employee_profile_picture/', default='staticfiles/img/employee_profile_picture/default.png')
     pin                 = models.IntegerField('Pincode', unique=True)

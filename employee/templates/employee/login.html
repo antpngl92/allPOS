@@ -27,8 +27,18 @@
   <div id='form'>
     <form method="POST" class="box">{%csrf_token%}
       <input type="number" id="pin" name="pin" placeholder="Enter Pin" required inputmode="numeric" autofocus autocomplete="off">
-      <button type="submit" >Login</button>
-      <button id="clock_in_out" >Clock In/Out</button>
+      <div class="buttons-table">
+        <table>
+          <tr>
+            <td>
+          <button class="button1 " type="submit" >Login</button>
+        </td>
+        <td>
+          <button class="button2 " id="clock_in_out" >Clock In/Out</button>
+        </td>
+        </tr>
+        </table>
+      </div>
     </form>
     
   </div>

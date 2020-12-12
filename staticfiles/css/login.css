@@ -17,8 +17,6 @@ body {
   border-radius: 20%;
 }
 
-
-
 .box input[type="number"] {
   border: 0;
   background: none;
@@ -37,27 +35,30 @@ body {
   width: 240px;
   border-color: white;
 }
-
-.box input[type="submit"] {
-  border: 0;
-  background: none;
-  display: block;
-  margin: 20px auto;
-  text-align: center;
+.button1, .button2{
+  border-radius: 66% ;
+  height: 66px ;
+  background-color: transparent;
   border: 1px solid white;
-  padding: 14px 40px;
-  outline: none;
   color: white;
-  border-radius: 24px;
-  transition: 0.25s;
-  cursor: pointer;
+  width: 66px;
   font-family: 'Open Sans', sans-serif;
+  outline: 0;
+}
+.button1{
+  margin-right: 20px;
+}
+.button1:hover, .button2:hover{
+  background-color: white;
+  color: #006FAE;
+  font-size: 16px;
+  font-weight: bold;
+}
+.buttons-table>table{
+  position: absolute;
+  left: 28%;
 }
 
-.box input[type="submit"]:hover {
-  background: white;
-  color: #006FAE;
-}
 
 /* Chrome, Safari, Edge, Opera */
 

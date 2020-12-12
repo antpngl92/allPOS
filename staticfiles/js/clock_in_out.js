@@ -5,7 +5,6 @@ $('#clock_in_out').on('click', function (e) {
     var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
     var pin = $('#pin').val()
     if (pin == "") {
-        console.log("")
         $('#clock').css('color', 'red')
         $('#clock').html("You cannot clock in/out without a pin")
         

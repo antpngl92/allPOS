@@ -1,22 +1,30 @@
 {% load static %}
+
+
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-  <title></title>
-</head>
-<body>
-  <div class='container1'>
-    {% block content %}
-    {% endblock %}
-    {% include 'epos/scripts.html' %}
-  </div>
-  
-</body>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/c7f301a7fb.js" crossorigin="anonymous"></script>
+    <!-- Navbar CSS-->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    {% include 'epos/sidenav.html' %}
+
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+    
+    
+      {% include 'epos/scripts.html' %}
+  </body>
 </html>

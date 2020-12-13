@@ -77,7 +77,8 @@ main{
         flex-direction: row;
     }
     .nav-link{
-        justify-content: center;
+        height: 0rem;
+        margin-bottom: 2.5rem;
     }
     main{
         margin-left: 0;

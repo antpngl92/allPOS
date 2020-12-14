@@ -12,10 +12,10 @@
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="fas fa-chart-pie"></i>
-                <span class="link-text">Sales</span>
+                <span class="link-text">Analytics</span>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item no-mobile">
             <a href="#" class="nav-link">
                 <i class="far fa-calendar-alt"></i>
                 <span class="link-text">Schedule</span>
@@ -24,11 +24,11 @@
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="fas fa-dolly-flatbed"></i>
-                <span class="link-text">Supply</span>
+                <span class="link-text">Inventory</span>
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link no-mobile">
                 <i class="fas fa-user-cog"></i>
                 <span class="link-text">Settings</span>
             </a>
@@ -39,6 +39,14 @@
                 <span class="link-text">Reports</span>
             </a>
         </li>
+        {% if user.permission_level == 1 %}
+        <li class="nav-item">
+            <a href="admin" class="nav-link">
+                <i class="fas fa-lock"></i>
+                <span class="link-text">Admin</span>
+            </a>
+        </li>
+        {% endif %}
         <li class="nav-item">
             <a href="{% url 'logout' %}" class="nav-link">
                 <i class="fas fa-sign-out-alt"></i>

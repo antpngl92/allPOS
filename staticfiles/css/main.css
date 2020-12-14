@@ -14,11 +14,12 @@ body::-webkit-scrollbar{
 }
 body::-webkit-scrollbar-track{
    
-    background:  var(--text-secondary);
+    background: var(--text-primary);
     
 }
 body::-webkit-scrollbar-thumb{
-    background: var(--text-primary);
+    background:  var(--text-secondary);
+   
 }
 main{
     margin-left: 5rem; 
@@ -27,6 +28,7 @@ main{
 .navbar{
     position: fixed;
     background: var(--text-secondary);
+    z-index: 1;
 }
 .navbar-nav{
     list-style: none;
@@ -57,11 +59,15 @@ main{
 }
 .logo{
     max-width: 4rem;
-    margin: 0 -0.5rem;
+    margin: 2rem -0.5rem;
 }
 .link-text{
     font-size: 14px;
     
+}
+li.nav-item a span{
+    display: inline;
+    text-align: center;
 }
 /* Small screens */
 @media only screen and (max-width: 600px){
@@ -78,11 +84,21 @@ main{
     }
     .nav-link{
         height: 0rem;
-        margin-bottom: 2.5rem;
+        margin-bottom: 1rem;      
     }
     main{
         margin-left: 0;
         margin-top: 5rem;
+    }
+    .link-text{
+        display: none !important;
+        
+    }
+    .nav-item{
+        width: 40px;
+    }
+    .no-mobile{
+        display: none;
     }
 }
 
@@ -94,8 +110,5 @@ main{
         width: 5rem;
         height: 100vh;
     }
-    .navbar:hover .link-text{
-        
-        
-    }
+
 }

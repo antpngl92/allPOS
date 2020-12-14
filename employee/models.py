@@ -49,7 +49,7 @@ class Employee(AbstractBaseUser):
     first_name          = models.CharField(max_length=20)
     second_name         = models.CharField(blank=True, max_length=20)
     last_name           = models.CharField(max_length=20)
-    date_of_birth        = models.DateField(blank=True, null=True)
+    date_of_birth       = models.DateField(blank=True, null=True)
     address             = models.CharField(max_length=60, blank=True)
     tel_number          = models.CharField(blank=True, max_length=12)
     email               = models.EmailField(blank=True)
@@ -87,13 +87,17 @@ class Employee(AbstractBaseUser):
 
     # Returns the short name of an employee
     def get_short_name(self):
-        
         return self.first_name
+    
+    def get_full_short(self):
+        surname = self.last_name
+        surname = surname[:1]
+        surname = surname + "."
+        return f"{self.first_name} {surname}"
     
     def email_employee(self, subject, message, from_email=None, **kwargs):
         #Sends an email to this Employee
         send_mail(subject, message, from_email, [self.email], **kwargs)
-
     
     # Required functions for custom users
     def has_perm(self, perm, obj=None):

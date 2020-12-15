@@ -11,6 +11,7 @@
 
     .rightside {
         position: absolute;
+        margin-left: 15px;
     }
 
     @media screen and (min-width: 768px) {
@@ -27,10 +28,15 @@
         .order-type-button,
         .fa-user-circle {
             font-size: 20px !important;
+            margin-right: 15px;
         }
 
         .order-number {
             font-size: 20px !important;
+        }
+
+        .fa-user-circle {
+            color: #00A1E0;
         }
 
         .employee-name,
@@ -76,26 +82,110 @@
         .price-total-label {
             top: 20% !important;
         }
-        .pay-button button{
+
+        .pay-button button {
             width: 80% !important;
             right: 15% !important;
         }
+
         .left-side-bottom-buttons-row2-butt-4 a,
         .left-side-bottom-buttons-row2-butt-3 a,
         .left-side-bottom-buttons-row2-butt-2 a,
-        .left-side-bottom-buttons-row2-butt-1 a{
-           width: 80% !important;
+        .left-side-bottom-buttons-row2-butt-1 a {
+            width: 80% !important;
         }
 
-        .leftside{
+        .leftside {
             border-right: 1px solid #DAE1E8;
         }
-        .left-side-bottom-buttons{
+
+        .left-side-bottom-buttons {
             border-top: 1px solid #DAE1E8;
         }
-        #arrow{
-            font-size: 20px;
+
+        .date-and-time {
+            display: inline !important;
+            text-align: end;
+        }
+
+        #date {
+            float: right;
+            text-align: end;
+            margin-left: 15px;
+        }
+
+        div.category-buttons {
+            overflow-x: scroll !important;
+            overflow-y: hidden !important;
+            white-space: nowrap !important;
+            height: 17vh !important;
+            margin: 0 !important;
+        }
+
+        div.category-buttons-row {
+            margin-top: 11px !important;
+            display: inline-block !important;
+
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #D3E0E8 !important;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #133B66;
+        }
+
+        .cat-butt,
+        .product-butt {
+            margin-right: 10px !important;
+            height: 15vh !important;
+            width: 17vh !important;
+            background: #00A1E0;
+            color: white;
+            border-radius: 10px !important;
+            border: none;
+            outline: none;
+            font-size: 18px !important;
+        }
+
+
+        .cat-butt:hover,
+        .product-butt:hover {
             color: #00A1E0;
+            background: white;
+            border: 2px solid #00A1E0;
+            outline: none;
+        }
+
+        .cat-butt:focus,
+        .product-butt:focus {
+            outline: none;
+            background: white;
+            color: #00A1E0;
+            border: 2px solid #00A1E0;
+        }
+
+        div.products-buttons-row {
+            display: inline-block !important;
+        }
+
+        .product-butt {
+            margin-bottom: 10px;
+            margin-right: 15px !important;
+
+        }
+
+        .product-butt span {
+            display: block;
+        }
+
+        .product-header {
+            margin-bottom: 10px !important;
+        }
+
+        .empty-space2 {
+            margin-top: 10vh !important;
         }
     }
 
@@ -251,7 +341,8 @@
         background: #00A1E0;
         color: #D7F3FF;
     }
-    .row-2-but:hover{
+
+    .row-2-but:hover {
         background: #00A1E0;
         color: #D7F3FF;
     }
@@ -271,6 +362,96 @@
     .pay-button {
         margin-top: 20px;
     }
+
+
+    .rightside {
+        text-align: center;
+        margin-right: 10px;
+    }
+
+    .date-and-time {
+        display: none;
+    }
+
+    #date {
+        float: right;
+        text-align: end;
+        margin-left: 15px;
+    }
+
+    div.category-buttons {
+        overflow-x: scroll !important;
+        overflow-y: hidden !important;
+        white-space: nowrap !important;
+        height: 15vh;
+        margin: 0 0 10% -10%;
+    }
+
+    div.category-buttons-row {
+        margin-top: 11px;
+        display: inline-block !important;
+
+    }
+
+    div.category-buttons::-webkit-scrollbar {
+        display: none
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #D3E0E8;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #133B66;
+    }
+
+    .cat-butt{
+        margin-right: 10px;
+        height: 11vh;
+        width: 13vh;
+        background: #00A1E0;
+        color: white;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 12px;
+        word-wrap: break-word;
+    }
+
+    .cat-butt:hover, .product-butt:hover {
+        color: #00A1E0;
+        background: white;
+        border: 2px solid #00A1E0;
+        outline: none;
+    }
+
+    .cat-butt:focus, .product-butt:focus {
+        outline: none;
+        background: white;
+        color: #00A1E0;
+        border: 2px solid #00A1E0;
+    }
+
+    .product-butt {
+ 
+        height: 11vh;
+        width: 13vh;
+        background: #00A1E0;
+        color: white;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        margin-bottom: 10px;
+        margin-right: 15px;
+        font-size: 10px;
+
+    }
+
+    .product-header {
+        margin-bottom: 5px !important;
+    }
+
+
 </style>
 <div class="row no-gutters">
 
@@ -428,7 +609,7 @@
                         </a>
                     </div>
                     <div class="col-md my-col pay-button">
-                       <span id="arrow">></span> <button class=" row-2-but">£14.50 Pay</button>
+                         <button class=" row-2-but">£14.50 Pay</button>
                     </div>
                 </div>
             </div>
@@ -437,7 +618,49 @@
 
     <div class="col-md-7 no-gutters">
         <div class="rightside">
+            <div class="rightside-header">
+                <div class="row rightside-header-row-1 no-gutters">
+                    <div class="col my-col date-and-time">
+                        <div id="date"></div>
+                        <div id="time"></div>
+                    </div>
+                </div>
+                <div class="row rightside-header-row-2 no-gutters">
+                    <div class="col my-col category">CATEGORY</div>
+                </div>
+            </div>
+            <div class="category-buttons">
+                <div class="row category-buttons-row no-gutters">
+                    <button type="button" class="cat-butt">Hot Drinks</button>
+                    <button type="button" class="cat-butt">Cold Drinks</button>
+                    <button type="button" class="cat-butt">Cakes</button>
+                    <button type="button" class="cat-butt">Pastries</button>
+                    <button type="button" class="cat-butt">Sandwitches</button>
+                    <button type="button" class="cat-butt">Kitchen</button>
+                </div>
+            </div>
+            <div class="empty-space2"></div>
+            <div class="product-header">PRODUCTS</div>
+            <div class="products-buttons">
+                <div class="row products-buttons-row no-gutters">
+                    <button type="button" class="product-butt">Latte <span>£2.60</span> </button>
+                    <button type="button" class="product-butt">Cappuccino <span>£2.60</span></button>
+                    <button type="button" class="product-butt">Espresso <span>£1.60</span></button>
+                    <button type="button" class="product-butt">Macchiato <span>£1.60</span></button>
+                    <button type="button" class="product-butt">Flat White <span>£2.60</span></button>
+                    <button type="button" class="product-butt">Double Espresso <span>£1.90</span></button>
+                    <button type="button" class="product-butt">Black Americano <span>£1.90</span></button>
+                    <button type="button" class="product-butt">White Americano <span>£2.10</span></button>
+                    <button type="button" class="product-butt">Hot Chocolate <span>£2.60</span></button>
+                    <button type="button" class="product-butt">English Tea<span>£1.10</span></button>
+                    <button type="button" class="product-butt">Green Tea<span>£1.10</span></button>
+                    <button type="button" class="product-butt">Chamomile Tea<span>£1.10</span></button>
+                    <button type="button" class="product-butt">Matcha Latte<span>£3.10</span></button>
+                    <button type="button" class="product-butt">Chai Latte<span>£3.10</span></button>
+                    <button type="button" class="product-butt">Hot Milk<span>£1.10</span></button>
+                </div>
 
+            </div>
         </div>
     </div>
 

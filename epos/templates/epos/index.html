@@ -1,158 +1,445 @@
 {% extends 'epos/base.html' %}
 {% block content %}
 <style>
-    .my-col,
-    .row-total-buttons {
-        
+    .rightside,
+    .leftside {
         color: #133B66 !important;
+        height: 163vh;
+        /* ====================== CHANGE THIS FOR MOBILE HEIGH OF EACH SECTION - LEFT OR RIGHT ===============================*/
+        width: 100% !important;
     }
 
-
-    .col-products {
-
-        height: 91vh;
+    .rightside {
+        position: absolute;
     }
 
-    .row-table-product-price {
+    @media screen and (min-width: 768px) {
+        .rightside {
+            position: static;
+        }
 
-        height: 50vh;
+        .leftside,
+        .rightside {
+            height: 96vh;
+        }
+
+        .order-number-button,
+        .order-type-button,
+        .fa-user-circle {
+            font-size: 20px !important;
+        }
+
+        .order-number {
+            font-size: 20px !important;
+        }
+
+        .employee-name,
+        .order-type {
+            font-size: 16px !important;
+        }
+
+        .order-product-list-table {
+            color: #133B66;
+            font-weight: bold;
+        }
+
+        .empty-space {
+            height: 20vh !important;
+        }
+
+        .total-amount-row1,
+        .total-amount-row2,
+        .total-amount-row3,
+        .total-amount-row4 {
+            font-size: 16px !important;
+            text-align: end !important;
+            margin-right: 10px !important;
+        }
+
+        .leftside-order-list {
+            font-size: 16px !important;
+        }
+
+        .left-side-bottom-buttons {
+            height: 19vh !important;
+        }
+
+        .left-side-total-amount div div:nth-child(3) {
+            left: 22px;
+        }
+
+        .left-side-bottom-buttons-row1 {
+            height: 9.5vh;
+        }
+
+        .price-total,
+        .price-total-label {
+            top: 20% !important;
+        }
+        .pay-button button{
+            width: 80% !important;
+            right: 15% !important;
+        }
+        .left-side-bottom-buttons-row2-butt-4 a,
+        .left-side-bottom-buttons-row2-butt-3 a,
+        .left-side-bottom-buttons-row2-butt-2 a,
+        .left-side-bottom-buttons-row2-butt-1 a{
+           width: 80% !important;
+        }
+
+        .leftside{
+            border-right: 1px solid #DAE1E8;
+        }
+        .left-side-bottom-buttons{
+            border-top: 1px solid #DAE1E8;
+        }
+        #arrow{
+            font-size: 20px;
+            color: #00A1E0;
+        }
     }
-    .row-total-price{
-        height: 20vh;
+
+    .order-number {
+        text-align: center;
+        color: #00A1E0;
+        font-weight: bold;
+        font-size: 16px;
     }
-    .row-total-buttons {
 
-        height: 21vh;
+    .order-number-button,
+    .order-type-button,
+    .fa-user-circle {
+        text-align: end;
 
     }
 
-    .underline:after {
+    .order-number-button a,
+    .order-type-button a {
+        color: #00A1E0;
+        text-decoration: none;
+    }
+
+    .employee-name {
+        font-size: 12px;
+    }
+
+    .order-type {
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .order-type:after {
         content: "";
         height: 1px;
         background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(147, 147, 147, 1) 50%, rgba(0, 0, 0, 0) 100%);
-
         display: block;
-        margin-bottom: 10px;
-        margin-top: 10px;
-    }
-    .first-tb-row{
-        border-top: none !important;
+        margin-bottom: 1px;
+        margin-top: 1px;
     }
 
-    /* this syle shoul stay in this file! */
-    #time, #date{
-        width: 300px;
-        display: inline;
-        color: #133B66 !important;
+    .leftside-order-list {
+        background: #D3E0E8;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 40vh;
+        text-decoration: none !important;
+        font-size: 12px;
     }
-    .items-total td, th{
-        border: none !important;
-        margin: 0 !important;
-        padding: 0 5px !important;
+
+    .order-product-list-table {
+        color: #133B66;
+        font-weight: bold;
+        text-decoration: none !important;
     }
-    .price-gen{
-        text-align: end;
+
+    table tr {
+        text-decoration: none;
     }
-    .col-time{
-        text-align: end;
+
+    /* Customize the scrollbar of the product's list table*/
+    ::-webkit-scrollbar {
+        width: 0.25rem;
     }
-    .items-order{
+
+    ::-webkit-scrollbar-track {
         background: #D3E0E8;
     }
+
+    ::-webkit-scrollbar-thumb {
+        background: #133B66;
+    }
+
+    /* Make the 3rd and 4rth td text at the end of the cell*/
+    .order-product-list-table td+td {
+        text-align: end;
+    }
+
+    .left-side-total-amount .row .col:nth-child(4) {
+        font-weight: bold;
+        margin-right: 0px;
+    }
+
+    .total-amount-row1,
+    .total-amount-row2,
+    .total-amount-row3,
+    .total-amount-row4 {
+        font-size: 12px;
+        text-align: end;
+    }
+
+
+
+    .left-side-total-amount {
+        text-align: end;
+    }
+
+    .left-side-total-amount .row .col:nth-child(4) {
+        font-weight: bold;
+    }
+
+
+    .row-1-but {
+        background: transparent;
+        color: #00A1E0;
+        border: 2px solid #00A1E0;
+        border-radius: 10px;
+
+    }
+
+    .left-side-bottom-buttons {
+        height: 96vh;
+    }
+
+    .price-total-label,
+    .price-total {
+        text-align: end;
+        margin-top: 15px;
+        margin-right: 10px;
+    }
+
+
+    .row-1-but {
+        margin-top: 10%;
+        width: 80%;
+        height: 70%;
+    }
+
+
+    .left-side-bottom-buttons-row2 div a {
+        color: #00A1E0;
+        text-align: center;
+        font-size: 14px;
+    }
+
+
+    .price-total {
+        font-weight: bold;
+        text-align: end !important;
+        top: 40%;
+        margin-right: 1%;
+    }
+
+    .row-1-but {
+        background: #D7F3FF;
+        color: #00A1E0;
+        border: 2px solid #00A1E0;
+        border-radius: 10px;
+        outline: 0 !important;
+    }
+
+    .row-1-but:hover {
+        background: #00A1E0;
+        color: #D7F3FF;
+    }
+    .row-2-but:hover{
+        background: #00A1E0;
+        color: #D7F3FF;
+    }
+
+    .left-side-bottom-buttons-row2 button {
+        text-align: center;
+        width: 50%;
+        height: 100%;
+        background: #D7F3FF;
+        border: 2px solid #00A1E0;
+        border-radius: 10px;
+        color: #00A1E0;
+        font-weight: bold;
+        outline: 0;
+    }
+
+    .pay-button {
+        margin-top: 20px;
+    }
 </style>
-<div class="epos-nav">
-    <div class="row my-row">
-        <div class="col-md-4 col-sm-12 my-col">
-            <div class="row my-row text-center">
-                <div class="col-md-4 my-col">
+<div class="row no-gutters">
 
+    <div class="col-md-5 no-gutters">
+        <div class="leftside">
+            <div class="leftside-header">
+                <div class="row header-row-1 no-gutters">
+                    <div class="col my-col empty"></div>
+                    <div class="col my-col order-number">50</div>
+                    <div class="col my-col order-number-button"><a href="#"><i class="far fa-file"></i> </a></div>
                 </div>
-                <div class="col-md-4 my-col"><strong style="color:#00A1E0 ;">50</strong></div>
-                <div class="col-md-4 my-col "><a href="#"><i class="far fa-file" style="color:#00A1E0 ;"></i> </a></div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 my-col"></div>
-        <div class="col-md-4 col-sm-12 my-col col-time">                     
-            <div id="time"></div>
-            <div id="date"></div>
-        </div>
-
-    </div>
-    <div class="row my-row">
-        <div class="col-md-4 col-sm-12 my-col">
-            <div class="row my-row text-center">
-                <div class="col-md-4 my-col"> <i class="far fa-user-circle" style="color:#00A1E0 ;"></i>
-                    {{user.get_full_short}}</div>
-                <div class="col-md-4 my-col underline"> Take Away</div>
-                <div class="col-md-4 my-col"> <a href="#"><i class="fas fa-ellipsis-h" style="color:#00A1E0 ;"></i></a>
+                <div class="row header-row-2 no-gutters">
+                    <div class="col my-col employee-name"><i class="far fa-user-circle"></i>{{user.get_full_short}}
+                    </div>
+                    <div class="col my-col order-type">Take Away</div>
+                    <div class="col my-col order-type-button"><a href="#"><i class="fas fa-ellipsis-h"></i></a></div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-8 col-sm-12 my-col">
-            CATEGORY
-        </div>
-    </div>
-</div>
-
-<div class="row my-row">
-    <div class="col-md-4 col-sm-12 my-col ">
-        <div class="row my-row row-table-product-price">
-            <table class="table items-order">
-                <tbody>
-                    <tr >
-                        <th scope="row" class="first-tb-row">Cappuchino</th>
-                        <td class="first-tb-row">1</td>
-                        <td class="first-tb-row">£2.60</td>
-                        <td class="first-tb-row">£2.60</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Carrot Cake</th>
-                        <td>2</td>
-                        <td>£4</td>
-                        <td>£8</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Latte</th>
-                        <td>1</td>
-                        <td>£2.60</td>
-                        <td>£2.60</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="row my-row row-total-price">
-            <div class="col-md-6 col-sm-12 my-col "></div>
-            <div class="col-md-6 col-sm-12 my-col ">
-                <table class="table items-total">
-                <tbody>
-                    <tr >
-                        <td class="first-tb-row price-gen">Discounts:</td>
-                        <th scope="row" class="first-tb-row">£0.00</th>
-                    </tr>
-                    <tr>
-                        <td class="price-gen">Sub Total:</td>
-                        <th scope="row">£13.20</th>
-                    </tr>
-                    <tr>
-                        <td class="price-gen">Surcharge:</td>
-                        <th scope="row">£0.00</th>
-                    </tr>
-                    <tr>
-                        <td class="price-gen">Tax:</td>
-                        <th scope="row">£2.67</th>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="leftside-order-list">
+                <table class="table order-product-list-table">
+                    <tbody>
+                        <tr>
+                            <td>Cappuchino</td>
+                            <td>1</td>
+                            <td>£2.60</td>
+                            <td>£2.60</td>
+                        </tr>
+                        <tr>
+                            <td>Carrot Cake</td>
+                            <td>2</td>
+                            <td>£4.00</td>
+                            <td>£8.00</td>
+                        </tr>
+                        <tr>
+                            <td>Latte</td>
+                            <td>1</td>
+                            <td>£2.60</td>
+                            <td>£2.60</td>
+                        </tr>
+                        <tr>
+                            <td>Cappuchino</td>
+                            <td>1</td>
+                            <td>£2.60</td>
+                            <td>£2.60</td>
+                        </tr>
+                        <tr>
+                            <td>Carrot Cake</td>
+                            <td>2</td>
+                            <td>£4.00</td>
+                            <td>£8.00</td>
+                        </tr>
+                        <tr>
+                            <td>Latte</td>
+                            <td>1</td>
+                            <td>£2.60</td>
+                            <td>£2.60</td>
+                        </tr>
+                        <tr>
+                            <td>Cappuchino</td>
+                            <td>1</td>
+                            <td>£2.60</td>
+                            <td>£2.60</td>
+                        </tr>
+                        <tr>
+                            <td>Carrot Cake</td>
+                            <td>2</td>
+                            <td>£4.00</td>
+                            <td>£8.00</td>
+                        </tr>
+                        <tr>
+                            <td>Latte</td>
+                            <td>1</td>
+                            <td>£2.60</td>
+                            <td>£2.60</td>
+                        </tr>
+                        <tr>
+                            <td>Cappuchino</td>
+                            <td>1</td>
+                            <td>£2.60</td>
+                            <td>£2.60</td>
+                        </tr>
+                        <tr>
+                            <td>Carrot Cake</td>
+                            <td>2</td>
+                            <td>£4.00</td>
+                            <td>£8.00</td>
+                        </tr>
+                        <tr>
+                            <td>Latte</td>
+                            <td>1</td>
+                            <td>£2.60</td>
+                            <td>£2.60</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="empty-space"></div>
+            <div class="left-side-total-amount">
+                <div class="row total-amount-row1 no-gutters">
+                    <div class="col my-col "></div>
+                    <div class="col my-col "></div>
+                    <div class="col my-col">Discounts:</div>
+                    <div class="col my-col amount">£0.00</div>
+                </div>
+                <div class="row total-amount-row2 no-gutters">
+                    <div class="col my-col"></div>
+                    <div class="col my-col"></div>
+                    <div class="col my-col">Sub Total:</div>
+                    <div class="col my-col amount">£13.20</div>
+                </div>
+                <div class="row total-amount-row3 no-gutters">
+                    <div class="col my-col"></div>
+                    <div class="col my-col"></div>
+                    <div class="col my-col">Surcharge:</div>
+                    <div class="col my-col amount">£0.00</div>
+                </div>
+                <div class="row total-amount-row4 no-gutters">
+                    <div class="col my-col "></div>
+                    <div class="col my-col "></div>
+                    <div class="col my-col ">Tax:</div>
+                    <div class="col my-col amount">£1.30</div>
+                </div>
+            </div>
+            <div class="left-side-bottom-buttons">
+                <div class="row left-side-bottom-buttons-row1 no-gutters text-center">
+                    <div class="col-md  my-col"><button type="button" class=" row-1-but">Cancel</button></div>
+                    <div class="col-md  my-col"><button type="button" class=" row-1-but">Hold</button></div>
+                    <div class="col-md  my-col"><button type="button" class=" row-1-but">Send</button></div>
+                    <div class="col-md  my-col price-total-label">Total:</div>
+                    <div class="col-md  my-col price-total"><span>£14.50</span></div>
+                </div>
+                <div class="row left-side-bottom-buttons-row2 no-gutters text-center">
+                    <div class="col-md my-col left-side-bottom-buttons-row2-butt-1">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-barcode"></i>
+                            <span class="row-2-button-text">Quantity</span>
+                        </a>
+                    </div>
+                    <div class="col-md my-col my-col left-side-bottom-buttons-row2-butt-2">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-plus"></i>
+                            <span class="row-2-button-text">Add Extra Item</span>
+                        </a>
+                    </div>
+                    <div class="col-md my-col my-col left-side-bottom-buttons-row2-butt-3">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-percentage"></i>
+                            <span class="row-2-button-text">Dicsount Order</span>
+                        </a>
+                    </div>
+                    <div class="col-md my-col my-col left-side-bottom-buttons-row2-butt-4">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-utensils"></i>
+                            <span class="row-2-button-text">Dinning Options</span>
+                        </a>
+                    </div>
+                    <div class="col-md my-col pay-button">
+                       <span id="arrow">></span> <button class=" row-2-but">£14.50 Pay</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row my-row row-total-buttons">
-            Hi
+    </div>
+
+    <div class="col-md-7 no-gutters">
+        <div class="rightside">
+
         </div>
     </div>
-    <div class="col-md-8 col-sm-12 my-col col-products">
-    </div>
+
 </div>
-
-
-
 {% endblock %}

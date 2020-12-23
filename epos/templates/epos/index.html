@@ -179,38 +179,30 @@
             </div>
             <div class="category-buttons">
                 <div class="row category-buttons-row no-gutters">
-                    <button type="button" class="cat-butt">Hot Drinks</button>
-                    <button type="button" class="cat-butt">Cold Drinks</button>
-                    <button type="button" class="cat-butt">Cakes</button>
-                    <button type="button" class="cat-butt">Pastries</button>
-                    <button type="button" class="cat-butt">Sandwitches</button>
-                    <button type="button" class="cat-butt">Kitchen</button>
+                    {% for c in categories %}
+                        {% if c.name == selected_category.name %}
+                            <button id="first" data-id={{c.id}} type="button" class="cat-butt" autofocus>{{c.name}}</button>
+                        {%else%}
+                            <button type="button" data-id={{c.id}} class="cat-butt">{{c.name}}</button>
+                        {%endif%}
+                        
+                    {% endfor %}
                 </div>
             </div>
             <div class="empty-space2"></div>
             <div class="product-header">PRODUCTS</div>
             <div class="products-buttons">
                 <div class="row products-buttons-row no-gutters">
-                    <button type="button" class="product-butt">Latte <span>£2.60</span> </button>
-                    <button type="button" class="product-butt">Cappuccino <span>£2.60</span></button>
-                    <button type="button" class="product-butt">Espresso <span>£1.60</span></button>
-                    <button type="button" class="product-butt">Macchiato <span>£1.60</span></button>
-                    <button type="button" class="product-butt">Flat White <span>£2.60</span></button>
-                    <button type="button" class="product-butt">Double Espresso <span>£1.90</span></button>
-                    <button type="button" class="product-butt">Black Americano <span>£1.90</span></button>
-                    <button type="button" class="product-butt">White Americano <span>£2.10</span></button>
-                    <button type="button" class="product-butt">Hot Chocolate <span>£2.60</span></button>
-                    <button type="button" class="product-butt">English Tea<span>£1.10</span></button>
-                    <button type="button" class="product-butt">Green Tea<span>£1.10</span></button>
-                    <button type="button" class="product-butt">Chamomile Tea<span>£1.10</span></button>
-                    <button type="button" class="product-butt">Matcha Latte<span>£3.10</span></button>
-                    <button type="button" class="product-butt">Chai Latte<span>£3.10</span></button>
-                    <button type="button" class="product-butt">Hot Milk<span>£1.10</span></button>
+                    {% for oi in order_items %}
+                        <button type="button" data-id={{oi.id}} class="product-butt">{{oi.product.name}} <span>£{{ oi.retail_price| floatformat:2}}</span> </button>
+                    {%endfor%}
                 </div>
 
             </div>
         </div>
     </div>
-
 </div>
+<script>
+    var GET_CATEGORY        = "{% url 'category' 0%}"
+</script>
 {% endblock %}

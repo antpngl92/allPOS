@@ -9,13 +9,13 @@
                 <div class="row header-row-1 no-gutters">
                     <div class="col my-col empty"></div>
                     <div class="col my-col order-number">50</div>
-                    <div class="col my-col order-number-button"><a href="#"><i class="far fa-file"></i> </a></div>
+                    <div class="col my-col order-number-button"><a href="#"><i class="far fa-file" data-toggle="modal" data-target="#order-number-modal"></i> </a></div>
                 </div>
                 <div class="row header-row-2 no-gutters">
                     <div class="col my-col employee-name"><i class="far fa-user-circle"></i>{{user.get_full_short}}
                     </div>
                     <div class="col my-col order-type">Take Away</div>
-                    <div class="col my-col order-type-button"><a href="#"><i class="fas fa-ellipsis-h"></i></a></div>
+                    <div class="col my-col order-type-button"><a href="#"><i class="fas fa-ellipsis-h" data-toggle="modal" data-target="#order-type-modal"></i></a></div>
                 </div>
             </div>
             <div class="leftside-order-list">
@@ -202,6 +202,9 @@
         </div>
     </div>
 </div>
+
+
+  {% include 'epos/modals.html' %}
 <script>
     var GET_CATEGORY        = "{% url 'category' 0%}"
 </script>

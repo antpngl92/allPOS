@@ -88,8 +88,7 @@ $(document).on('click', '.fa-minus', function () {
 
     if (current_item_number == 1) {
         $(current_item).remove() // Remove item from order if it's only one in the order
-        TOTAL_ITEMS = TOTAL_ITEMS -1; // Update the number of the total items in the order
-        keep_track_of_total_price()  // Update pay button and financial order information
+        TOTAL_ITEMS = TOTAL_ITEMS -1; // Update the number of the total items in the order 
     }
     else {  
         current_item_number = current_item_number - 1; // Subtract 1 from current product count 
@@ -102,9 +101,8 @@ $(document).on('click', '.fa-minus', function () {
         price_item_total = price_item_total.toFixed(2)              // Make it two decimal places
         
         $(current_item).children('.product-total-price').children('span').html(price_item_total)  // Update the total price for the same item
-       keep_track_of_total_price() // Update pay button and financial order information
-       
     }
+    keep_track_of_total_price()// Update pay button and financial order information
     updateScroll()
 })
 // Add button handler

@@ -8,91 +8,20 @@
             <div class="leftside-header">
                 <div class="row header-row-1 no-gutters">
                     <div class="col my-col empty"></div>
-                    <div class="col my-col order-number">50</div>
-                    <div class="col my-col order-number-button"><a href="#"><i class="far fa-file" data-toggle="modal" data-target="#order-number-modal"></i> </a></div>
+                    <div class="col my-col order-number">0</div>
+                    <div class="col my-col order-number-button" title="Enter Order Number"><a  href="#"><i class="far fa-file"  data-toggle="modal" data-target="#order-number-modal"></i> </a></div>
                 </div>
                 <div class="row header-row-2 no-gutters">
                     <div class="col my-col employee-name"><i class="far fa-user-circle"></i>{{user.get_full_short}}
                     </div>
-                    <div class="col my-col order-type">Take Away</div>
+                    <div class="col my-col order-type">Take Out</div>
                     <div class="col my-col order-type-button"><a href="#"><i class="fas fa-ellipsis-h" data-toggle="modal" data-target="#order-type-modal"></i></a></div>
                 </div>
             </div>
             <div class="leftside-order-list">
                 <table class="table order-product-list-table">
-                    <tbody>
-                        <tr>
-                            <td>Cappuchino</td>
-                            <td>1</td>
-                            <td>£2.60</td>
-                            <td>£2.60</td>
-                        </tr>
-                        <tr>
-                            <td>Carrot Cake</td>
-                            <td>2</td>
-                            <td>£4.00</td>
-                            <td>£8.00</td>
-                        </tr>
-                        <tr>
-                            <td>Latte</td>
-                            <td>1</td>
-                            <td>£2.60</td>
-                            <td>£2.60</td>
-                        </tr>
-                        <tr>
-                            <td>Cappuchino</td>
-                            <td>1</td>
-                            <td>£2.60</td>
-                            <td>£2.60</td>
-                        </tr>
-                        <tr>
-                            <td>Carrot Cake</td>
-                            <td>2</td>
-                            <td>£4.00</td>
-                            <td>£8.00</td>
-                        </tr>
-                        <tr>
-                            <td>Latte</td>
-                            <td>1</td>
-                            <td>£2.60</td>
-                            <td>£2.60</td>
-                        </tr>
-                        <tr>
-                            <td>Cappuchino</td>
-                            <td>1</td>
-                            <td>£2.60</td>
-                            <td>£2.60</td>
-                        </tr>
-                        <tr>
-                            <td>Carrot Cake</td>
-                            <td>2</td>
-                            <td>£4.00</td>
-                            <td>£8.00</td>
-                        </tr>
-                        <tr>
-                            <td>Latte</td>
-                            <td>1</td>
-                            <td>£2.60</td>
-                            <td>£2.60</td>
-                        </tr>
-                        <tr>
-                            <td>Cappuchino</td>
-                            <td>1</td>
-                            <td>£2.60</td>
-                            <td>£2.60</td>
-                        </tr>
-                        <tr>
-                            <td>Carrot Cake</td>
-                            <td>2</td>
-                            <td>£4.00</td>
-                            <td>£8.00</td>
-                        </tr>
-                        <tr>
-                            <td>Latte</td>
-                            <td>1</td>
-                            <td>£2.60</td>
-                            <td>£2.60</td>
-                        </tr>
+                    <tbody class="order-product-list-table-body">
+
                     </tbody>
                 </table>
             </div>
@@ -108,7 +37,7 @@
                     <div class="col my-col"></div>
                     <div class="col my-col"></div>
                     <div class="col my-col">Sub Total:</div>
-                    <div class="col my-col amount">£13.20</div>
+                    <div class="col my-col amount">£<span>0.00</span></div>
                 </div>
                 <div class="row total-amount-row3 no-gutters">
                     <div class="col my-col"></div>
@@ -120,16 +49,16 @@
                     <div class="col my-col "></div>
                     <div class="col my-col "></div>
                     <div class="col my-col ">Tax:</div>
-                    <div class="col my-col amount">£1.30</div>
+                    <div class="col my-col amount">£<span>0.00</span></div>
                 </div>
             </div>
             <div class="left-side-bottom-buttons">
                 <div class="row left-side-bottom-buttons-row1 no-gutters text-center">
-                    <div class="col-md  my-col"><button type="button" class=" row-1-but">Cancel</button></div>
+                    <div class="col-md  my-col"><button type="button" onClick="window.location.reload();" class=" row-1-but">Cancel</button></div>
                     <div class="col-md  my-col"><button type="button" class=" row-1-but">Hold</button></div>
                     <div class="col-md  my-col"><button type="button" class=" row-1-but">Send</button></div>
                     <div class="col-md  my-col price-total-label">Total:</div>
-                    <div class="col-md  my-col price-total"><span>£14.50</span></div>
+                    <div class="col-md  my-col price-total">£<span>0.00</span></div>
                 </div>
                 <div class="row left-side-bottom-buttons-row2 no-gutters text-center">
                     <div class="col-md my-col left-side-bottom-buttons-row2-butt-1">
@@ -157,7 +86,7 @@
                         </a>
                     </div>
                     <div class="col-md my-col pay-button">
-                        <button class=" row-2-but">£14.50 Pay</button>
+                        <button class="row-2-but">£<span>0.00</span> Pay</button>
                     </div>
                 </div>
             </div>
@@ -194,7 +123,7 @@
             <div class="products-buttons">
                 <div class="row products-buttons-row no-gutters">
                     {% for oi in order_items %}
-                        <button type="button" data-id={{oi.id}} class="product-butt">{{oi.product.name}} <span>£{{ oi.retail_price| floatformat:2}}</span> </button>
+                        <button type="button" data-id={{oi.id}} data-name={{oi.product.name}} data-price={{ oi.retail_price| floatformat:2}} class="product-butt">{{oi.product.name}} <span>£{{ oi.retail_price| floatformat:2}}</span> </button>
                     {%endfor%}
                 </div>
 
@@ -206,6 +135,9 @@
 
   {% include 'epos/modals.html' %}
 <script>
-    var GET_CATEGORY        = "{% url 'category' 0%}"
+    var GET_CATEGORY        = "{% url 'category' 0%}";
+    var CREATE_ORDER        = "{% url 'order' %}";
+    var TOTAL_ITEMS         = 0;
+    var TAX                 = 0.10
 </script>
 {% endblock %}

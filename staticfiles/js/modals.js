@@ -4,3 +4,11 @@ $('#modal-order-number-button').on('click', function(e){
     $('.order-number').html(input_val)
     $('.close').click()
 })
+$('#modal-order-type-button').on('click', function(e){
+    e.preventDefault();
+    var order_type  = $('input[type=radio][name=order-type]:checked').val()
+    $('.order-type').html(order_type)  
+    $(order_type).prop('checked', false)
+    $('.close').click()
+    keep_track_of_total_price()
+})

@@ -1,52 +1,49 @@
-
-  <!-- Order Number Modal -->
-  <div class="modal fade" id="order-number-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header text-center">
-          <h5 class="modal-title" id="exampleModalLabel">Order Number</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form method="POST">
-                <label for="order-number-input">Order Number:</label>
-                <input type="number" id="order-number-input" style="width: 75px !important;">
-            </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" id="modal-order-number-button" class="btn btn-primary">Save changes</button>
-        </div>
+<!-- Order Number Modal -->
+<div class="modal fade" id="order-number-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5 class="modal-title" id="exampleModalLabel">Order Number</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="order-number-input">Order Number:</label>
+        <input type="number" id="order-number-input" style="width: 75px !important;">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="modal-order-number-button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
-  <!-- END Order Number Modal -->
+</div>
+<!-- END Order Number Modal -->
 
-    <!-- Order Type Modal -->
-    <div class="modal fade" id="order-type-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header text-center">
-              <h5 class="modal-title" id="exampleModalLabel">Order Type</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <form method="POST">
-                    <input type="radio" name="order-type" value="haveIn">
-                    <label for="haveIn">Have In</label><br>
-                    <input type="radio" name="order-type" value="takeAway">
-                    <label for="takeAway">Take Away</label><br>
-                </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" id="modal-order-number-button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
+<!-- Order Type Modal -->
+<div class="modal fade" id="order-type-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5 class="modal-title" id="exampleModalLabel">Order Type</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <!-- END Order Type Modal -->
+      <div class="modal-body">
+          <input type="radio" name="order-type" value="Have In">
+          <label for="haveIn">Have In</label><br>
+          <input type="radio" name="order-type" value="Take Out">
+          <label for="takeAway">Take Out</label><br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="modal-order-type-button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Order Type Modal -->

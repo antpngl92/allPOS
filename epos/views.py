@@ -7,6 +7,7 @@ from django.core import serializers
 from product.models import Product, Category
 from employee.models import Employee
 from orderitem.models import OrderItem
+from order.models import Order
 
 
 @login_required
@@ -32,3 +33,10 @@ def get_products_API(request, pk):
         order_items = OrderItem.objects.filter(product__category=primary_key)
         order_items = list(order_items.values())
     return JsonResponse(order_items, safe=False)
+
+def create_order_API(request, pk):
+    if request.method == "POST":
+        order_item_pk = pk
+        
+        order, created = Order.objects.get_or_create()
+

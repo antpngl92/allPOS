@@ -3,7 +3,7 @@
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header text-center">
+      <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Order Number</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -34,10 +34,10 @@
         </button>
       </div>
       <div class="modal-body">
-          <input type="radio" name="order-type" value="Have In">
-          <label for="haveIn">Have In</label><br>
-          <input type="radio" name="order-type" value="Take Out">
-          <label for="takeAway">Take Out</label><br>
+        <input type="radio" name="order-type" value="Have In">
+        <label for="haveIn">Have In</label><br>
+        <input type="radio" name="order-type" value="Take Out">
+        <label for="takeAway">Take Out</label><br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -47,3 +47,123 @@
   </div>
 </div>
 <!-- END Order Type Modal -->
+
+<!-- Pay Order Modal -->
+<div class="modal fade" id="payment-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Checkout | Order # <span></span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group">
+          <li class='list-group-item payment-discount'>Discounts:
+            <div class='float-right'>
+              £<span>0.00</span>
+            </div>
+          </li>
+          <li class='list-group-item payment-service'>Service Fee(s):
+            <div class='float-right'>
+              £<span>0.00</span>
+            </div>
+          </li>
+          <li class='list-group-item payment-sub-total'>Sub Total:
+            <div class='float-right'>
+              £<span></span>
+            </div>
+          </li>
+          <li class='list-group-item payment-surcharge'>Surcharge:
+            <div class='float-right'>
+              £<span>0.00</span>
+            </div>
+          </li>
+          <li class='list-group-item payment-tax'>Tax:
+            <div class='float-right'>
+              £<span></span>
+            </div>
+          </li>
+          <li class='list-group-item payment-autogratuity'>Autogratuity:
+            <div class='float-right'>
+              £<span>0.00</span>
+            </div>
+          </li>
+        </ul>
+        <hr>
+        <div class="payment-total">
+          <ul class="list-group">
+            <li class='list-group-item payment-total-list'>TOTAL:
+              <div class='float-right'>
+                £<span></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <hr>
+        <div class="payment-balance">
+          <ul class="list-group">
+            <li class='list-group-item payment-balance-list'>Balance Due:
+              <div class='float-right'>
+                £<span></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <hr>
+        <div class="payment-nav">
+          <ul class="nav">
+            <li class="navitem" data-toggle="tooltip" data-placement="top" title="Functionality Not Added Yet">
+                 <div class="icon">
+                      <i class="fas fa-coins"></i>
+                 </div>
+                 <div class="text">
+                       Tip <br>Amount
+                 </div>
+            </li>
+            <li class="navitem" data-toggle="tooltip" data-placement="top" title="Functionality Not Added Yet">
+                 <div class="icon">
+                      <i class="fas fa-gifts"></i>
+                 </div>
+                 <div class="text">
+                       Gift <br>Receipt
+                 </div>
+            </li>
+            <li class="navitem" data-toggle="tooltip" data-placement="top" title="Functionality Not Added Yet">
+                 <div class="icon">
+                      <i class="far fa-envelope-open"></i>
+                 </div>
+                 <div class="text">
+                       Email <br> Receip
+                 </div>
+            </li>
+            <li class="navitem" data-toggle="tooltip" data-placement="top" title="Functionality Not Added Yet">
+                 <div class="icon">
+                      <i class="fas fa-print"></i>
+                 </div>
+                 <div class="text">
+                       Reprint <br> Receip
+                 </div>
+            </li>
+                <li class="navitem" data-toggle="tooltip" data-placement="top" title="Functionality Not Added Yet">
+                 <div class="icon">
+                      <i class="fas fa-history"></i>
+                 </div>
+                 <div class="text">
+                       Refund <br>Payments
+                 </div>
+            </li>
+        </ul>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" data-type="cash" id="1a"class="btn btn-primary cash-butt">Cash</button>
+        <button type="button" data-type="card" id="2a" class="btn btn-primary card-butt">Card</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Pay Order Modal -->

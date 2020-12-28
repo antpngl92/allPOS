@@ -1,12 +1,13 @@
     /* 2 div's dividing the screen into 2 sections*/
-    .rightside,
-    .leftside {
+
+    .rightside, .leftside {
         color: #133B66 !important;
         height: 163vh;
         width: 100% !important;
     }
 
     /*Right side section*/
+
     .rightside {
         position: absolute;
         margin-left: 15px;
@@ -16,102 +17,71 @@
         .rightside {
             position: static;
         }
-
-        .leftside,
-        .rightside {
+        .leftside, .rightside {
             height: 96vh;
         }
-
-        .order-number-button,
-        .order-type-button,
-        .fa-user-circle {
+        .order-number-button, .order-type-button, .fa-user-circle {
             font-size: 20px !important;
             margin-right: 15px;
         }
-
         .order-number {
             font-size: 20px !important;
         }
-
         .fa-user-circle {
             color: #00A1E0;
         }
-
-        .employee-name,
-        .order-type {
+        .employee-name, .order-type {
             font-size: 16px !important;
         }
-
         .order-product-list-table {
             color: #133B66;
             font-weight: bold;
         }
-
         .empty-space {
             height: 20vh !important;
         }
-
-        .total-amount-row1,
-        .total-amount-row2,
-        .total-amount-row3,
-        .total-amount-row4 {
+        .total-amount-row1, .total-amount-row2, .total-amount-row3, .total-amount-row4 {
             font-size: 16px !important;
             text-align: end !important;
             margin-right: 10px !important;
         }
-
         .leftside-order-list {
             font-size: 16px !important;
         }
-
         .left-side-bottom-buttons {
             height: 19vh !important;
         }
-
         .left-side-total-amount div div:nth-child(3) {
             left: 22px;
         }
-
         .left-side-bottom-buttons-row1 {
             height: 9.5vh;
         }
-
-        .price-total,
-        .price-total-label {
+        .price-total, .price-total-label {
             top: 20% !important;
         }
-
         .pay-button button {
             width: 80% !important;
             right: 15% !important;
         }
-
-        .left-side-bottom-buttons-row2-butt-4 a,
-        .left-side-bottom-buttons-row2-butt-3 a,
-        .left-side-bottom-buttons-row2-butt-2 a,
-        .left-side-bottom-buttons-row2-butt-1 a {
+        .left-side-bottom-buttons-row2-butt-4 a, .left-side-bottom-buttons-row2-butt-3 a, .left-side-bottom-buttons-row2-butt-2 a, .left-side-bottom-buttons-row2-butt-1 a {
             width: 80% !important;
         }
-
         .leftside {
             border-right: 1px solid #DAE1E8;
         }
-
         .left-side-bottom-buttons {
             border-top: 1px solid #DAE1E8;
         }
-
         .date-and-time {
             display: inline !important;
             text-align: end;
         }
-
         #date {
             float: right;
             text-align: end;
             margin-left: 15px;
         }
-
         div.category-buttons {
             overflow-x: scroll !important;
             overflow-y: hidden !important;
@@ -119,23 +89,17 @@
             height: 17vh !important;
             margin: 0 !important;
         }
-
         div.category-buttons-row {
             margin-top: 11px !important;
             display: inline-block !important;
-
         }
-
         ::-webkit-scrollbar-track {
             background: #D3E0E8 !important;
         }
-
         ::-webkit-scrollbar-thumb {
             background: #133B66;
         }
-
-        .cat-butt,
-        .product-butt {
+        .cat-butt, .product-butt {
             margin-right: 10px !important;
             height: 15vh !important;
             width: 17vh !important;
@@ -146,42 +110,31 @@
             outline: none;
             font-size: 18px !important;
         }
-
-
-        .cat-butt:hover,
-        .product-butt:hover {
+        .cat-butt:hover, .product-butt:hover {
             color: #00A1E0;
             background: white;
             border: 2px solid #00A1E0;
             outline: none;
         }
-
-        .cat-butt:focus,
-        .product-butt:focus {
+        .cat-butt:focus, .product-butt:focus {
             outline: none;
             background: white;
             color: #00A1E0;
             border: 2px solid #00A1E0;
         }
-
         div.products-buttons-row {
             display: inline-block !important;
         }
-
         .product-butt {
             margin-bottom: 10px;
             margin-right: 15px !important;
-
         }
-
         .product-butt span {
             display: block;
         }
-
         .product-header {
             margin-bottom: 10px !important;
         }
-
         .empty-space2 {
             margin-top: 10vh !important;
         }
@@ -194,15 +147,11 @@
         font-size: 16px;
     }
 
-    .order-number-button,
-    .order-type-button,
-    .fa-user-circle {
+    .order-number-button, .order-type-button, .fa-user-circle {
         text-align: end;
-
     }
 
-    .order-number-button a,
-    .order-type-button a {
+    .order-number-button a, .order-type-button a {
         color: #00A1E0;
         text-decoration: none;
     }
@@ -231,7 +180,7 @@
         overflow-x: hidden;
         height: 40vh;
         text-decoration: none !important;
-        font-size: 12px;
+        font-size: 8px;
     }
 
     .order-product-list-table {
@@ -245,6 +194,7 @@
     }
 
     /* Customize the scrollbar of the product's list table*/
+
     ::-webkit-scrollbar {
         width: 0.25rem;
     }
@@ -258,6 +208,7 @@
     }
 
     /* Make the 3rd and 4rth td text at the end of the cell*/
+
     .order-product-list-table td+td {
         text-align: end;
     }
@@ -267,15 +218,10 @@
         margin-right: 0px;
     }
 
-    .total-amount-row1,
-    .total-amount-row2,
-    .total-amount-row3,
-    .total-amount-row4 {
+    .total-amount-row1, .total-amount-row2, .total-amount-row3, .total-amount-row4 {
         font-size: 12px;
         text-align: end;
     }
-
-
 
     .left-side-total-amount {
         text-align: end;
@@ -285,26 +231,22 @@
         font-weight: bold;
     }
 
-
     .row-1-but {
         background: transparent;
         color: #00A1E0;
         border: 2px solid #00A1E0;
         border-radius: 10px;
-
     }
 
     .left-side-bottom-buttons {
         height: 96vh;
     }
 
-    .price-total-label,
-    .price-total {
+    .price-total-label, .price-total {
         text-align: end;
         margin-top: 15px;
         margin-right: 10px;
     }
-
 
     .row-1-but {
         margin-top: 10%;
@@ -312,13 +254,11 @@
         height: 70%;
     }
 
-
     .left-side-bottom-buttons-row2 div a {
         color: #00A1E0;
         text-align: center;
         font-size: 14px;
     }
-
 
     .price-total {
         font-weight: bold;
@@ -361,7 +301,6 @@
         margin-top: 20px;
     }
 
-
     .rightside {
         text-align: center;
         margin-right: 10px;
@@ -388,7 +327,6 @@
     div.category-buttons-row {
         margin-top: 11px;
         display: inline-block !important;
-
     }
 
     div.category-buttons::-webkit-scrollbar {
@@ -416,16 +354,14 @@
         word-wrap: break-word;
     }
 
-    .cat-butt:hover,
-    .product-butt:hover {
+    .cat-butt:hover, .product-butt:hover {
         color: #00A1E0;
         background: white;
         border: 2px solid #00A1E0;
         outline: none;
     }
 
-    .cat-butt:focus,
-    .product-butt:focus {
+    .cat-butt:focus, .product-butt:focus {
         outline: none;
         background: white;
         color: #00A1E0;
@@ -433,7 +369,6 @@
     }
 
     .product-butt {
-
         height: 11vh;
         width: 13vh;
         background: #00A1E0;
@@ -444,51 +379,101 @@
         margin-bottom: 10px;
         margin-right: 15px;
         font-size: 10px;
-
     }
 
     .product-header {
         margin-bottom: 5px !important;
     }
 
-    .modal-content{
-        background-color: #D3E0E8;
-        color: #133B66;
-        border: 1px solid #133B66;
+    /* ================================================================================================== */
 
+    .modal-header {
+        background-color: #D4E0E7;
+        color: #133B66;
     }
 
-    .modal-content .btn-primary{
+    .modal-content .btn-primary {
         background-color: #00A1E0;
         color: white;
     }
-    .modal-content .btn-primary:hover{
+
+    .modal-content .btn-primary:hover {
         background-color: white;
         color: #00A1E0;
         border: 1px solid #00A1E0;
     }
 
-    .modal-content .btn-secondary{
-      background:  #D4E0E7 !important;
-      color:#133B66;
+    .modal-content .btn-secondary {
+        background: #D4E0E7 !important;
+        color: #133B66;
     }
-    .modal-content .btn-secondary:hover{
+
+    .modal-content .btn-secondary:hover {
         background: #133B66 !important;
         color: #D4E0E7;
     }
 
-    .plus, .minus{
+    .plus, .minus {
         color: #133B66;
         font-size: 10px;
         border: none !important;
         outline: none !important;
         background: transparent;
     }
-    .fa-minus:hover,.fa-plus:hover{
+
+    .fa-minus:hover, .fa-plus:hover {
         background: #D4E0E7;
-        color:#00A1E0;
-        cursor:pointer;
-        
+        color: #00A1E0;
+        cursor: pointer;
     }
 
-  
+    .list-group-item {
+        border: none;
+        color: #5C7E98;
+        padding: 2px;
+    }
+
+    .list-group-item .float-right {
+        color: #133B66;
+        font-weight: 620;
+    }
+
+    .payment-autogratuity .float-right {
+        color: #00A1E0;
+    }
+
+    .payment-total-list, .payment-balance-list {
+        color: #133B66;
+        font-size: 18px;
+    }
+
+    .payment-total-list .float-right, .payment-balance-list .float-right {
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+
+    .payment-nav{
+        margin-top: 30px;
+    }
+
+    .navitem {
+        float: left;
+        margin: auto;
+        color:#00A1E0;
+    }
+    .navitem:hover{
+        color: #133B66;
+        cursor: pointer;
+    }
+
+    .icon, .text {
+        text-align: center !important;
+    }
+
+    .icon {
+        margin-bottom: 5px;
+    }
+    .payment-balance-list .float-right{
+        color: #E36A70;
+    }

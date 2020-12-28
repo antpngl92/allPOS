@@ -86,13 +86,13 @@
                         </a>
                     </div>
                     <div class="col-md my-col pay-button">
-                        <button class="row-2-but">£<span>0.00</span> Pay</button>
+                        <button class="row-2-but pay-order-button" data-toggle="modal" data-target="#payment-modal">£<span>0.00</span> Pay</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    {% csrf_token %}
     <div class="col-md-7 no-gutters">
         <div class="rightside">
             <div class="rightside-header">
@@ -122,8 +122,8 @@
             <div class="product-header">PRODUCTS</div>
             <div class="products-buttons">
                 <div class="row products-buttons-row no-gutters">
-                    {% for oi in order_items %}
-                        <button type="button" data-id={{oi.id}} data-name={{oi.product.name}} data-price={{ oi.retail_price| floatformat:2}} class="product-butt">{{oi.product.name}} <span>£{{ oi.retail_price| floatformat:2}}</span> </button>
+                    {% for p in products %}
+                        <button type="button" data-id={{p.id}} data-name='{{p.name}}' data-price={{ p.retail_price| floatformat:2}} class="product-butt">{{p.name}} <span>£{{ p.retail_price| floatformat:2}}</span> </button>
                     {%endfor%}
                 </div>
 

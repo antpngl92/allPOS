@@ -7,9 +7,24 @@ class Product(models.Model):
     ingredient              = models.ManyToManyField(Ingredient)
     category                = models.ForeignKey('Category', null=True, blank=True, on_delete=models.DO_NOTHING)
     food_allergen_labels    = models.ManyToManyField('FoodAllergenLabels')
+    retail_price            = models.DecimalField(decimal_places=2, max_digits=4)
 
     def __str__(self):
         return self.name
+
+
+    
+    @property
+    def actual_cost(self):    
+        ingridients = Ingredient.objects.filter(product=self)
+        print(f"Ingridients: {ingridients} for product: {self}")
+        actual_cost = 0
+        for i in ingridients:
+            quantity = i.quantity
+            inventory_ingredient = i.inventory_ingredient                       # get the inventory ingredient 
+            inventory_ingredient_unit_cost = inventory_ingredient.unit_cost     # get the inventory ingredient unit cost 
+            actual_cost += quantity * inventory_ingredient_unit_cost
+        return actual_cost
     
    
 class FoodAllergenLabels(models.Model):

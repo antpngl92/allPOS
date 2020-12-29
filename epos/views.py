@@ -30,7 +30,7 @@ def home_view(request):
     }
     return render(request, 'epos/index.html', context)
 
-
+@login_required
 def get_products_API(request, pk):
     if request.method == "GET":
         primary_key = pk
@@ -38,6 +38,7 @@ def get_products_API(request, pk):
         products    = list(products.values())
     return JsonResponse(products, safe=False)
 
+@login_required
 def create_order_API(request):
     if request.method == "POST":
         products            = request.POST.getlist('products[]')            
@@ -98,21 +99,6 @@ def create_order_API(request):
                 # Exctract used Ingridient quantity for each Order Item from Inventory Ingredient
                 i.inventory_ingredient.current_stock = (i.inventory_ingredient.current_stock - i.quantity*temp_product_quantity)
                 i.inventory_ingredient.save()
-
-
-
-           
-
-                
-    
-
-
-   
-        
-        
-
-     
-
 
     return JsonResponse({}, safe=False)
 

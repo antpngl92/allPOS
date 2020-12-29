@@ -1,12 +1,10 @@
 // Add product to an order when product button is clicked
 $(document).on('click', '.product-butt', function () {
 
-    var order_item_id = $(this).data('id') // Get Item Id
-    // var order_item_name = $(this).data('name') // Get Item Name
     var order_item_name = $(this).data('name') // Get Item Name
     var order_item_price = $(this).data('price') // Get Item Price
     var exist = check_if_exist(order_item_name) // Check if item is already in the order
-
+    console.log(exist)
     // Calculate the price for an item 
     var order_item_quantity = 1;
     var product_total = (order_item_price * order_item_quantity).toFixed(2)
@@ -29,11 +27,14 @@ $(document).on('click', '.product-butt', function () {
     // Else, change the item quantity and item total price
     else {
         var row_num = exist; // Get the row number of the item that exists 
+        console.log("Row num: "+ row_num)
         var number_as_int = parseInt($('tr#' + row_num + ' td.product-quantity').html()) // Current num of ordered items
+        console.log("Current " + number_as_int)
         var quantity = number_as_int + 1; // increment the item counter + 1
         $('tr#' + row_num + ' td.product-quantity').html(quantity)                // Update the item counter for an item
         var price_as_number = parseFloat($('tr#' + row_num + ' td.product-unit-price span').html()) // Get the item unit price 
         var total_price = (price_as_number * quantity).toFixed(2);
+        console.log(total_price)
         $('tr#' + row_num + ' td.product-total-price span').html(total_price)
     }
    
@@ -187,7 +188,16 @@ function create_order(payment_type){
         },
         url: CREATE_ORDER,
         success: function(data){
-          
+            
+            $('.payment-balance-list .float-right span').html("0.00")
+            $('.card-butt').prop('disabled', true)
+            $('.cash-butt').prop('disabled', true)
+            $('.modal-title span').append(" Paid")
+            $('.order-product-list-table-body').html("")
+            $('.order-number').html("0")
+            $('.order-type').html("Take Out")
+            keep_track_of_total_price()
+            TOTAL_ITEMS = 0;
         }
     })
 }

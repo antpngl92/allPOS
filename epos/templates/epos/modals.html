@@ -34,9 +34,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="radio" name="order-type" value="Have In">
+        <input type="radio" id="have-in" name="order-type" value="Have In">
         <label for="haveIn">Have In</label><br>
-        <input type="radio" name="order-type" value="Take Out">
+        <input type="radio" id="take-out" name="order-type" value="Take Out">
         <label for="takeAway">Take Out</label><br>
       </div>
       <div class="modal-footer">
@@ -54,7 +54,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Checkout | Order # <span></span></h5>
+        <h5 class="modal-title" id="exampleModalLabel">Checkout | Order # <span id="order-status"></span></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -97,7 +97,7 @@
           <ul class="list-group">
             <li class='list-group-item payment-total-list'>TOTAL:
               <div class='float-right'>
-                £<span></span>
+                £<span id="total"></span>
               </div>
             </li>
           </ul>

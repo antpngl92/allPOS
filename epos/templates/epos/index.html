@@ -9,13 +9,13 @@
                 <div class="row header-row-1 no-gutters">
                     <div class="col my-col empty"></div>
                     <div class="col my-col order-number">0</div>
-                    <div class="col my-col order-number-button" title="Enter Order Number"><a  href="#"><i class="far fa-file"  data-toggle="modal" data-target="#order-number-modal"></i> </a></div>
+                    <div class="col my-col order-number-button" title="Enter Order Number"><a id="order-number-anchor"  href="#"><i class="far fa-file"  data-toggle="modal" data-target="#order-number-modal"></i> </a></div>
                 </div>
                 <div class="row header-row-2 no-gutters">
-                    <div class="col my-col employee-name"><i class="far fa-user-circle"></i>{{user.get_full_short}}
+                    <div class="col my-col employee-name"><i class="far fa-user-circle"></i><span id="employee-full-short-name">{{user.get_full_short}}</span>
                     </div>
                     <div class="col my-col order-type">Take Out</div>
-                    <div class="col my-col order-type-button"><a href="#"><i class="fas fa-ellipsis-h" data-toggle="modal" data-target="#order-type-modal"></i></a></div>
+                    <div class="col my-col order-type-button"><a href="#" id="order-type-anchor"><i class="fas fa-ellipsis-h" data-toggle="modal" data-target="#order-type-modal"></i></a></div>
                 </div>
             </div>
             <div class="leftside-order-list">

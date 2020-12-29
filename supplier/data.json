@@ -1,0 +1,22 @@
+[
+    {
+        "model": "supplier.supplier",
+        "pk": 1,
+        "fields": {
+            "name": "Ettr",
+            "email": "Ettr@gmail.com",
+            "phone": "020 334 400",
+            "lead_time_delivery": 1
+        }
+    },
+    {
+        "model": "supplier.supplier",
+        "pk": 2,
+        "fields": {
+            "name": "Meet Sup",
+            "email": "meetsup@gmail.com",
+            "phone": "0233 3434 993",
+            "lead_time_delivery": 1
+        }
+    }
+]

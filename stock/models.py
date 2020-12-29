@@ -3,7 +3,7 @@ from supplier.models import Supplier
 
 class InventoryIngredient(models.Model):
     name                 = models.CharField(max_length=30)
-    supplier             = models.ManyToManyField(Supplier, blank=True, null=True) 
+    supplier             = models.ManyToManyField(Supplier, blank=True) 
     unit_cost            = models.DecimalField(decimal_places=2, max_digits=4)
     unit_weight          = models.DecimalField(decimal_places=3, max_digits=5)
     current_stock        = models.DecimalField(blank=False, decimal_places=3, max_digits=5)

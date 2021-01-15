@@ -4,7 +4,8 @@ from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from django.core import serializers
 import json
-
+from datetime import date
+from collections import defaultdict
 
 from product.models import Product, Category
 from employee.models import Employee
@@ -29,6 +30,29 @@ def home_view(request):
         'selected_category' : selected_category,
     }
     return render(request, 'epos/index.html', context)
+
+@login_required
+def analytics_view(request):
+    today = date.today()
+    orders = Order.objects.filter(date=today)
+    ordered_items = defaultdict(dict)
+    for i in orders:
+        products_for_order = i.products.filter()
+
+        for j in products_for_order:
+            temp_name       = j.product_name 
+            temp_quantity   = j.quantity
+            
+            if ordered_items[temp_name] == {}:
+                ordered_items[temp_name] = temp_quantity
+            else:
+                ordered_items[temp_name] = ordered_items[temp_name] + temp_quantity
+    ordered_items = dict(ordered_items)
+   
+    context = {
+        'item'      : ordered_items,
+    }    
+    return render(request, 'epos/analytics.html', context)
 
 @login_required
 def get_products_API(request, pk):

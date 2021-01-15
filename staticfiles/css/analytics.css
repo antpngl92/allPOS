@@ -1,0 +1,49 @@
+/* This to be deleted when finish */
+.leftside-analytics {
+    border: 1px solid green;
+}
+
+.data-header{
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+.data-list-chart{
+    padding: 5px;
+    background: white !important;
+    border-radius: 10px;
+    
+}
+.category-text-header{
+    float: left;
+    width: 90%;
+    padding-left: 10px;
+    
+}
+.borderless td, .borderless th {
+    border: none;
+    padding: 7px;
+}
+.quantity-sold{
+    float: right;
+    font-weight: bold;
+}
+.pie-text-bellow{
+    padding-top: 60px;
+    margin-bottom: 20px;
+}
+.top-ten-text{
+    font-size: 30px;
+}
+
+/* Computer screen/ screen more than 768 width */
+@media screen and (min-width: 768px) {
+    .leftside-analytics, .rightside-analytics {
+        color: #133B66 ;
+        height: 96vh;
+        width: 100% ;
+    }
+    .data-header{
+        font-size: 16px;
+    }
+}

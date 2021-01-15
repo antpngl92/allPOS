@@ -52,6 +52,9 @@ main{
     color: var(--text-primary);
     text-decoration: none;
 }
+.nav-link:hover{
+    color: #00A1E0;
+}
 
 .nav-link i{
     min-width: 2rem;

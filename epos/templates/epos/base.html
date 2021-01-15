@@ -14,10 +14,14 @@
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/c7f301a7fb.js" crossorigin="anonymous"></script>
+  <!-- Chart Js-->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <!-- Navbar CSS-->
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
   <!-- EPOS CSS-->
   <link rel="stylesheet" href="{% static 'css/epos.css' %}">
+    <!-- ANALYTICS CSS-->
+  <link rel="stylesheet" href="{% static 'css/analytics.css' %}">
   <title>{{ title }}</title>
 </head>
 
@@ -33,6 +37,7 @@
 
 
   {% include 'epos/scripts.html' %}
+  
 </body>
 
 </html>

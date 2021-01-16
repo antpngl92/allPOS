@@ -8,7 +8,7 @@
             <div class="data-list-chart">
                 <div class="row chart-list-top">
                     <div class="col-md-8 col-sm-12 pie-chart-left no-gutters order-12 text-center">
-                        <canvas id="pieChart" style="max-width: 500px;"></canvas>
+                        <canvas id="pieChart" style="max-width: 600px;"></canvas>
                         <div class="pie-text-bellow">
                             <span class="top-ten-text">Top 10 </span><br>
                             <span>by Quantity Sold </span>
@@ -17,15 +17,31 @@
                     <div class="col-md-4 col-sm-12 top-10-item-right no-gutters order-12">
                         <table class="table borderless">
                             {% for i, q in item.items|dictsortreversed:1 %}
-                                {% if forloop.counter < 11 %}
-                                <tr>
-                                    <td class="product-name">{{i}}</td>
-                                    <td class="quantity-sold">{{q}}</td>
+                            {% if forloop.counter < 11 %} <tr>
+                                <td class="product-name">{{i}}</td>
+                                <td class="quantity-sold">{{q}}</td>
                                 </tr>
-                               {% endif %}
-                                
-                            {%endfor%}
+                                {% endif %}
+
+                                {%endfor%}
                         </table>
+                    </div>
+                </div>
+            </div>
+            <div class="data-sales">
+                <div class="row barChart-holder">
+                    <div class="col-md-8 col-sm-12  no-gutters">
+                        <canvas id="barChart" style="max-width: 600px;"></canvas>
+                    </div>
+                    <div class="col-md-4 col-sm-12 no-gutters text-center">
+                        <span class="revenue-text">Revenue</span><br>
+                        <span>Last 14 Days</span>
+
+                        <span class="today-revenue-text">Today</span>
+                        <span class="today-revenue-amount ">£{{this_week_daily_revenue.6}}</span>
+
+                        <span class="last-week-revenue-text">Last {{week_day}} </span>
+                        <span class="last-week-revenue-amount">£{{last_week_daily_revenue.6}}</span>
                     </div>
                 </div>
             </div>
@@ -34,54 +50,20 @@
 
     <div class="col-md-6 no-gutters">
         <div class="rightside-analytics">
-           
+
             <br>
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-<script>
-    $(function(){
-        var items = $('.quantity-sold')
-        var colors = ["#5AA8E5", "#7786D1", "#9A73D2", "#C261CA", "#DD75BC", "#DC5970", "#E4884F", "#F8D95F", "#95DB5D", "#5FA6B7"];
 
-        for(var i = 0; i < items.length; i++){
-            items[i].style.color = colors[i];
-        }
 
-    })
-
-    //pie
-    Chart.defaults.global.legend.display = false;
-
-    // Get the product names and sold quantity 
-    var items_temp = $('.product-name')    
-    var number_temp = $('.quantity-sold')
-
-    var items = []
-    var numbers = []
-    // Insert the product names and sold quantity into lists
-    for(var i =0 ; i < items_temp.length;i++){
-        items[i]    = items_temp[i].innerText
-        numbers[i]  = number_temp[i].innerText
-    }
-    
-    // Integrate products names and sold quantity into pie chart
-    var ctxP = document.getElementById("pieChart").getContext('2d');
-    var myPieChart = new Chart(ctxP, {
-        type: 'doughnut',
-        data: {
-            labels: items,
-            datasets: [{
-                data: numbers,
-                backgroundColor: ["#5AA8E5", "#7786D1", "#9A73D2", "#C261CA", "#DD75BC", "#DC5970", "#E4884F", "#F8D95F", "#95DB5D", "#5FA6B7"],
-                hoverBackgroundColor: ["#9dc3e0", "#a3aac9", "#b19dcf", "#c69bc9", "#d9a5c8", "#cf97a1", "#d6a98d", "#faeebe", "#b3d498", "#b1c3c7"]
-            },
-            ]
-        },
-        options: {
-            responsive: true,
-        }
-    });
-</script>
+<div id="hidden" style="display: none">
+    {{this_week_daily_revenue |json_script:'this_week_daily_revenue'}}
+</div>
+<div id="hidden2" style="display: none">
+    {{last_week_daily_revenue |json_script:'this_week_daily_revenue'}}
+</div>
+<div id="hidden3" style="display: none">
+    {{weeek_days_list |json_script:'this_week_daily_revenue'}}
+</div>
 {% endblock %}

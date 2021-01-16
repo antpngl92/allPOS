@@ -5,6 +5,8 @@ from django.http import JsonResponse
 from django.core import serializers
 import json
 from datetime import date
+import datetime
+from datetime import timedelta
 from collections import defaultdict
 
 from product.models import Product, Category
@@ -33,26 +35,73 @@ def home_view(request):
 
 @login_required
 def analytics_view(request):
-    today = date.today()
-    orders = Order.objects.filter(date=today)
-    ordered_items = defaultdict(dict)
-    for i in orders:
-        products_for_order = i.products.filter()
+    today           = date.today()
+    orders          = Order.objects.filter(date=today)       # Get all the orders for today
+    ordered_items   = defaultdict(dict)         
+    for i in orders:                                # Loop through all orders
+        products_for_order = i.products.filter()    # For each order get products list
 
-        for j in products_for_order:
-            temp_name       = j.product_name 
-            temp_quantity   = j.quantity
+        for j in products_for_order:                # for each product of the product list (for each order)
+            temp_name       = j.product_name        # get product name 
+            temp_quantity   = j.quantity            # get product quantity
             
-            if ordered_items[temp_name] == {}:
-                ordered_items[temp_name] = temp_quantity
-            else:
+            if ordered_items[temp_name] == {}:      # if order name doesn't exist as a key in the dictironary 
+                ordered_items[temp_name] = temp_quantity  # set a key-value in the dictionary 
+            else:                                   # otherwise, update the value with the given order-name-key
                 ordered_items[temp_name] = ordered_items[temp_name] + temp_quantity
     ordered_items = dict(ordered_items)
-   
+    
+    week_days       = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+    today_week_day  = get_today_week_day(today) # Get numeric day of the week  
+    weeek_days_list = get_list_week_days(week_days, today_week_day) # get list of week days, where todays date is at last index
+
+
+    # Get revenue for each day for the last 2 weeks 
+    this_week_daily_revenue = []
+    last_week_daily_revenue = [] 
+    for i in range(0,14):
+        temp_date   = today - timedelta(days=i)
+        orders      = Order.objects.filter(date=temp_date)
+        today_total = get_total_for_day(orders, temp_date)
+        if(i < 7):
+            this_week_daily_revenue.insert(0, today_total)
+        else:
+            last_week_daily_revenue.insert(0, today_total)
+
+    title = "Analytics"
     context = {
-        'item'      : ordered_items,
+        'item'                      : ordered_items,
+        'week_day'                  : week_days[today_week_day],
+        'this_week_daily_revenue'   : this_week_daily_revenue,
+        'last_week_daily_revenue'   : last_week_daily_revenue,
+        'weeek_days_list'           : weeek_days_list,
+        'title'                     : title
     }    
     return render(request, 'epos/analytics.html', context)
+
+# get a list of week days, where today is last index
+def get_list_week_days(wd, twd):
+    days_arr = []
+    for i in range(6,-1, -1):
+        days_arr.append(wd[twd-i])
+    return days_arr
+
+# Get the total Revenue for the "date" argument
+def get_total_for_day(orders, date):
+    today_total = 0
+    for o in orders:
+        today_total += o.total_amount
+
+    return today_total
+
+# get the number of the week day
+def get_today_week_day(today):
+    year = str(today)[:4]
+    month = str(today)[5:7]
+    day = str(today)[8:10]
+    week_num=datetime.date(int(year),int(month),int(day)).weekday()
+
+    return week_num
 
 @login_required
 def get_products_API(request, pk):

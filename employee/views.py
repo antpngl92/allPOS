@@ -11,24 +11,24 @@ from django.http import HttpResponse, Http404
 
 # Create your views here.
 def login_view(request):
-    context = {}
-    user = request.user
+    context     = {}
+    user        = request.user
     if user.is_authenticated:
         return redirect('home')
     if request.POST:
         form = AccountAuthenticationForm(request.POST)
         if form.is_valid:
-            pin = request.POST['pin']
-            pin = int(pin) 
-            clocked_in = True # Assuming an employee is clocked in
+            pin         = request.POST['pin']
+            pin         = int(pin) 
+            clocked_in  = True # Assuming an employee is clocked in
 
             # Check if there is a user with the provided pin
             try:
                 employee = Employee.objects.get(pin=pin) # get the employee with the pin
             except:
-                context['clocked'] = "Incorrect PIN!"
-                context['login_form'] = form
-                context['title'] = "Log in"
+                context['clocked']      = "Incorrect PIN!"
+                context['login_form']   = form
+                context['title']        = "Log in"
                 return render(request, 'employee/login.html', context)
             today = datetime.date.today() # get todays date 
             # get latest timestamp for today
@@ -53,8 +53,8 @@ def login_view(request):
                 context['clocked'] = "Please, clock in first!"
     else:
         form = AccountAuthenticationForm()
-    context['login_form'] = form
-    context['title'] = "Log in"
+    context['login_form']       = form
+    context['title']            = "Login"
     return render(request, 'employee/login.html', context)
 
 
@@ -66,12 +66,12 @@ def logout_view(request):
 
 def clock_in_out_API(request):
     if request.method == "POST":
-        status = "Unsuccessful"
-        pin = request.POST['pin']
-        employee = Employee.objects.get(pin=pin)
-        today = datetime.date.today() # get todays date
+        status      = "Unsuccessful"
+        pin         = request.POST['pin']
+        employee    = Employee.objects.get(pin=pin)
+        today       = datetime.date.today() # get todays date
         todays_time_stamp_exist = True
-        now = datetime.time
+        now         = datetime.time
         # Get the latest timestamp
         try:
             timestamp = TimeStapm.objects.filter(employee=employee, datestamp=today)

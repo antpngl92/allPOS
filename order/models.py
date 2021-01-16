@@ -2,6 +2,8 @@ from django.db import models
 from employee.models import Employee
 from orderitem.models import OrderItem
 
+from datetime import date
+
 class Order(models.Model):
     TAKEAWAY = 1
     HAVEIN   = 2

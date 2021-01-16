@@ -12,12 +12,22 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
   integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+<script type="text/javascript" src="{% static 'js/modals.js' %}"></script>
+
 {% if request.user.is_authenticated %}
 <script type="text/javascript" src="{% static 'js/session.js' %}"></script>
 {% endif %}
 
-<script type="text/javascript" src="{% static 'js/login_date_time.js' %}"></script>
+{%if title == "Login" %}
 <script type="text/javascript" src="{% static 'js/clock_in_out.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/epos_categories.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/modals.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/create_order.js' %}"></script>
+{%endif%}
+
+{%if title == "EPOS" %}
+  <script type="text/javascript" src="{% static 'js/create_order.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/epos_categories.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/login_date_time.js' %}"></script>
+{%endif%}
+
+{%if title == "Analytics" %}
+  <script type="text/javascript" src="{% static 'js/analytics.js' %}"></script>
+{%endif%}

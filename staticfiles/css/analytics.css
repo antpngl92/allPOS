@@ -2,23 +2,11 @@
 .leftside-analytics {
     border: 1px solid green;
 }
-
-.data-header{
-    font-size: 14px;
-    font-weight: bold;
-    padding-bottom: 20px;
-}
+/* Pie chart card */
 .data-list-chart{
     padding: 5px;
     background: white !important;
-    border-radius: 10px;
-    
-}
-.category-text-header{
-    float: left;
-    width: 90%;
-    padding-left: 10px;
-    
+    border-radius: 10px; 
 }
 .borderless td, .borderless th {
     border: none;
@@ -35,15 +23,53 @@
 .top-ten-text{
     font-size: 30px;
 }
+.data-sales{
+    background: white;
+    margin-top: 30px;
+    border-radius: 10px;
+    padding: 10px;
+}
 
-/* Computer screen/ screen more than 768 width */
+/* Computer screen/ screen more than 768 width  and less than 1044px*/
 @media screen and (min-width: 768px) {
     .leftside-analytics, .rightside-analytics {
         color: #133B66 ;
         height: 96vh;
         width: 100% ;
     }
-    .data-header{
+    .borderless{
+        font-size: 10px;
+    }
+}
+
+/* Computer screen/ screen more than 1044px*/
+@media screen and (min-width: 1044px) {
+    .leftside-analytics, .rightside-analytics {
+        color: #133B66 ;
+        height: 96vh;
+        width: 100% ;
+    }
+    .borderless{
         font-size: 16px;
+    }
+    .data-sales{
+
+        padding: 10px;
+    }
+    .revenue-text{
+        font-size: 30px;
+    }
+    .today-revenue-text, .last-week-revenue-text{
+        margin-top: 12%;
+        font-size: 20px;
+        display: block;
+    }
+    .today-revenue-amount{
+        font-size: 20px;
+        color: rgba(90, 168, 229, 1);
+    }
+    .last-week-revenue-amount{
+        font-size: 20px;
+        color: rgba(194, 97, 202, 1);
     }
 }

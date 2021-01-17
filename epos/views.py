@@ -175,3 +175,9 @@ def create_order_API(request):
 
     return JsonResponse({}, safe=False)
 
+
+def get_orders_list_API(request):
+    orders = []
+    if request.method == 'GET':
+        orders = Order.objects.all()
+    return JsonResponse(list(orders.values()), safe=False)

@@ -427,11 +427,6 @@
         cursor: pointer;
     }
 
-    .list-group-item {
-        border: none;
-        color: #5C7E98;
-        padding: 2px;
-    }
 
     .list-group-item .float-right {
         color: #133B66;

@@ -1,7 +1,3 @@
-/* This to be deleted when finish */
-.leftside-analytics {
-    border: 1px solid green;
-}
 /* Pie chart card */
 .data-list-chart{
     padding: 5px;
@@ -29,7 +25,87 @@
     border-radius: 10px;
     padding: 10px;
 }
+.today-revenue-text, .last-week-revenue-text{
+    margin-top: 12%;
+    font-size: 20px;
+    display: block;
+}
 
+.today-revenue-amount{
+    font-size: 20px;
+    color: rgba(90, 168, 229, 1);
+}
+.last-week-revenue-amount{
+    font-size: 20px;
+    color: rgba(194, 97, 202, 1);
+}
+.operation-buttons{
+    background: white;
+    margin-top: 30px;
+    border-radius: 10px;
+}
+.list-group-item:hover{
+    cursor: pointer !important;
+}
+.list-group-item span{
+    margin-left: 10px;
+    font-weight: bold;
+}
+.fa-info-circle{
+    float: right;
+    color: #00A1E0;
+}
+.end-of-day{
+    float: right;
+    color: #00A1E0;
+}
+
+.button1-holder{
+    /* border: 1px solid red; */
+    margin-top: 10px;
+}
+.button1{
+    border: 3px solid #00A1E0;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    color: #00A1E0;
+    font-size: 20px;
+    font-weight: bold;
+}
+.button1 i, .button2 i{
+    padding-top: 10px;
+    display: block;
+    font-size: 40px;
+}
+.csdj1{
+    margin-right: 8%;
+}
+.csdj1, .csdj2 {
+    width: 45%;
+    border: 3px solid #00A1E0;
+    border-radius: 10px;
+    background: transparent;
+    color: #00A1E0;
+    height: 100%;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+button:focus{
+    outline: none
+}
+button:hover{
+    cursor: pointer;
+}
+.analytics-order-list-modal-body{
+    height: 200px;
+    overflow-y: auto;
+}
+.orders-list-modal{
+    width: 600px !important;
+}
 /* Computer screen/ screen more than 768 width  and less than 1044px*/
 @media screen and (min-width: 768px) {
     .leftside-analytics, .rightside-analytics {
@@ -40,6 +116,13 @@
     .borderless{
         font-size: 10px;
     }
+    .revenue-text{
+        font-size: 20px;
+    }
+    .today-revenue-amount, .last-week-revenue-amount, .today-revenue-text, .last-week-revenue-text{
+        font-size: 14px;
+    }
+    
 }
 
 /* Computer screen/ screen more than 1044px*/
@@ -59,17 +142,23 @@
     .revenue-text{
         font-size: 30px;
     }
-    .today-revenue-text, .last-week-revenue-text{
-        margin-top: 12%;
+    .today-revenue-amount, .last-week-revenue-amount, .today-revenue-text, .last-week-revenue-text{
         font-size: 20px;
-        display: block;
     }
-    .today-revenue-amount{
-        font-size: 20px;
-        color: rgba(90, 168, 229, 1);
+    .button1-holder{       
+        margin-bottom: 60px;
     }
-    .last-week-revenue-amount{
-        font-size: 20px;
-        color: rgba(194, 97, 202, 1);
+    .button1-holder{
+        /* border: 1px solid red; */
+        margin-top: 0;
+        margin-left: 60px;
+        padding-right: 0;
+        padding-left: 0;
+        height: 160px;
+        
+    }
+    .analytics-order-list-modal-body{
+        height: 400px;
+        overflow-y: auto;
     }
 }

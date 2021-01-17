@@ -1,20 +1,20 @@
 {% extends 'epos/base.html' %}
 {% block content %}
-
+{% include 'epos/modals.html' %}
 
 <div class="row no-gutters">
     <div class="col-md-6 no-gutters">
         <div class="leftside-analytics">
             <div class="data-list-chart">
                 <div class="row chart-list-top">
-                    <div class="col-md-8 col-sm-12 pie-chart-left no-gutters order-12 text-center">
+                    <div class="col-lg-8 col-md-12 col-sm-12 pie-chart-left no-gutters order-12 text-center">
                         <canvas id="pieChart" style="max-width: 600px;"></canvas>
                         <div class="pie-text-bellow">
                             <span class="top-ten-text">Top 10 </span><br>
                             <span>by Quantity Sold </span>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-12 top-10-item-right no-gutters order-12">
+                    <div class="col-lg-4 col-md-12 col-sm-12 top-10-item-right no-gutters order-12">
                         <table class="table borderless">
                             {% for i, q in item.items|dictsortreversed:1 %}
                             {% if forloop.counter < 11 %} <tr>
@@ -30,10 +30,10 @@
             </div>
             <div class="data-sales">
                 <div class="row barChart-holder">
-                    <div class="col-md-8 col-sm-12  no-gutters">
+                    <div class="col-lg-8 col-md-12 col-sm-12  no-gutters">
                         <canvas id="barChart" style="max-width: 600px;"></canvas>
                     </div>
-                    <div class="col-md-4 col-sm-12 no-gutters text-center">
+                    <div class="col-lg-4 col-md-12 col-sm-12 no-gutters text-center">
                         <span class="revenue-text">Revenue</span><br>
                         <span>Last 14 Days</span>
 
@@ -45,17 +45,91 @@
                     </div>
                 </div>
             </div>
+            <div class="operation-buttons-holder">
+                <ul class="operation-buttons list-group">
+                    <li class="list-group-item">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>On Hold Payments</span>
+                        <i class="fas fa-info-circle"></i>
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-coins"></i>
+                        <span>Tips</span>
+                        <i class="fas fa-info-circle"></i>
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-hourglass-end"></i>
+                        <span>End of the Day Process</span>
+                        <span class="end-of-day">Initiate</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
+    
 
     <div class="col-md-6 no-gutters">
         <div class="rightside-analytics">
 
-            <br>
+            <div class="row">
+                <div class="col-lg-5 col-md-12 col-sm-12 button1-holder">
+                   <button class="button1 get-order-list"><i class="far fa-copy" data-toggle="modal" data-target="#orders-list-modal"></i></i>Orders</button>
+                </div>
+                <div class="col-lg-5 col-md-12 col-sm-12 button1-holder">
+                    <button class="button1 orders-button"><i class="far fa-file-alt"></i>New Order</button>
+                 </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 col-md-12 col-sm-12 button1-holder">
+                   <button class="button1"><i class="fas fa-user-tie"></i>Catering</button>
+                </div>
+                <div class="col-lg-5 col-md-12 col-sm-12 button1-holder">
+                    <button class="button1"><i class="fas fa-truck-moving"></i>Delivery Management</button>
+                 </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 col-md-12 col-sm-12 button1-holder">
+                   <button class="button1"><i class="far fa-calendar-check"></i>Appointments</button>
+                </div>
+                <div class="col-lg-5 col-md-12 col-sm-12 button1-holder">
+                    <button class="button2 csdj1"><i class="fas fa-envelope-open-text"></i>Invoices</button>
+                    <button class="button2 csdj2"><i class="fas fa-dolly"></i>Shipping</button>
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="orders-list-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Checkout | Order # <span id="order-status"></span></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body analytics-order-list-modal-body">
+          <table class="table orders-list-analytics">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Number</th>
+                <th scope="col">Total</th>
+                <th scope="col">Type</th>
+                <th scope="col">Paid</th>
+              </tr>
+            </thead>
+            <tbody>
+  
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <div id="hidden" style="display: none">
     {{this_week_daily_revenue |json_script:'this_week_daily_revenue'}}
@@ -66,4 +140,9 @@
 <div id="hidden3" style="display: none">
     {{weeek_days_list |json_script:'this_week_daily_revenue'}}
 </div>
+<script>
+    var ORDERS_END_POINT = "{% url 'orders' %}"
+</script>
+{% csrf_token %}
+
 {% endblock %}

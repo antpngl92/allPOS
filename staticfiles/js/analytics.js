@@ -119,3 +119,45 @@ $(function () {
         }
     });
 })
+
+$(function () {
+    $('.orders-button').on('click', function(){
+        location.replace("/")
+    })
+
+    $('.get-order-list').on('click', function(){
+        var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+        
+        $.ajax({
+            method: "GET",
+            beforeSend: function (xhr){
+                xhr.setRequestHeader('X-CSRFToken', csrftoken);
+            },
+            url: ORDERS_END_POINT,
+            success: function(data){
+                
+                for(var i = data.length-1; i >= 0; i--){
+                    var type = data[i]['order_type']
+                    var curr_type = "Have In"
+
+                    var paid = data[i]['paid']
+                    var curr_paid = "Paid"
+
+                    if(paid == false) curr_paid = "On Hold"
+                    if(type==1) curr_type = "Take Out"
+
+                    $('.orders-list-analytics tbody').append(''+
+                    '<tr id='+data[i]['id']+'>\
+                        <td scope="row" style="font-weight:bold";>'+data[i]['id']+'</td>\
+                        <td>'+data[i]['date']+'</td>\
+                        <td>'+data[i]['time'].substring(0,8)+'</td>\
+                        <td>'+data[i]['order_numer']+'</td>\
+                        <td>£'+data[i]['total_amount']+'</td>\
+                        <td>'+curr_type+'</td>\
+                        <td>'+curr_paid+'</td>\
+                    </tr>')
+                }
+            }
+        })
+    })
+})

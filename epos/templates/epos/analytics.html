@@ -1,8 +1,8 @@
 {% extends 'epos/base.html' %}
 {% block content %}
-{% include 'epos/modals.html' %}
 
-<div class="row no-gutters">
+
+<div class="row">
     <div class="col-md-6 no-gutters">
         <div class="leftside-analytics">
             <div class="data-list-chart">
@@ -68,68 +68,25 @@
     </div>
     
 
-    <div class="col-md-6 no-gutters">
+    <div class="col-md-6">
         <div class="rightside-analytics">
-
             <div class="row">
-                <div class="col-lg-5 col-md-12 col-sm-12 button1-holder">
-                   <button class="button1 get-order-list"><i class="far fa-copy" data-toggle="modal" data-target="#orders-list-modal"></i></i>Orders</button>
-                </div>
-                <div class="col-lg-5 col-md-12 col-sm-12 button1-holder">
-                    <button class="button1 orders-button"><i class="far fa-file-alt"></i>New Order</button>
-                 </div>
+                <div class="col first-row"><button class="first-row-button1" data-toggle="modal" data-target="#orders-list-modal"><i class="far fa-copy"></i>Orders</button></div>
+                <div class="col first-row"><button class="first-row-button2"><i class="far fa-file"></i>New Order</button></div>
             </div>
             <div class="row">
-                <div class="col-lg-5 col-md-12 col-sm-12 button1-holder">
-                   <button class="button1"><i class="fas fa-user-tie"></i>Catering</button>
-                </div>
-                <div class="col-lg-5 col-md-12 col-sm-12 button1-holder">
-                    <button class="button1"><i class="fas fa-truck-moving"></i>Delivery Management</button>
-                 </div>
+                <div class="col second-row"><button class="second-row-button1"><i class="fas fa-user-tie"></i>Catering</button></div>
+                <div class="col second-row"><button class="second-row-button2"><i class="fas fa-shipping-fast"></i>Delivery Management</button></div>
             </div>
             <div class="row">
-                <div class="col-lg-5 col-md-12 col-sm-12 button1-holder">
-                   <button class="button1"><i class="far fa-calendar-check"></i>Appointments</button>
-                </div>
-                <div class="col-lg-5 col-md-12 col-sm-12 button1-holder">
-                    <button class="button2 csdj1"><i class="fas fa-envelope-open-text"></i>Invoices</button>
-                    <button class="button2 csdj2"><i class="fas fa-dolly"></i>Shipping</button>
-                </div>
+                <div class="col third-row"><button class="third-row-button1"><i class="far fa-calendar-check"></i>Appointments</button></div>
+                <div class="col third-row"><button class="third-row-button2"><i class="fas fa-envelope-open-text"></i>Invoices</button></div>
+                <div class="col third-row"><button class="third-row-button3"><i class="fas fa-truck-loading"></i>Shipping</button></div>
             </div>
-            
         </div>
     </div>
 </div>
-<div class="modal fade" id="orders-list-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Checkout | Order # <span id="order-status"></span></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body analytics-order-list-modal-body">
-          <table class="table orders-list-analytics">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Date</th>
-                <th scope="col">Time</th>
-                <th scope="col">Number</th>
-                <th scope="col">Total</th>
-                <th scope="col">Type</th>
-                <th scope="col">Paid</th>
-              </tr>
-            </thead>
-            <tbody>
-  
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
 <div id="hidden" style="display: none">
     {{this_week_daily_revenue |json_script:'this_week_daily_revenue'}}
@@ -142,7 +99,9 @@
 </div>
 <script>
     var ORDERS_END_POINT = "{% url 'orders' %}"
+    var ORDER_END_POINT = "{% url 'this_order' 0%}"
 </script>
+{% include 'epos/modals.html' %}
 {% csrf_token %}
 
 {% endblock %}

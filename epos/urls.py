@@ -5,6 +5,7 @@ from epos.views import (
     get_products_API,
     create_order_API,
     get_orders_list_API,
+    get_order_API,
     )
 
 urlpatterns = [
@@ -13,6 +14,6 @@ urlpatterns = [
     path('category/<int:pk>',get_products_API,name='category'),
     path('orders/',get_orders_list_API,name='orders'),
     path('order/',create_order_API,name='order'),
-
+    path('get_order/<int:pk>', get_order_API, name="this_order")
 
 ]

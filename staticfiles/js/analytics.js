@@ -121,43 +121,142 @@ $(function () {
 })
 
 $(function () {
-    $('.orders-button').on('click', function(){
+    // Create a new order - redirect to EPOS screen
+    $('.first-row-button2').on('click', function () {
         location.replace("/")
     })
-
-    $('.get-order-list').on('click', function(){
+    // List Orders
+    $('.first-row-button1').on('click', function () {
+        $('.analytics-order-list-modal-body').html('')
+        $('#orders-modal-label').html('Orders/')
         var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-        
-        $.ajax({
-            method: "GET",
-            beforeSend: function (xhr){
-                xhr.setRequestHeader('X-CSRFToken', csrftoken);
-            },
-            url: ORDERS_END_POINT,
-            success: function(data){
-                
-                for(var i = data.length-1; i >= 0; i--){
-                    var type = data[i]['order_type']
-                    var curr_type = "Have In"
+        get_orders(csrftoken)
 
-                    var paid = data[i]['paid']
-                    var curr_paid = "Paid"
-
-                    if(paid == false) curr_paid = "On Hold"
-                    if(type==1) curr_type = "Take Out"
-
-                    $('.orders-list-analytics tbody').append(''+
-                    '<tr id='+data[i]['id']+'>\
-                        <td scope="row" style="font-weight:bold";>'+data[i]['id']+'</td>\
-                        <td>'+data[i]['date']+'</td>\
-                        <td>'+data[i]['time'].substring(0,8)+'</td>\
-                        <td>'+data[i]['order_numer']+'</td>\
-                        <td>£'+data[i]['total_amount']+'</td>\
-                        <td>'+curr_type+'</td>\
-                        <td>'+curr_paid+'</td>\
-                    </tr>')
-                }
-            }
-        })
     })
 })
+$(function () {
+    $('.table-row-list').on('click-row.bs.table', function () {
+        console.log("a")
+    })
+})
+// Get the list of all orders
+function get_orders(csrftoken) {
+    $('.analytics-order-list-modal-body').html('')
+    $.ajax({
+        method: "GET",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-CSRFToken', csrftoken);
+        },
+        url: ORDERS_END_POINT,
+        success: function (data) {
+
+            for (var i = data.length - 1; i >= 0; i--) {
+                var type = data[i]['order_type']
+                var curr_type = "Have In"
+
+                var paid = data[i]['paid']
+                var curr_paid = "Paid"
+
+                if (paid == false) curr_paid = "On Hold"
+                if (type == 1) curr_type = "Take Out"
+                
+                $('.analytics-order-list-modal-body').append('' +
+                    '   <table class="table orders-list-analytics">\
+                        <thead>\
+                            <tr class="table-row-orders">\
+                                <th scope="col">ID</th>\
+                                <th scope="col">Date</th>\
+                                <th scope="col">Time</th>\
+                                <th scope="col">Number</th>\
+                                <th scope="col">Total</th>\
+                                <th scope="col">Type</th>\
+                                <th scope="col">Paid</th>\
+                                <th scope="col">View Order</th>\
+                            </tr>\
+                        </thead>\
+                        <tbody>\
+                        </tbody>\
+                    </table>')
+
+                $('.orders-list-analytics tbody').append('' +
+                    '<tr class="table-row-list" id=' + data[i]['id'] + '>\
+                        <td scope="row" style="font-weight:bold";>'+ data[i]['id'] + '</td>\
+                        <td>'+ data[i]['date'] + '</td>\
+                        <td>'+ data[i]['time'].substring(0, 8) + '</td>\
+                        <td>'+ data[i]['order_numer'] + '</td>\
+                        <td>£'+ data[i]['total_amount'] + '</td>\
+                        <td>'+ curr_type + '</td>\
+                        <td>'+ curr_paid + '</td>\
+                        <td><a href="#" id='+ data[i]['id'] + ' class="btn btn-light view-specific-order">View</a></td>\
+                    </tr>')
+            }
+        }
+    })
+}
+
+// Modal Header Breadcrumb
+$(document).on('click', '.back_to_orders', function () {
+    $('#orders-modal-label').html('Orders/')
+    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+    get_orders(csrftoken)
+})
+// View a specific order from the order list
+$(document).on('click', '.view-specific-order', function () {
+    var order_id = $(this).attr('id')
+    $('.analytics-order-list-modal-body').html('') // When order details are set-up for rendering DELETE this!
+    var modal_text = $('#orders-modal-label').html()
+    $('#orders-modal-label').html('<a href="#" class="back_to_orders">' + modal_text + '</a>Order: ' + order_id)
+    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+    get_specific_order(csrftoken, order_id)
+
+})
+
+function get_specific_order(csrftoken, order_id) {
+    $.ajax({
+        method: "GET",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-CSRFToken', csrftoken);
+        },
+        url: ORDER_END_POINT.replace('0', order_id),
+        success: function (data) {
+            console.log(data['q'].length)
+            console.log(data['q'])
+            console.log(data['rp'])
+            $('.analytics-order-list-modal-body').append('' +
+                '<table class="table specific-order-products">\
+                    <thead>\
+                        <tr>\
+                            <th scope="col">Product</th>\
+                            <th scope="col">Quantity</th>\
+                            <th scope="col">Retail Price</th>\
+                            <th scope="col">Total Price</th>\
+                            </tr>\
+                    </thead>\
+                    <tbody>\
+                    </tbody>\
+                    </table>\
+            ')
+            var total = 0
+            for(var i = 0; i < data['q'].length;i++){
+                $('.specific-order-products tbody').append(''+
+                '<tr>\
+                    <td scope="row">'+data['p'][i] + '</td>\
+                    <td>'+data['q'][i] + '</td>\
+                    <td>£'+data['rp'][i] + '</td>\
+                    <td>£'+ (data['rp'][i] * data['q'][i]).toFixed(2) +'</td>\
+                </tr>\
+                ')
+                total = total + (data['rp'][i] * data['q'][i])
+            }
+            $('.specific-order-products tbody').append(''+
+            '<tr>\
+                <td scope="row"><b>Order Total: </b></td>\
+                <td></td>\
+                <td></td>\
+                <td>£'+total.toFixed(2)+'</td>\
+            </tr>\
+            ')
+        }
+    })
+}
+

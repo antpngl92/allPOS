@@ -175,6 +175,19 @@ def create_order_API(request):
 
     return JsonResponse({}, safe=False)
 
+def get_order_API(request, pk):
+    product = []
+    quantity = []
+    price = []
+    if request.method == 'GET':
+        order = Order.objects.get(pk=pk)
+        data = []
+        for o in order.products.all():
+            product.append(str(o))
+            quantity.append(o.quantity)
+            price.append(o.product.retail_price)
+
+    return JsonResponse({'p': product, 'q':quantity, 'rp':price}, safe=False)
 
 def get_orders_list_API(request):
     orders = []

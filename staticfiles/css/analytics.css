@@ -60,43 +60,27 @@
     color: #00A1E0;
 }
 
-.button1-holder{
-    /* border: 1px solid red; */
-    margin-top: 10px;
+/* Here */
+.rightside-analytics .row{
+    margin-bottom: 30px;
+    column-gap: 20px;
 }
-.button1{
-    border: 3px solid #00A1E0;
-    border-radius: 10px;
+.first-row button, .second-row button, .third-row button {
     width: 100%;
     height: 100%;
     background: transparent;
-    color: #00A1E0;
-    font-size: 20px;
-    font-weight: bold;
-}
-.button1 i, .button2 i{
-    padding-top: 10px;
-    display: block;
-    font-size: 40px;
-}
-.csdj1{
-    margin-right: 8%;
-}
-.csdj1, .csdj2 {
-    width: 45%;
     border: 3px solid #00A1E0;
     border-radius: 10px;
-    background: transparent;
     color: #00A1E0;
-    height: 100%;
     font-size: 20px;
-    font-weight: bold;
+    outline:none;
+}
+.first-row button i, .second-row button i, .third-row button i {
+    display: block;
+    padding-top: 4%;
 }
 
-button:focus{
-    outline: none
-}
-button:hover{
+.rightside-analytics button:hover{
     cursor: pointer;
 }
 .analytics-order-list-modal-body{
@@ -105,6 +89,23 @@ button:hover{
 }
 .orders-list-modal{
     width: 600px !important;
+}
+.table-row-orders:hover{
+    border-top: 1px solid #00A1E0;
+    border-bottom: 1px solid #00A1E0;
+    cursor: pointer;
+}
+.orders-list-analytics > thead > tr > td {
+    border-bottom: 1px solid red !important;
+}
+table.orders-list-analytics > tbody > tr:hover {
+    cursor: pointer;
+}
+.table-row-list:hover{
+    background:#D4E0E7;
+}
+.analytics-order-list-modal-body{
+    font-size: 10px;
 }
 /* Computer screen/ screen more than 768 width  and less than 1044px*/
 @media screen and (min-width: 768px) {
@@ -122,11 +123,35 @@ button:hover{
     .today-revenue-amount, .last-week-revenue-amount, .today-revenue-text, .last-week-revenue-text{
         font-size: 14px;
     }
-    
+    .analytics-order-list-modal-body{
+        height: 300px;
+        font-size: 12px;
+    }
+    .third-row-button3{
+        margin-top: 30px;
+    }
 }
-
-/* Computer screen/ screen more than 1044px*/
-@media screen and (min-width: 1044px) {
+/* Computer screen more than 992px width and less than 1500px*/
+@media screen and (min-width: 992px){
+    .third-row-button3{
+        margin-top: 30px;
+    }
+    .analytics-order-list-modal-body{
+        height: 300px;
+        font-size: 16px;
+    }
+    .first-row button, .second-row button, .third-row button {
+        height: 200px;
+        font-size: 25px;
+    }
+}
+@media screen and (min-width: 1164px){
+    .third-row-button3{
+        margin-top: 0;
+    }
+}
+/* Computer screen more than 1500px*/
+@media screen and (min-width: 1500px) {
     .leftside-analytics, .rightside-analytics {
         color: #133B66 ;
         height: 96vh;
@@ -136,7 +161,6 @@ button:hover{
         font-size: 16px;
     }
     .data-sales{
-
         padding: 10px;
     }
     .revenue-text{
@@ -145,20 +169,12 @@ button:hover{
     .today-revenue-amount, .last-week-revenue-amount, .today-revenue-text, .last-week-revenue-text{
         font-size: 20px;
     }
-    .button1-holder{       
-        margin-bottom: 60px;
-    }
-    .button1-holder{
-        /* border: 1px solid red; */
-        margin-top: 0;
-        margin-left: 60px;
-        padding-right: 0;
-        padding-left: 0;
-        height: 160px;
-        
-    }
+
     .analytics-order-list-modal-body{
         height: 400px;
         overflow-y: auto;
+    }
+    .third-row-button3{
+        margin-top: 0;
     }
 }

@@ -25,12 +25,14 @@
                 <span class="link-text">Inventory</span>
             </a>
         </li>
+        {% if user.permission_level == 1 %}
         <li class="nav-item">
-            <a href="#" class="nav-link no-mobile">
+            <a href="{% url 'settings' %}" class="nav-link no-mobile">
                 <i class="fas fa-user-cog"></i>
                 <span class="link-text">Settings</span>
             </a>
         </li>
+        {% endif %}
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="fas fa-chart-line"></i>

@@ -194,3 +194,11 @@ def get_orders_list_API(request):
     if request.method == 'GET':
         orders = Order.objects.all()
     return JsonResponse(list(orders.values()), safe=False)
+
+
+def settings(request):
+    title = "Settings"
+    context = {
+        'title' : title
+    }
+    return render(request, 'epos/settings.html', context)

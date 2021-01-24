@@ -2,6 +2,8 @@ from django.urls import path
 from epos.views import (
     home_view,
     analytics_view,datetime, 
+    settings, 
+
     get_products_API,
     create_order_API,
     get_orders_list_API,
@@ -14,6 +16,6 @@ urlpatterns = [
     path('category/<int:pk>',get_products_API,name='category'),
     path('orders/',get_orders_list_API,name='orders'),
     path('order/',create_order_API,name='order'),
-    path('get_order/<int:pk>', get_order_API, name="this_order")
-
+    path('get_order/<int:pk>', get_order_API, name="this_order"),
+    path('settings/',settings, name="settings"),
 ]

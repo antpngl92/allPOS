@@ -63,7 +63,6 @@
 /* Here */
 .rightside-analytics .row{
     margin-bottom: 30px;
-    column-gap: 20px;
 }
 .first-row button, .second-row button, .third-row button {
     width: 100%;
@@ -107,6 +106,20 @@ table.orders-list-analytics > tbody > tr:hover {
 .analytics-order-list-modal-body{
     font-size: 10px;
 }
+.rightside-analytics{
+    margin-top: 30px;
+}
+.second-row{
+    width: 44%;
+}
+.first-row button, .second-row button, .third-row button{
+    font-size: 14px;
+}
+@media screen and (max-width: 371px){
+    .third-row-button3{
+        margin-top: 30px;
+    }
+}
 /* Computer screen/ screen more than 768 width  and less than 1044px*/
 @media screen and (min-width: 768px) {
     .leftside-analytics, .rightside-analytics {
@@ -127,9 +140,6 @@ table.orders-list-analytics > tbody > tr:hover {
         height: 300px;
         font-size: 12px;
     }
-    .third-row-button3{
-        margin-top: 30px;
-    }
 }
 /* Computer screen more than 992px width and less than 1500px*/
 @media screen and (min-width: 992px){
@@ -145,9 +155,9 @@ table.orders-list-analytics > tbody > tr:hover {
         font-size: 25px;
     }
 }
-@media screen and (min-width: 1164px){
+@media screen and (min-width: 1088px){
     .third-row-button3{
-        margin-top: 0;
+        margin-top: 0px !important;
     }
 }
 /* Computer screen more than 1500px*/

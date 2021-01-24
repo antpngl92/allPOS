@@ -22,12 +22,16 @@
 <script type="text/javascript" src="{% static 'js/clock_in_out.js' %}"></script>
 {%endif%}
 
+<script type="text/javascript" src="{% static 'js/create_order.js' %}"></script>
 {%if title == "EPOS" %}
-  <script type="text/javascript" src="{% static 'js/create_order.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/epos_categories.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/login_date_time.js' %}"></script>
 {%endif%}
 
 {%if title == "Analytics" %}
   <script type="text/javascript" src="{% static 'js/analytics.js' %}"></script>
+{%endif%}
+
+{%if title == "Settings" %}
+  <script type="text/javascript" src="{% static 'js/settings.js' %}"></script>
 {%endif%}

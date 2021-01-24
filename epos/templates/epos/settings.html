@@ -1,0 +1,18 @@
+{% extends 'epos/base.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-sm column-1">
+    <div class="tax-setting text-center">
+      <span>Current Tax: <span class="current-tax"></span> </span>
+        <button class="change-tax-btn" data-toggle="modal" data-target="#tax-change">Change</button>
+    </div>
+  </div>
+  <div class="col-sm column-2">
+    One of three columns
+  </div>
+  <div class="col-sm column-3">
+    One of three columns
+  </div>
+</div>
+{% include 'epos/modals.html' %}
+{% endblock %}

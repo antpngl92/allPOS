@@ -24,7 +24,13 @@ class Order(models.Model):
     order_numer     = models.IntegerField(blank=True)
     date            = models.DateField(auto_now_add=True)
     time            = models.TimeField(auto_now_add=True)
-    employee        = models.ForeignKey(Employee, on_delete=models.DO_NOTHING)
+    employee        = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL)
     total_amount    = models.DecimalField(decimal_places=2, max_digits=6)
     paid            = models.BooleanField()
     payment_method  = models.IntegerField(choices=PAYMENTMETHOD)
+
+class Tax(models.Model):
+    tax = models.DecimalField(decimal_places=2, max_digits=5)
+
+    def __str__(self):
+        return str(self.tax)

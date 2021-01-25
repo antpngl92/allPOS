@@ -62,7 +62,6 @@ class Employee(AbstractBaseUser):
     is_employeed        = models.BooleanField(blank=True, null=True,)
     nin                 = models.CharField(max_length=9, blank=True, null=True, unique=True)
     permission_level    = models.IntegerField(choices=AUTHORIZATION, default=EMPLOYEE)
-    profile_picture     = models.ImageField(upload_to='staticfiles/img/employee_profile_picture/', default='staticfiles/img/employee_profile_picture/default.png')
     pin                 = models.IntegerField('Pincode', unique=True)
     password            = models.CharField(blank=True, max_length=100)
 

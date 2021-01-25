@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import JsonResponse
 from django.http import HttpResponse, Http404
+from django.db import IntegrityError
 
 # Create your views here.
 def login_view(request):
@@ -96,3 +97,38 @@ def clock_in_out_API(request):
                 timestamp_clock_in.save()
                 status = "Clocked In!"
     return JsonResponse({'status': status}, safe=False)
+
+@login_required
+def create_employee_API(request):
+    status = "Created"
+    if request.method == "POST":
+        data = request.POST.getlist('data[]')
+        first_name      = data[0]
+        middle_name     = data[1]
+        surname         = data[2]
+        dob             = data[3]
+        address         = data[4]
+        tel_number      = data[5]
+        email           = data[6]
+        position        = data[7]
+        pay_rate        = data[8]
+        start_date      = data[9]
+        if data[10] == "":
+            end_date        = None
+        else: 
+            end_date        = data[10]
+        if data[11] == "true":
+            is_employeed = True
+        else:
+            is_employeed = False
+        nin             = data[12]
+        permission      = data[13]
+        pin             = data[14]
+        password = "as9dia9sdik(ASIDKLASJDasd0as9d"
+        employee = Employee(first_name=first_name, second_name=middle_name, last_name=surname, date_of_birth=dob, address=address, tel_number=tel_number, email=email, position=position, hourly_pay_rate=pay_rate, start_date=start_date, end_date=end_date, is_employeed=is_employeed, nin=nin, permission_level=permission, pin=pin, password=password)
+        try:
+            employee.save()
+        except IntegrityError as e: 
+            if 'UNIQUE constraint' in str(e.args):
+                status = "User with this pin exists"
+    return JsonResponse({'status':status}, safe=False)

@@ -15,6 +15,7 @@ from orderitem.models import OrderItem
 from order.models import Order
 from stock.models import InventoryIngredientTransaction
 from stock.models import InventoryIngredient
+from order.models import Tax
 
 
 @login_required
@@ -24,12 +25,14 @@ def home_view(request):
     products            = Product.objects.filter(category=selected_category.id)   # Get the order_items for the selected category
     user                = request.user
     title               = "EPOS"
+    tax = Tax.objects.latest('id')
     context = {
         'categories'        : categories,
         'user'              : user,   
         'title'             : title, 
         'products'          : products,
         'selected_category' : selected_category,
+        'tax'               : tax
     }
     return render(request, 'epos/index.html', context)
 
@@ -198,7 +201,29 @@ def get_orders_list_API(request):
 
 def settings(request):
     title = "Settings"
+    try:
+        tax = Tax.objects.latest('id')
+    except Tax.DoesNotExist:
+        tax = ""
+    print(tax)
     context = {
-        'title' : title
+        'title' : title,
+        'tax'   : tax
     }
     return render(request, 'epos/settings.html', context)
+
+def get_TAX_API(request):
+    try:
+        tax = Tax.objects.latest('id')
+        tax = tax.tax
+    except Tax.DoesNotExist:
+        tax = 0.00
+    return JsonResponse({'tax':tax}, safe=False)
+
+def change_TAX_API(request, tax):
+    if request.method == "POST":
+        print(tax)
+        tax = Tax(tax=tax)
+        tax.save()
+
+    return JsonResponse({'status': "status"}, safe=False)

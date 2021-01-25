@@ -1,5 +1,3 @@
-var TAX                 = 0.10
-
 // Add product to an order when product button is clicked
 $(document).on('click', '.product-butt', function () {
 
@@ -67,9 +65,9 @@ function keep_track_of_total_price() {
     $('.price-total').children('span').html(button_total.toFixed(2))
 
 }
-// Calculates tax/ Tax could be changed from the EPOS template (index.html)
+// Calculates tax
 function calculate_tax(total) {
-    return TAX * total
+    return (TAX * total)/100
 }
 // Loops through each table row and calculates the total price of all items
 function get_total_price_of_order() {

@@ -135,9 +135,9 @@
 
   {% include 'epos/modals.html' %}
 <script>
+    var TAX                 = '{{tax}}'
     var GET_CATEGORY        = "{% url 'category' 0%}";
     var CREATE_ORDER        = "{% url 'order' %}";
     var TOTAL_ITEMS         = 0;
-
 </script>
 {% endblock %}

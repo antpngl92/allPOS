@@ -8,6 +8,8 @@ from epos.views import (
     create_order_API,
     get_orders_list_API,
     get_order_API,
+    get_TAX_API,
+    change_TAX_API
     )
 
 urlpatterns = [
@@ -17,5 +19,7 @@ urlpatterns = [
     path('orders/',get_orders_list_API,name='orders'),
     path('order/',create_order_API,name='order'),
     path('get_order/<int:pk>', get_order_API, name="this_order"),
+    path('tax/', get_TAX_API, name="tax"),
+    path('tax/<str:tax>', change_TAX_API, name="change tax"),
     path('settings/',settings, name="settings"),
 ]

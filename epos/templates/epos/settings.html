@@ -1,18 +1,187 @@
 {% extends 'epos/base.html' %}
 {% block content %}
+{% csrf_token %}
 <div class="row">
   <div class="col-sm column-1">
     <div class="tax-setting text-center">
+      <h5 class="form_header_employee text-center">Edit Tax</h4>
       <span>Current Tax: <span class="current-tax"></span> </span>
         <button class="change-tax-btn" data-toggle="modal" data-target="#tax-change">Change</button>
     </div>
   </div>
   <div class="col-sm column-2">
-    One of three columns
+    <div class="add-employee">
+      <form class="needs-validation" novalidate> {% csrf_token %}
+        <h5 class="form_header_employee text-center">Register an Employee</h5>
+
+        <div class="form-group row">
+          <label for="first_name_input" class="col-2 col-form-label">Name</label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="first_name_input" placeholder="Enter First Name">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="middle_name_input" class="col-2 col-form-label">Middle</label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="middle_name_input" placeholder="Enter Middle Name">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="surname_input" class="col-2 col-form-label">Surname</label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="surname_input" placeholder="Enter Surname">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="date_of_birth_input" class="col-2 col-form-label">DOB</label>
+          <div class="col-10">
+            <input class="form-control" type="date" id="date_of_birth_input" placeholder="Enter Date Of Birth" required>
+            <div class="invalid-feedback">
+              Please choose a username.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="address_input" class="col-2 col-form-label">Address</label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="address_input" placeholder="Enter Address">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="contact_num_input" class="col-2 col-form-label">Tel.</label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="contact_num_input" placeholder="Enter Contact Number">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="email_input" class="col-2 col-form-label">Email</label>
+          <div class="col-10">
+            <input class="form-control" type="email" id="email_input" placeholder="Enter Email">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="position_input" class="col-2 col-form-label">Position</label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="position_input" placeholder="Enter Employee's Position">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="pay_rate_input" class="col-2 col-form-label">Rate</label>
+          <div class="col-10">
+            <input class="form-control" type="number" step="0.01" id="pay_rate_input" placeholder="Enter Employee's Pay Rate">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="start_date_input" class="col-2 col-form-label">Start</label>
+          <div class="col-10">
+            <input class="form-control" type="date" id="start_date_input" required>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="date" class="col-2 col-form-label">End</label>
+          <div class="col-10">
+            <input class="form-control" type="date" id="end_date_input">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="is_employeed_input" class="col-2 col-form-label">Employeed</label>
+          <div class="col-10">
+            <input class="form-control" type="checkbox" id="is_employeed_input">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="nin_input" class="col-2 col-form-label">NIN</label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="nin_input" placeholder="Enter National Insurance Number">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="permission_level_input" class="col-2 col-form-label">Permissions</label>
+          <div class="col-10">
+            <input class="form-control" type="number" min="1" max="3" step="1" id="permission_level_input" placeholder="Enter Permission Level">
+            <small id="emailHelp" class="form-text text-muted">1- Manager, 2-Supervisor, 3-Employee</small>
+          </div>
+        </div>
+
+        <div class="form-group row pin-row">
+          <label for="pin_input" class="col-2 col-form-label">PIN</label>
+          <div class="col-10">
+            <input class="form-control" type="number" step="1" id="pin_input" placeholder="Enter Pin">
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" id="create_employee_button" class="change-tax-btn">Save</button>
+        </div>
+        <input type="reset" class="hidden-reset" value="Reset" hidden/>
+      </form>
+    </div>
   </div>
   <div class="col-sm column-3">
-    One of three columns
+    <div class="add_supplier">
+      <form class="needs-validation" novalidate> {% csrf_token %}
+        <h5 class="form_header_employee text-center">Register a Supplier</h5>
+
+        <div class="form-group row">
+          <label for="supplier_name_input" class="col-2 col-form-label">Name</label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="supplier_name_input" placeholder="Enter Name">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="supplier_email_input" class="col-2 col-form-label">Email</label>
+          <div class="col-10">
+            <input class="form-control" type="email" id="supplier_email_input" placeholder="Enter Email">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="supplier_number_input" class="col-2 col-form-label">Number</label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="supplier_number_input" placeholder="Enter Phone Number">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="supplier_lead_time_input" class="col-2 col-form-label">Lead Time</label>
+          <div class="col-10">
+            <input class="form-control" type="number" id="supplier_lead_time_input" placeholder="Enter Lead Time Delivery in Day">
+            <small id="emailHelp" class="form-text text-muted">Time between placing and receiving an order</small>
+          </div>
+        </div>
+
+        <!-- IPHONE like checkbox -->
+        <!-- <div class="checkbox checkbox-slider--b-flat">
+          <label>
+            <input type="checkbox"><span>Default</span>
+          </label>
+        </div> -->
+        <div class="text-center">
+          <button type="submit" id="create_supplier_button" class="change-tax-btn">Save</button>
+        </div>
+        <input type="reset" class="hidden-reset-supplier" value="Reset" hidden/>
+
+      </form>
+    </div>
   </div>
 </div>
+<script>
+  var GET_TAX         = "{% url 'tax' %}";
+  var CHANGE_TAX      = "{% url 'change tax' 0%}";
+  var CREATE_EMPLOYEE = "{% url 'create employee'%}";
+</script>
 {% include 'epos/modals.html' %}
 {% endblock %}

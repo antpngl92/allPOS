@@ -214,15 +214,39 @@
       </div>
       <div class="modal-body">
         <label for="order-number-input">Tax :</label>
-        <input type="number" id="order-number-input" min="0" max="100" step="0.01" style="width: 75px !important;" oninput="(validity.valid)||(value='');"> %
+        <input type="number" id="tax-percentage-input" min="0" max="100" step="0.01" style="width: 75px !important;" oninput="(validity.valid)||(value='');" required> %
         <small id="emailHelp" class="form-text text-muted">Enter the sales tax in percentage</small>
         
       </div>
       <div class="modal-footer">
-        <button type="button" data-type="cash" id="1a"class="btn btn-primary cash-butt">Save</button>
-        <button type="button" data-type="card" id="2a" class="btn btn-primary card-butt">Cancel</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" id="modal-tax-change-button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
 </div>
 <!-- END Tax Change Modal -->
+
+<!-- Employee Creation Modal -->
+<div class="modal fade" id="employee-creation" tabindex="-1" role="dialog" aria-labelledby="employee-creation-modal"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Created Employee</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Employee Creation Modal -->

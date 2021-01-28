@@ -3,16 +3,59 @@
 {% csrf_token %}
 <div class="row">
   <div class="col-sm column-1">
-    <div class="tax-setting text-center">
-      <h5 class="form_header_employee text-center">Edit Tax</h4>
-      <span>Current Tax: <span class="current-tax"></span> </span>
-        <button class="change-tax-btn" data-toggle="modal" data-target="#tax-change">Change</button>
+    <div class="tax-setting">
+      <h5 class="form_header_employee text-center">Edit Tax</h5>
+      <ul class="list-group list-group-flush mt-3 uListO">
+        <li class='list-group-item' >Current Tax: <span class="current-tax"></span>
+          <div class='float-right'>
+            <button class="btn btn-info order-info change-tax-btn" data-toggle="modal" data-target="#tax-change">Edit</button>
+          </div>
+        </li>
+      </ul>
     </div>
+
+    <div class="view-all-emaployees">
+      <ul class="list-group list-group-flush mt-3 uListO">
+        <li class='list-group-item' > View All Employees
+          <div class='float-right'>
+            <a class="btn btn-info view_all_employees" href="{% url 'employee' %}">View</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="view-all-suppliers">
+      <ul class="list-group list-group-flush mt-3 uListO">
+        <li class='list-group-item' > View All Suppliers
+          <div class='float-right'>
+            <a class='btn btn-info view_all_suppliers' href="#">View</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="automatic-ordering">
+      <ul class="list-group list-group-flush mt-3 uListO">
+        <li class='list-group-item' > Automatic Raw Goods Ordering
+          <div class='float-right'>
+            <div class="checkbox checkbox-slider--b-flat">
+              <label>
+                <input type="checkbox"><span></span>
+              </label>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="automatic-ordering-button-holder">
+        <button type='button' class='btn btn-info automatic-ordering-settings'>Settings</button>
+      </div>
+      </div>
+
+
   </div>
   <div class="col-sm column-2">
     <div class="add-employee">
       <form class="needs-validation" novalidate> {% csrf_token %}
-        <h5 class="form_header_employee text-center">Register an Employee</h5>
+        <!-- <h5 class="form_header_employee text-center">Register an Employee</h5> -->
 
         <div class="form-group row">
           <label for="first_name_input" class="col-2 col-form-label">Name</label>
@@ -123,7 +166,7 @@
           </div>
         </div>
         <div class="text-center">
-          <button type="submit" id="create_employee_button" class="change-tax-btn">Save</button>
+          <button type="submit" id="create_employee_button" class="btn btn-info">Create Employee</button>
         </div>
         <input type="reset" class="hidden-reset" value="Reset" hidden/>
       </form>
@@ -131,8 +174,8 @@
   </div>
   <div class="col-sm column-3">
     <div class="add_supplier">
-      <form class="needs-validation" novalidate> {% csrf_token %}
-        <h5 class="form_header_employee text-center">Register a Supplier</h5>
+      <form class="needs-validation supplier-registration-form" novalidate> {% csrf_token %}
+
 
         <div class="form-group row">
           <label for="supplier_name_input" class="col-2 col-form-label">Name</label>
@@ -162,18 +205,12 @@
             <small id="emailHelp" class="form-text text-muted">Time between placing and receiving an order</small>
           </div>
         </div>
-
-        <!-- IPHONE like checkbox -->
-        <!-- <div class="checkbox checkbox-slider--b-flat">
-          <label>
-            <input type="checkbox"><span>Default</span>
-          </label>
-        </div> -->
         <div class="text-center">
-          <button type="submit" id="create_supplier_button" class="change-tax-btn">Save</button>
+          <button type="submit" id="create_supplier_button" class="btn btn-info">Create Supplier</button>
         </div>
         <input type="reset" class="hidden-reset-supplier" value="Reset" hidden/>
-
+        <div class="validation_message">
+        </div>
       </form>
     </div>
   </div>
@@ -182,6 +219,7 @@
   var GET_TAX         = "{% url 'tax' %}";
   var CHANGE_TAX      = "{% url 'change tax' 0%}";
   var CREATE_EMPLOYEE = "{% url 'create employee'%}";
+  var CREATE_SUPPLIER = "{% url 'create supplier'%}";
 </script>
 {% include 'epos/modals.html' %}
 {% endblock %}

@@ -6,9 +6,11 @@ from timestamp.models import TimeStapm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 import datetime
-from django.http import JsonResponse
-from django.http import HttpResponse, Http404
+from django.http import JsonResponse, QueryDict
+from django.http import HttpResponse, Http404,HttpResponseBadRequest
 from django.db import IntegrityError
+from django.core import serializers
+from decimal import  Decimal
 
 # Create your views here.
 def login_view(request):
@@ -132,3 +134,88 @@ def create_employee_API(request):
             if 'UNIQUE constraint' in str(e.args):
                 status = "User with this pin exists"
     return JsonResponse({'status':status}, safe=False)
+
+@login_required
+def get_employees(request):
+    employees = Employee.objects.all()
+    title = "Employees"
+    context = {
+        'employees' : employees,
+        'title'     : title
+    }
+    return render(request, 'employee/employees.html', context)
+
+@login_required
+def get_employee_API(request, pk):
+    print(request.method)
+    if request.method == "GET":
+        employee = Employee.objects.filter(pk=pk)
+        data = serializers.serialize('json', employee)
+        return JsonResponse(data, safe=False)
+    return HttpResponseBadRequest("Invalid HTTP method")
+
+@login_required
+def delete_employee_API(request, pk):
+    if request.method == "DELETE":
+        employee = Employee.objects.get(pk=pk)
+        if employee.delete():
+            return JsonResponse({'status' : 'Success'}, safe=False)
+    return JsonResponse({'status' : 'Error'}, safe=False)
+
+
+@login_required
+def edit_employee_API(request, pk):
+    if request.method == "PUT":
+        employee = Employee.objects.get(pk=pk)
+        data = QueryDict(request.body)
+        data = data.getlist('data[]')
+        
+
+        first_name      = data[0]
+        middle_name     = data[1]
+        surname         = data[2]
+        dob             = data[3]
+        address         = data[4]
+        tel_number      = data[5]
+        email           = data[6]
+        position        = data[7]
+        pay_rate        = data[8]
+        pay_rate        = Decimal(pay_rate)
+        pay_rate = round(pay_rate, 2)
+        
+        start_date      = data[9]
+        print(start_date)
+        if data[10] == "":
+            end_date        = None
+        else: 
+            end_date        = data[10]
+        if data[11] == "true":
+            is_employeed = True
+        else:
+            is_employeed = False
+        nin             = data[12]
+        permission      = data[13]
+        pin             = data[14]
+        password = "as9dia9sdik(ASIDKLASJDasd0as9d"
+
+        # employee.first_name=first_name 
+        # employee.second_name=middle_name 
+        # employee.last_name=surname 
+        # employee.date_of_birth=dob 
+        # employee.address=address 
+        # employee.tel_number=tel_number 
+        # employee.email=email 
+        # employee.position=position, 
+        # employee.start_date=start_date, 
+        employee = Employee.objects.filter(pk=pk).update(first_name=first_name, second_name=middle_name, last_name=surname, date_of_birth=dob, address=address, tel_number=tel_number, email=email, position=position, hourly_pay_rate=pay_rate, start_date=start_date, end_date=end_date, is_employeed=is_employeed, nin=nin, permission_level=permission, pin=pin, password=password)
+        # employee.end_date=end_date, 
+        # employee.is_employeed=is_employeed, 
+        # employee.nin=nin, 
+        # employee.permission_level=permission, 
+        # employee.pin=pin, 
+        # employee.password=password
+
+        # employee.save()
+
+    return JsonResponse({'status' : 'Success'}, safe=False)
+    

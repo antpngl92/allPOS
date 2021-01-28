@@ -1,0 +1,29 @@
+{% extends 'epos/base.html' %}
+{% block content %}
+<div class="row no-gutters">
+    <div class="col-md-6   no-gutters list-of-employees"> {% csrf_token %}
+        <ul class="list-group list-group-flush mt-3 employee-list">
+            {%for e in employees%}
+            <li class='list-group-item' id="{{e.id}}" > <strong>{{e.get_full_name}}</strong>
+                <div class='float-right'>
+                    <button type='button' class='btn btn-info employee_info' data-id="{{e.id}}" >Info</button>
+                    <button type='button' class='btn btn-info employee_update' data-id="{{e.id}}">Update</button>
+                    <button type='button' class='btn btn-info employee_delete' data-id="{{e.id}}">Delete</button>
+                </div>
+            </li>
+            
+            {%endfor%}
+        </ul>
+
+    </div>
+
+    <div class="col-md-6  no-gutters view-edit-employee">
+
+    </div>
+</div>
+<script>
+    var GET_EMPLOYEE = "{% url 'get employee' 0%}"
+    var DELETE_EMPLOYEE = "{% url 'delete employee' 0%}"
+    var UPDATE_EMPLOYEE = "{% url 'update employee' 0%}"
+</script>
+{% endblock %}

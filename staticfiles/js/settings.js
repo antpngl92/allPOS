@@ -80,7 +80,7 @@ function tax_representation(tax) {
 $(document).on('click', '#create_employee_button', function (e) {
     e.preventDefault();
     data = []
-    var valid = validateForm(data)
+    var valid = validateFormEmployee(data)
     // console.log(data)
     if (valid) {
         var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
@@ -104,23 +104,23 @@ $(document).on('click', '#create_employee_button', function (e) {
                     $('.hidden-reset').click()
                     $('#employee-creation').modal('show')
 
-                    $('.modal-body').html(''+
+                    $('.modal-body-employee').html(''+
                     '<ul class="list-group">\
-                    <li class="list-group-item">'+data[0]+'</li>\
-                    <li class="list-group-item">'+data[1]+'</li>\
-                    <li class="list-group-item">'+data[2]+'</li>\
-                    <li class="list-group-item">'+data[3]+'</li>\
-                    <li class="list-group-item">'+data[4]+'</li>\
-                    <li class="list-group-item">'+data[5]+'</li>\
-                    <li class="list-group-item">'+data[6]+'</li>\
-                    <li class="list-group-item">'+data[7]+'</li>\
-                    <li class="list-group-item">'+data[8]+'</li>\
-                    <li class="list-group-item">'+data[9]+'</li>\
-                    <li class="list-group-item">'+data[10]+'</li>\
-                    <li class="list-group-item">'+data[11]+'</li>\
-                    <li class="list-group-item">'+data[12]+'</li>\
-                    <li class="list-group-item">'+data[13]+'</li>\
-                    <li class="list-group-item">'+data[14]+'</li>\
+                    <li class="list-group-item">First Name: <b>'+data[0]+'</b></li>\
+                    <li class="list-group-item">Second Name: <b>'+data[1]+'</b></li>\
+                    <li class="list-group-item">Surname: <b>'+data[2]+'</b></li>\
+                    <li class="list-group-item">Date Of Birth: <b>'+data[3]+'</b></li>\
+                    <li class="list-group-item">Address: <b>'+data[4]+'</b></li>\
+                    <li class="list-group-item">Tel.:<b>'+data[5]+'</b></li>\
+                    <li class="list-group-item">Email: <b>'+data[6]+'</b></li>\
+                    <li class="list-group-item">Position: <b>'+data[7]+'</b></li>\
+                    <li class="list-group-item">Rate: <b>'+data[8]+'</b></li>\
+                    <li class="list-group-item">Start Date: <b>'+data[9]+'</b></li>\
+                    <li class="list-group-item">End Date: <b>'+data[10]+'</b></li>\
+                    <li class="list-group-item">Is currently Employeed: <b>'+data[11]+'</b></li>\
+                    <li class="list-group-item">National Insurance Number: <b>'+data[12]+'</b></li>\
+                    <li class="list-group-item">Permission: <b>'+data[13]+'</b></li>\
+                    <li class="list-group-item">PIN: <b>'+data[14]+'</b></li>\
                   </ul>'
                   )
                     $('.pin-exists-message').remove()
@@ -132,7 +132,7 @@ $(document).on('click', '#create_employee_button', function (e) {
 
 })
 
-function validateForm(data) {
+function validateFormEmployee(data) {
 
     valid = true
 
@@ -226,6 +226,96 @@ function validateForm(data) {
         valid = false;
     }
     else $('#pin_input').css('border-color', '#CFD4DA')
+
+    return valid
+}
+
+// Get data from supplier registration form 
+$(document).on('click', '#create_supplier_button', function(e){
+    e.preventDefault();
+    var data = []
+    var valid_form = validateFormSupplier(data)
+    if(valid_form){
+        var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+        $.ajax({
+            method: "POST",
+            beforeSend: function (xhr) {
+
+                xhr.setRequestHeader('X-CSRFToken', csrftoken);
+            },
+            url: CREATE_SUPPLIER,
+            data: {
+                'data': data
+            },
+            success: function (d) {
+                $('.validation_message').html('')
+                console.log(d)
+                if(d['status'] == "Supplier with this name already exists"){
+                    $('.validation_message').append('<small id="nameSupplierHelp" class="supplier-exists-message" style="color: red !important;">This supplier already exists!</small>')
+                    $('#supplier_name_input').css('border-color', 'red')
+                }
+                else{
+                    $('.hidden-reset-supplier').click()
+                    $('#supplier-creation-modal').modal('show')
+
+                    $('.modal-body-supplier').html(''+
+                    '<ul class="list-group">\
+                    <li class="list-group-item">Supplier Name: <b>'+data[0]+'</b></li>\
+                    <li class="list-group-item">Email: <b>'+data[1]+'</b></li>\
+                    <li class="list-group-item">Tel.: <b>'+data[2]+'</b></li>\
+                    <li class="list-group-item">Lead Time: <b>'+data[3]+'</b></li>\
+                  </ul>'
+                  )
+                    $('.pin-exists-message').remove()
+
+                }
+            }
+        })
+    }
+})
+
+function validateFormSupplier(data){
+
+    var valid = true
+
+    var supplier_name = $('#supplier_name_input').val()
+    var email         = $('#supplier_email_input').val()
+    var phone_number  = $('#supplier_number_input').val()
+    var lead_time     = $('#supplier_lead_time_input').val()
+
+    data.push(supplier_name)
+    data.push(email)
+    data.push(phone_number)
+    data.push(lead_time)
+
+    // console.log(supplier_name)
+    // console.log(email)
+    // console.log(phone_number)
+    // console.log(lead_time)
+
+    if(supplier_name == ""){
+        $('#supplier_name_input').css('border-color', 'red')
+        valid = false;
+    }
+    else $('#supplier_name_input').css('border-color', '#CFD4DA')
+
+    if(email == ""){
+        $('#supplier_email_input').css('border-color', 'red')
+        valid = false;
+    }
+    else $('#supplier_email_input').css('border-color', '#CFD4DA')
+
+    if(phone_number == ""){
+        $('#supplier_number_input').css('border-color', 'red')
+        valid = false;
+    }
+    else $('#supplier_number_input').css('border-color', '#CFD4DA')
+
+    if(lead_time == ""){
+        $('#supplier_lead_time_input').css('border-color', 'red')
+        valid = false;
+    }
+    else $('#supplier_lead_time_input').css('border-color', '#CFD4DA')
 
     return valid
 }

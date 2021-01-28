@@ -1,62 +1,51 @@
 @import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css');
+body{
+  background-color: #E4F7FD;
+}
+
 .column-1, .column-2, .column-3{
     /* border: 1px solid red; */
     height: 100%;
 }
 .current-tax{
     font-weight: bold;
-    display: block;
-}
-.change-tax-btn{
-    border: 2px solid #00A1E0;
-    background: #00A1E0;
-    border-radius: 10px;
-    color: white;
-    width: 40%;
-    text-align: center;
-    outline:none !important;
-    text-decoration: none !important;
-    padding: 10px;
-    margin-top: 10px;
-}
-.change-tax-btn:hover{
-    color: #00A1E0;
-    background: white;
-    border: 2px solid #00A1E0;
-    width: 40%;
-    padding: 10px;
-}
 
-.tax-setting, .add_supplier{
+}
+.tax-setting, .add-employee, .add_supplier,.view-all-emaployees,.view-all-suppliers,.automatic-ordering {
     padding: 10px;
     background: white;
     border-radius: 10px;
-}
-.tax-setting span{
+    margin-bottom: 30px;
     color: #133B63;
 }
+
 .form_header_employee{
     padding: 10px !important;
     color: #133B63 !important;
-}
-.add-employee{
-    border-radius: 10px;
-    background: white;
-    padding: 10px !important;
 }
 .column-2{
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
+form label, .modal-body-employee, .modal-body-supplier {
+  color:#133B63;
+}
+.automatic-ordering-settings{
+  width: 30%;
+}
+.automatic-ordering-button-holder{
+  text-align: center;
+}
+.list-group-item, .list-group{
+  border: none !important;
+}
+
 @media screen and (min-width: 575px) {
     .column-2{
         margin-top: 0;
         margin-bottom: 0;
     }
-}
-
-form label{
-    color:#133B63;
 }
 
 

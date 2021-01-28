@@ -24,17 +24,22 @@
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
   <!-- EPOS CSS-->
   <link rel="stylesheet" href="{% static 'css/epos.css' %}">
-    <!-- ANALYTICS CSS-->
+  {% if title == "Analytics"%}
+  <!-- ANALYTICS CSS-->
   <link rel="stylesheet" href="{% static 'css/analytics.css' %}">
-  
+  {% endif %}
+
+  {% if title == "Employees"%}
+    <link rel="stylesheet" href="{% static 'css/employees.css' %}">
+  {% endif %}
   <title>{{ title }}</title>
 </head>
 
 <body>
   {% include 'epos/sidenav.html' %}
-  
+
   {% include 'epos/sidenav.html' %}
- 
+
 
   <main>
     <div class="container-fluid main-container">

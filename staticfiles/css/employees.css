@@ -1,0 +1,25 @@
+.list-of-employees, .view-edit-employee{
+    height: 96.5vh ;
+    color: #133B66;
+}
+.employee-list{
+    overflow-y: scroll; 
+    height: 67.8vh;
+    margin: 15px;
+}
+.view-edit-employee{
+    margin-top: 30px;
+}
+
+.needs-validation{
+    margin: 15px;
+   
+}
+@media screen and (min-width: 768px){
+    .view-edit-employee{
+        margin-top: 0;
+    }
+    .emlpoyee-details{
+        margin: 15px;
+    }
+}

@@ -184,7 +184,6 @@ def get_order_API(request, pk):
     price = []
     if request.method == 'GET':
         order = Order.objects.get(pk=pk)
-        data = []
         for o in order.products.all():
             product.append(str(o))
             quantity.append(o.quantity)

@@ -166,11 +166,8 @@ def delete_employee_API(request, pk):
 @login_required
 def edit_employee_API(request, pk):
     if request.method == "PUT":
-        employee = Employee.objects.get(pk=pk)
         data = QueryDict(request.body)
         data = data.getlist('data[]')
-        
-
         first_name      = data[0]
         middle_name     = data[1]
         surname         = data[2]
@@ -182,7 +179,6 @@ def edit_employee_API(request, pk):
         pay_rate        = data[8]
         pay_rate        = Decimal(pay_rate)
         pay_rate = round(pay_rate, 2)
-        
         start_date      = data[9]
         print(start_date)
         if data[10] == "":
@@ -198,24 +194,8 @@ def edit_employee_API(request, pk):
         pin             = data[14]
         password = "as9dia9sdik(ASIDKLASJDasd0as9d"
 
-        # employee.first_name=first_name 
-        # employee.second_name=middle_name 
-        # employee.last_name=surname 
-        # employee.date_of_birth=dob 
-        # employee.address=address 
-        # employee.tel_number=tel_number 
-        # employee.email=email 
-        # employee.position=position, 
-        # employee.start_date=start_date, 
         employee = Employee.objects.filter(pk=pk).update(first_name=first_name, second_name=middle_name, last_name=surname, date_of_birth=dob, address=address, tel_number=tel_number, email=email, position=position, hourly_pay_rate=pay_rate, start_date=start_date, end_date=end_date, is_employeed=is_employeed, nin=nin, permission_level=permission, pin=pin, password=password)
-        # employee.end_date=end_date, 
-        # employee.is_employeed=is_employeed, 
-        # employee.nin=nin, 
-        # employee.permission_level=permission, 
-        # employee.pin=pin, 
-        # employee.password=password
 
-        # employee.save()
 
     return JsonResponse({'status' : 'Success'}, safe=False)
     

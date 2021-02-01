@@ -1,4 +1,5 @@
 {% extends 'epos/base.html' %}
+{% load static %}
 {% block content %}
 
 <div class="row no-gutters">
@@ -140,4 +141,7 @@
     var CREATE_ORDER        = "{% url 'order' %}";
     var TOTAL_ITEMS         = 0;
 </script>
+<script type="text/javascript" src="{% static 'js/create_order.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/epos_categories.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/login_date_time.js' %}"></script>
 {% endblock %}

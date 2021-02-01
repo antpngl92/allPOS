@@ -198,4 +198,3 @@ def edit_employee_API(request, pk):
 
 
     return JsonResponse({'status' : 'Success'}, safe=False)
-    

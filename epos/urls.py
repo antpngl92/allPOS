@@ -11,6 +11,11 @@ from epos.views import (
     get_TAX_API,
     change_TAX_API
     )
+from schedule.views import (
+    todays_schedule, 
+    get_rota,
+    get_timestamps_API,
+    )
 
 urlpatterns = [
     path('',home_view,name='home'),
@@ -22,4 +27,7 @@ urlpatterns = [
     path('tax/', get_TAX_API, name="tax"),
     path('tax/<str:tax>', change_TAX_API, name="change tax"),
     path('settings/',settings, name="settings"),
+    path('schedule/',todays_schedule, name="schedule"),
+    path('rota/',get_rota, name="get rota"),
+    path('stamps/<int:pk>/',get_timestamps_API, name="get stamps"),
 ]

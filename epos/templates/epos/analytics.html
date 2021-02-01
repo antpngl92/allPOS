@@ -1,4 +1,5 @@
 {% extends 'epos/base.html' %}
+{% load static %}
 {% block content %}
 
 
@@ -45,6 +46,7 @@
                     </div>
                 </div>
             </div>
+            {% if employee.permission_level == 1 or employee.permission_level == 2%}
             <div class="operation-buttons-holder">
                 <ul class="operation-buttons list-group">
                     <li class="list-group-item">
@@ -64,6 +66,7 @@
                     </li>
                 </ul>
             </div>
+            {% endif %}
         </div>
     </div>
     
@@ -74,6 +77,7 @@
                 <div class="col first-row"><button class="first-row-button1" data-toggle="modal" data-target="#orders-list-modal"><i class="far fa-copy"></i>Orders</button></div>
                 <div class="col first-row"><button class="first-row-button2"><i class="far fa-file"></i>New Order</button></div>
             </div>
+            {% if user.permission_level == 1 %}
             <div class="row">
                 <div class="col second-row"><button class="second-row-button1"><i class="fas fa-user-tie"></i>Catering</button></div>
                 <div class="col second-row"><button class="second-row-button2"><i class="fas fa-shipping-fast"></i>Delivery Management</button></div>
@@ -83,6 +87,7 @@
                 <div class="col third-row"><button class="third-row-button2"><i class="fas fa-envelope-open-text"></i>Invoices</button></div>
                 <div class="col third-row"><button class="third-row-button3"><i class="fas fa-truck-loading"></i>Shipping</button></div>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -102,6 +107,7 @@
     var ORDER_END_POINT = "{% url 'this_order' 0%}"
 </script>
 {% include 'epos/modals.html' %}
+<script type="text/javascript" src="{% static 'js/analytics.js' %}"></script>
 {% csrf_token %}
 
 {% endblock %}

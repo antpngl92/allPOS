@@ -1,4 +1,5 @@
 {% extends 'epos/base.html' %}
+{% load static %}
 {% block content %}
 <div class="row no-gutters">
     <div class="col-md-6   no-gutters list-of-employees"> {% csrf_token %}
@@ -26,4 +27,5 @@
     var DELETE_EMPLOYEE = "{% url 'delete employee' 0%}"
     var UPDATE_EMPLOYEE = "{% url 'update employee' 0%}"
 </script>
+<script type="text/javascript" src="{% static 'js/employee.js' %}"></script>
 {% endblock %}

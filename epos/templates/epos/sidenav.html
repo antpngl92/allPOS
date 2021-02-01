@@ -14,7 +14,7 @@
             </a>
         </li>
         <li class="nav-item no-mobile">
-            <a href="#" class="nav-link">
+            <a href="{% url 'schedule' %}" class="nav-link">
                 <i class="far fa-calendar-alt"></i>
                 <span class="link-text">Schedule</span>
             </a>
@@ -25,7 +25,7 @@
                 <span class="link-text">Inventory</span>
             </a>
         </li>
-        {% if user.permission_level == 1 %}
+        {% if user.permission_level == 1 or employee.permission_level == 2 %}
         <li class="nav-item">
             <a href="{% url 'settings' %}" class="nav-link no-mobile">
                 <i class="fas fa-user-cog"></i>

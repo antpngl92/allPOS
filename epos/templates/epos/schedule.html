@@ -1,0 +1,52 @@
+{% extends 'epos/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class=" h3 text-center p-1 pb-0">Today's Schedule</div>
+<div class="working-employees table-responsive text-center mb-5">
+    <table class="table employee-schedule-table">
+        <thead>
+            <tr>
+                <th scope="col">Employee</th>
+                <th scope="col">Date</th>
+                <th scope="col">Starting</th>
+                <th scope="col">Finishing</th>
+                <th scope="col">Clocked In</th>
+                <th scope="col">Clocked Out</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for i in schedules %}
+            <tr id="{{i.employee.id}}">
+                <td scope="row">{{i}}</th>
+                <td>{{i.work_date}}</td>
+                <td>{{i.start_work_hour}}</td>
+                <td>{{i.end_work_hour}}</td>
+                <td class="clocked-in"></td>
+                <td class="clocked-out"></td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+<div class="col secondary-nav p-3">
+    <div class="row text-center">
+        <div class="col-3">
+            <a href="{% url 'get rota' %}" class="secondary-nav-link schedule-buttons">View Rota</a>
+        </div>
+        <div class="col-3">
+            <a href="#" class="secondary-nav-link schedule-buttons">Update Rota</a>
+        </div>
+        <div class="col-3">
+            <a href="#" class="secondary-nav-link schedule-buttons">Timestamp History</a>
+        </div>
+        <div class="col-3">
+            <a href="#" class="secondary-nav-link schedule-buttons">Employee Reports</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{% static 'js/schedule_day_picker.js' %}"></script>
+<script>
+    var GET_STAMPS   = "{% url 'get stamps' 0%}";
+</script>
+{% endblock %}

@@ -1,4 +1,5 @@
 {% extends 'epos/base.html' %}
+{% load static %}
 {% block content %}
 {% csrf_token %}
 <div class="row">
@@ -222,4 +223,5 @@
   var CREATE_SUPPLIER = "{% url 'create supplier'%}";
 </script>
 {% include 'epos/modals.html' %}
+<script type="text/javascript" src="{% static 'js/settings.js' %}"></script>
 {% endblock %}

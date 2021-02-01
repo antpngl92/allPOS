@@ -32,14 +32,17 @@
   {% if title == "Employees"%}
     <link rel="stylesheet" href="{% static 'css/employees.css' %}">
   {% endif %}
+
+  {% if title == "Scheduler"%}
+    <link rel="stylesheet" href="{% static 'css/secondary-nav.css' %}">
+  {% endif %}
+
   <title>{{ title }}</title>
 </head>
 
 <body>
   {% include 'epos/sidenav.html' %}
-
-  {% include 'epos/sidenav.html' %}
-
+  {% include 'epos/scripts.html' %}
 
   <main>
     <div class="container-fluid main-container">
@@ -49,7 +52,7 @@
   </main>
 
 
-  {% include 'epos/scripts.html' %}
+
 </body>
 
 </html>

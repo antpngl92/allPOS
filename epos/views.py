@@ -18,6 +18,7 @@ from stock.models import InventoryIngredient
 from order.models import Tax
 
 
+
 @login_required
 def home_view(request):
     categories          = Category.objects.all()                                            # Get all categories 

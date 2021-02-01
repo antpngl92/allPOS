@@ -1,0 +1,33 @@
+{% extends 'epos/base.html' %}
+{% load static %}
+{% block content %}
+<div class="calendar text-center">
+<table style="border: 1px solid black">
+    <thead>
+        <tr>
+            <th scope="col">Monday</th>
+            <th scope="col">Tuesday</th>
+            <th scope="col">Wednesday</th>
+            <th scope="col">Thursday</th>
+            <th scope="col">Friday</th>
+            <th scope="col">Saturday</th>
+            <th scope="col">Sunday</th>
+        </tr>
+    </thead>
+    <tbody style="border: 1px solid black">
+        <tr style="border: 1px solid black">
+            <td style="border: 1px solid black" scope="row">1</th>
+            <td style="border: 1px solid black">2</td>
+            <td style="border: 1px solid black">3</td>
+            <td style="border: 1px solid black">4</td>
+            <td style="border: 1px solid black" class="clocked-in">5</td>
+            <td style="border: 1px solid black" class="clocked-out">6</td>
+            <td style="border: 1px solid black" class="clocked-out">7</td>
+        </tr>
+       
+    </tbody>
+</table>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+.secondary-nav {
+    width: 50%;
+    float: none;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+.schedule-buttons{
+    border: 2px solid #00A1E0;
+    border-radius: 10px;
+    padding: 7px;
+    color: #00A1E0;
+    text-decoration: none;
+}
+.schedule-buttons:hover{
+    text-decoration: none
+}
+
+.secondary-nav-link {
+    text-decoration: none;
+    
+}
+
+.secondary-nav-link:hover {
+    color: #00A1E0;
+}
+
+.working-employees{
+    background: white;
+    border-radius: 10px;
+    color: #133B66;
+    
+}
+.employee-schedule-table{
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+}
+.employee-schedule-table tbody{
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 400px;
+}
+.employee-schedule-table tr{
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+}
+.date-input-employee-list{
+    width: 30px
+}

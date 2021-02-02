@@ -177,7 +177,6 @@ function create_order(payment_type){
         beforeSend: function (xhr){
             xhr.setRequestHeader('X-CSRFToken', csrftoken);
           },
-        
         data: {
             'products[]' : products,
             'products_quantity[]' : products_quantity,

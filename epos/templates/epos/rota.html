@@ -2,32 +2,53 @@
 {% load static %}
 {% block content %}
 <div class="calendar text-center">
-<table style="border: 1px solid black">
-    <thead>
-        <tr>
-            <th scope="col">Monday</th>
-            <th scope="col">Tuesday</th>
-            <th scope="col">Wednesday</th>
-            <th scope="col">Thursday</th>
-            <th scope="col">Friday</th>
-            <th scope="col">Saturday</th>
-            <th scope="col">Sunday</th>
-        </tr>
-    </thead>
-    <tbody style="border: 1px solid black">
-        <tr style="border: 1px solid black">
-            <td style="border: 1px solid black" scope="row">1</th>
-            <td style="border: 1px solid black">2</td>
-            <td style="border: 1px solid black">3</td>
-            <td style="border: 1px solid black">4</td>
-            <td style="border: 1px solid black" class="clocked-in">5</td>
-            <td style="border: 1px solid black" class="clocked-out">6</td>
-            <td style="border: 1px solid black" class="clocked-out">7</td>
-        </tr>
-       
-    </tbody>
-</table>
+    <div class="month"> {% csrf_token %}
+        <ul>
+          <li class="prev"><a href='#'>&#10094;</a></li>
+          <li class="next"><a href='#'>&#10095;</a></li>
+          <li><span class="month1">August</span><br></li>
+          <li><span style="font-size:18px" class="year">2017</span></li>
+        </ul>
+      </div>
+      
+      <ul class="weekdays">
+        <li></li>
+        <li>Mo</li>
+        <li>Tu</li>
+        <li>We</li>
+        <li>Th</li>
+        <li>Fr</li>
+        <li>Sa</li>
+        <li>Su</li>
+      </ul>
+      
+      <ul class="days">
+        <li class="days-of-the-month">Employee</li>
+        <li class="days-of-the-month"></li>
+        <li class="days-of-the-month"></li>
+        <li class="days-of-the-month"></li>
+        <li class="days-of-the-month"></li>
+        <li class="days-of-the-month"></li>
+        <li class="days-of-the-month"></li>
+        <li class="days-of-the-month"><span class="active"></span></li>
+      </ul>
+
+    {% for e in employees %}
+      <ul class="days employees" id="{{e.id}}">
+        <li class="employee-full-short"><strong>{{e.get_full_short}}</strong></li>
+        <li>Day Off</li>
+        <li>Day Off</li>
+        <li>Day Off</li>
+        <li>Day Off</li>
+        <li>Day Off</li>
+        <li>Day Off</li>
+        <li>Day Off</li>
+      </ul>
+    {% endfor %}      
 </div>
 
-
+<script type="text/javascript" src="{% static 'js/rota.js' %}"></script>
+<script>
+    var GET_SCHEDULE_FOR_ROTA = "{% url 'get schedule for rota' %}"
+</script>
 {% endblock %}

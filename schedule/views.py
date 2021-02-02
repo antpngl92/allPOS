@@ -3,8 +3,9 @@ from schedule.models import Schedule
 from datetime import date
 from timestamp.models import TimeStapm
 import datetime
-from datetime import datetime
+
 from django.http import JsonResponse
+from employee.models import Employee
 
 # Create your views here.
 def todays_schedule(request):
@@ -18,8 +19,12 @@ def todays_schedule(request):
     return render(request, 'epos/schedule.html', context)
 
 def get_rota(request):
-
-    return render(request, 'epos/rota.html', {})
+    employees = Employee.objects.all()
+    context = {
+        'employees' : employees,
+        'title'     : 'Rota'
+    }
+    return render(request, 'epos/rota.html', context)
 
 def get_timestamps_API(request, pk):
     if request.method == "GET":
@@ -32,3 +37,12 @@ def get_timestamps_API(request, pk):
         }
     return JsonResponse(context, safe=False)
 
+
+def get_schedule_for_rota_API(request):
+    context = {}
+    if request.method == "GET":
+        week = request.GET.getlist('week[]')
+        week = [w[:10] for w in week]
+        schedules = Schedule.objects.filter(work_date__in=week).order_by("employee")
+        schedules = list(schedules.values())
+    return JsonResponse(schedules, safe=False)

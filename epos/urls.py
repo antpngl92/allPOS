@@ -15,6 +15,7 @@ from schedule.views import (
     todays_schedule, 
     get_rota,
     get_timestamps_API,
+    get_schedule_for_rota_API
     )
 
 urlpatterns = [
@@ -30,4 +31,5 @@ urlpatterns = [
     path('schedule/',todays_schedule, name="schedule"),
     path('rota/',get_rota, name="get rota"),
     path('stamps/<int:pk>/',get_timestamps_API, name="get stamps"),
+    path('schedules/',get_schedule_for_rota_API, name="get schedule for rota"),
 ]

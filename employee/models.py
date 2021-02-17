@@ -81,7 +81,7 @@ class Employee(AbstractBaseUser):
 
     # Returns the full name of an employee
     def get_full_name(self):
-        full_name = f"{self.first_name} {self.second_name} {self.last_name}"
+        full_name = f"{self.first_name}  {self.last_name}"
         return full_name.strip() 
 
     # Returns the short name of an employee

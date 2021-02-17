@@ -10,6 +10,7 @@ from employee.views import (
     get_employee_API, 
     delete_employee_API,
     edit_employee_API,
+    get_all_employees_API    
     )
 
 urlpatterns = [
@@ -24,5 +25,6 @@ urlpatterns = [
     path('employee/<int:pk>',get_employee_API,name='get employee'),
     path('employee/delete/<int:pk>',delete_employee_API,name='delete employee'),
     path('employee/update/<int:pk>',edit_employee_API,name='update employee'),
+    path('employee/all/',get_all_employees_API,name='get all employee'),
     
 ]

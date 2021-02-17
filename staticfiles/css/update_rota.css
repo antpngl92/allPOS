@@ -1,0 +1,23 @@
+
+#week_input{
+   width: 200px;
+}
+
+
+
+.schedule_table table tbody{
+   display: block;
+   height: 37rem;
+   overflow: auto;
+}
+.schedule_table table thead, .schedule_table table tbody tr {
+   display:table;
+   width:100%;
+   table-layout:fixed;
+}
+.schedule_table table thead{
+   width: calc( 100% - 1em )
+}
+.schedule_table table{
+   width: 100%;
+}

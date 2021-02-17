@@ -227,3 +227,4 @@ def change_TAX_API(request, tax):
         tax.save()
 
     return JsonResponse({'status': "status"}, safe=False)
+

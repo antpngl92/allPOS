@@ -198,3 +198,10 @@ def edit_employee_API(request, pk):
 
 
     return JsonResponse({'status' : 'Success'}, safe=False)
+
+
+def get_all_employees_API(request):
+    if request.method=="GET":
+        employees = Employee.objects.all()
+        employees = list(employees.values_list('id', 'first_name', 'last_name',))
+    return JsonResponse(employees, safe=False)

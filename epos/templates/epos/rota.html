@@ -1,11 +1,11 @@
 {% extends 'epos/base.html' %}
 {% load static %}
 {% block content %}
-<div class="calendar text-center">
+<div class="calendar text-center mb-5">
     <div class="month"> {% csrf_token %}
         <ul>
-          <li class="prev"><a href='#'>&#10094;</a></li>
-          <li class="next"><a href='#'>&#10095;</a></li>
+
+
           <li><span class="month1">August</span><br></li>
           <li><span style="font-size:18px" class="year">2017</span></li>
         </ul>
@@ -32,7 +32,8 @@
         <li class="days-of-the-month"></li>
         <li class="days-of-the-month"><span class="active"></span></li>
       </ul>
-
+    
+    <div class="employee-schedule-rota">
     {% for e in employees %}
       <ul class="days employees" id="{{e.id}}">
         <li class="employee-full-short"><strong>{{e.get_full_short}}</strong></li>
@@ -44,8 +45,25 @@
         <li>Day Off</li>
         <li>Day Off</li>
       </ul>
-    {% endfor %}      
+    {% endfor %}   
+  </div>
 </div>
+<div class="col secondary-nav p-3">
+  <div class="row text-center">
+      <div class="col-md-3 col-sm-12">
+          <a href="{% url 'schedule' %}" >Today's Schedule</a>
+      </div>
+      <div class="col-md-3 col-sm-12">
+        <a href="{% url 'update rota' %}" >Update Rota</a>
+      </div>
+      <div class="col-md-3 col-sm-12">
+          <a href="#" >Timestamp History</a>
+      </div>
+      <div class="col-md-3 col-sm-12">
+          <a href="#" >Employee Reports</a>
+      </div>
+  </div>
+</div>   
 
 <script type="text/javascript" src="{% static 'js/rota.js' %}"></script>
 <script>

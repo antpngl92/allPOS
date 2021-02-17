@@ -40,7 +40,7 @@
     display: block;
     overflow-y: auto;
     overflow-x: hidden;
-    height: 400px;
+    height: 67.8vh;
 }
 .employee-schedule-table tr{
     width: 100%;

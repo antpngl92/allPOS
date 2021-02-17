@@ -38,8 +38,11 @@
     <link rel="stylesheet" href="{% static 'css/employees.css' %}">
   {% endif %}
 
-  {% if title == "Scheduler"%}
+  {% if title == "Scheduler" or title == "Rota"%}
     <link rel="stylesheet" href="{% static 'css/secondary-nav.css' %}">
+  {% endif %}  
+  {% if title == "Update Rota"%}
+    <link rel="stylesheet" href="{% static 'css/update_rota.css' %}">
   {% endif %}
 
   <title>{{ title }}</title>
@@ -54,10 +57,8 @@
       {% block content %}
       {% endblock %}
     </div>
+    
   </main>
-
-
-
 </body>
 
 </html>

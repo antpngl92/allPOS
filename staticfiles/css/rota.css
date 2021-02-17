@@ -78,3 +78,17 @@ body {font-family: Verdana, sans-serif;}
 .employee-full-short{
     color: #133B66 !important;
 }
+
+.prev a, .next a{
+  text-decoration: none;
+  color: #DAE1E8 !important;
+}
+
+div.employee-schedule-rota{
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  overflow-y: scroll; 
+  height: 57.8vh;
+  margin: 15px;
+}

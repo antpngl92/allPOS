@@ -1,0 +1,49 @@
+{% extends 'epos/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="timestamp_table mt-5 mb-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Employee</th>
+                <th scope="col">Activity</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+            </tr>
+        </thead>
+        <tbody class="table-body">
+            {%for t in timestamps%}
+            <tr>
+                <td>{{t.employee.get_full_name}} </td>
+                {% if t.activity_type == 1 %}
+                    <td>Clock In</td>
+                {% else %}
+                    <td>Clock Out</td>
+                {% endif %}
+                <td>{{t.datestamp |date:'Y-m-d' }} </td>
+                <td>{{t.timestamp |time:"H:i"}} </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+
+
+<div class="col secondary-nav p-3">
+    <div class="row text-center">
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'schedule' %}" >View Weekly Rota</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+          <a href="{% url 'update rota' %}" >Update Rota</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'schedule' %}">Today's Schedule</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'employee reports' %}">Employee Reports</a>
+        </div>
+    </div>
+  </div>   
+{% endblock %}

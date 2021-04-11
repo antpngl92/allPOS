@@ -115,51 +115,51 @@
         <div class="payment-nav">
           <ul class="nav">
             <li class="navitem" data-toggle="tooltip" data-placement="top" title="Functionality Not Added Yet">
-                 <div class="icon">
-                      <i class="fas fa-coins"></i>
-                 </div>
-                 <div class="text">
-                       Tip <br>Amount
-                 </div>
+              <div class="icon">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div class="text">
+                Tip <br>Amount
+              </div>
             </li>
             <li class="navitem" data-toggle="tooltip" data-placement="top" title="Functionality Not Added Yet">
-                 <div class="icon">
-                      <i class="fas fa-gifts"></i>
-                 </div>
-                 <div class="text">
-                       Gift <br>Receipt
-                 </div>
+              <div class="icon">
+                <i class="fas fa-gifts"></i>
+              </div>
+              <div class="text">
+                Gift <br>Receipt
+              </div>
             </li>
             <li class="navitem" data-toggle="tooltip" data-placement="top" title="Functionality Not Added Yet">
-                 <div class="icon">
-                      <i class="far fa-envelope-open"></i>
-                 </div>
-                 <div class="text">
-                       Email <br> Receip
-                 </div>
+              <div class="icon">
+                <i class="far fa-envelope-open"></i>
+              </div>
+              <div class="text">
+                Email <br> Receip
+              </div>
             </li>
             <li class="navitem" data-toggle="tooltip" data-placement="top" title="Functionality Not Added Yet">
-                 <div class="icon">
-                      <i class="fas fa-print"></i>
-                 </div>
-                 <div class="text">
-                       Reprint <br> Receip
-                 </div>
+              <div class="icon">
+                <i class="fas fa-print"></i>
+              </div>
+              <div class="text">
+                Reprint <br> Receip
+              </div>
             </li>
-                <li class="navitem" data-toggle="tooltip" data-placement="top" title="Functionality Not Added Yet">
-                 <div class="icon">
-                      <i class="fas fa-history"></i>
-                 </div>
-                 <div class="text">
-                       Refund <br>Payments
-                 </div>
+            <li class="navitem" data-toggle="tooltip" data-placement="top" title="Functionality Not Added Yet">
+              <div class="icon">
+                <i class="fas fa-history"></i>
+              </div>
+              <div class="text">
+                Refund <br>Payments
+              </div>
             </li>
-        </ul>
+          </ul>
         </div>
       </div>
 
       <div class="modal-footer">
-        <button type="button" data-type="cash" id="1a"class="btn btn-primary cash-butt">Cash</button>
+        <button type="button" data-type="cash" id="1a" class="btn btn-primary cash-butt">Cash</button>
         <button type="button" data-type="card" id="2a" class="btn btn-primary card-butt">Card</button>
       </div>
     </div>
@@ -168,7 +168,8 @@
 <!-- END Pay Order Modal -->
 
 <!-- Orders Modal -->
-<div class="modal fade" id="orders-list-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal fade" id="orders-list-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -214,9 +215,10 @@
       </div>
       <div class="modal-body">
         <label for="order-number-input">Tax :</label>
-        <input type="number" id="tax-percentage-input" min="0" max="100" step="0.01" style="width: 75px !important;" oninput="(validity.valid)||(value='');" required> %
+        <input type="number" id="tax-percentage-input" min="0" max="100" step="0.01" style="width: 75px !important;"
+          oninput="(validity.valid)||(value='');" required> %
         <small id="emailHelp" class="form-text text-muted">Enter the sales tax in percentage</small>
-        
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -239,12 +241,12 @@
         </button>
       </div>
       <div class="modal-body-employee">
-        
+
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        
+
       </div>
     </div>
   </div>
@@ -252,8 +254,8 @@
 <!-- END Employee Creation Modal -->
 
 <!-- Supplier Creation Modal -->
-<div class="modal fade" id="supplier-creation-modal" tabindex="-1" role="dialog" aria-labelledby="employee-creation-modal"
-  aria-hidden="true">
+<div class="modal fade" id="supplier-creation-modal" tabindex="-1" role="dialog"
+  aria-labelledby="employee-creation-modal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -263,14 +265,242 @@
         </button>
       </div>
       <div class="modal-body-supplier">
-        
+
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        
+
       </div>
     </div>
   </div>
 </div>
 <!-- END Supplier Creation Modal -->
+
+<!-- Edit Inventory Ingredient Modal -->
+<div class="modal fade" id="inventory-ingredient-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><span class="inventory_ingredient_pk"></span><span
+            class="inventory_ingredient_name"></span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form class="needs-validation" novalidate>
+          <p hidden>{% csrf_token %}
+          <p>
+          <div class="form-group row">
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control form-control-sm" size="30"  id="ing-name" placeholder="Enter Ingredient Name" autofocus/>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="suplier_choice" class="col-sm-2 col-form-label col-form-label-sm">Suplier</label>
+            <div class="col-sm-10">
+              <select class="form-control select-supplier form-control-sm" id="suplier_choice">
+
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Unit Cost</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control form-control-sm" id="ing-cost"
+                placeholder="Enter Ingredient Cost for a Unit" step=".01">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Unit Weight</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control form-control-sm" id="ing-weight"
+                placeholder="Enter Ingredient Weight for a Unit" step=".001">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Current Stock</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control form-control-sm" id="ing-stock"
+                placeholder="Enter Ingredient Current Stock" step=".001">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Minimum Stock Needed</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control form-control-sm" id="ing-stock-needed"
+                placeholder="Enter Ingredient Minimum Stock Needed" step=".001">
+            </div>
+          </div>
+
+          <div class="form-group row">
+              <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Automated Ording</label>
+              <ul class="list-group list-group-flush uListO">
+                <li class='list-group-item' > 
+                  <div class='float-right'>
+                    <div class="checkbox checkbox-slider--b-flat">
+                      <label class="checkbox-auto">
+                      </label>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="update-inventory-ingredient-btn" data-pk="" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Edit Inventory Ingredient Modal -->
+
+<!-- Create Inventory Ingredient Modal -->
+<div class="modal fade" id="inventory-ingredient-modal-create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="create-inventory-ingridient-modal-header"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form class="needs-validation" novalidate>
+          <p hidden>{% csrf_token %}
+          <p>
+          <div class="form-group row">
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control form-control-sm" size="30"  id="ing-name-crt" placeholder="Enter Ingredient Name" autofocus/>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="suplier_choice" class="col-sm-2 col-form-label col-form-label-sm">Suplier</label>
+            <div class="col-sm-10">
+              <select class="form-control select-supplier_crt form-control-sm" id="suplier_choice_crt" >
+                
+
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Unit Cost</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control form-control-sm" id="ing-cost-crt"
+                placeholder="Enter Ingredient Cost for a Unit" step=".01">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Unit Weight</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control form-control-sm" id="ing-weight-crt"
+                placeholder="Enter Ingredient Weight for a Unit" step=".001">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Current Stock</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control form-control-sm" id="ing-stock-crt"
+                placeholder="Enter Ingredient Current Stock" step=".001">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Minimum Stock Needed</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control form-control-sm" id="ing-stock-needed-crt"
+                placeholder="Enter Ingredient Minimum Stock Needed" step=".001">
+            </div>
+          </div>
+
+          <div class="form-group row">
+              <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Automated Ording</label>
+              <ul class="list-group list-group-flush uListO">
+                <li class='list-group-item' > 
+                  <div class='float-right'>
+                    <div class="checkbox checkbox-slider--b-flat">
+                      <label class="checkbox-auto-crt">
+                      </label>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="create-inventory-ingredient-btn" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Edit Inventory Ingredient Modal -->
+
+<!-- Edit Ingredient Modal -->
+<div class="modal fade" id="ingredient-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><span class="ingredient_pk"></span><span
+            class="ingredient_name"></span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form class="needs-validation" novalidate>
+          <p hidden>{% csrf_token %}
+          <p>
+          <div class="form-group row">
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control form-control-sm" size="30"  id="ing2-name" placeholder="Enter Ingredient Name" autofocus/>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Quantity</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control form-control-sm" id="ing-quant"
+                placeholder="Enter Ingredient Cost for a Unit" step=".01">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="suplier_choice" class="col-sm-2 col-form-label col-form-label-sm">RII</label>
+            <div class="col-sm-10">
+              <select class="form-control select-related-inventory-ingredient form-control-sm" id="related-inventory-ingredient-choice">
+
+              </select>
+            </div>
+          </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="update-ingredient-btn" data-pk="" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Edit Inventory Ingredient Modal -->

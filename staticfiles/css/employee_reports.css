@@ -1,0 +1,24 @@
+
+.view_report{
+    border: 1px solid green;
+    height: 800px;
+}
+
+.report_settings{ 
+    background-color: white;
+    border-radius: 10px;
+}
+
+.hidden-element{
+    display: none;
+}
+#date_for_report, #date_for_report_start, #date_for_report_end{
+    border: 1px solid gainsboro;
+    border-radius: 4px;
+    color: #4A5057;
+}
+
+.missing_input{
+    border: 2px solid red;
+}
+

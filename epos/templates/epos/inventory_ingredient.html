@@ -1,0 +1,69 @@
+{% extends 'epos/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/update_rota.css' %}">
+<link rel="stylesheet" href="{% static 'css/secondary-nav.css' %}">
+<link rel="stylesheet" href="{% static 'css/stock.css' %}">
+    <div class="h3 text-center p-1 pb-0">Current Stock</div>
+
+<div class="current-stock table-responsive text-center mb-5">
+    <table class="table stock-table">
+        <thead>
+            <tr>
+                <th scope="col">Inventory Ingredient</th>
+                <th scope="col">Supplier</th>
+                <th scope="col">Unit Cost</th>
+                <th scope="col">Unit Weight</th>
+                <th scope="col">Current Stock</th>
+                <th scope="col">MInimum Stock Needed</th>
+                <th scope="col">Auto Ordering</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inventory_ingredient in inventory_ingredients%}
+            <tr id="{{inventory_ingredient.pk}}">
+                <td scope="row" class="nn-2">{{inventory_ingredient.name}}</th>
+                <td>{{inventory_ingredient.supplier}}</td>
+                <td>{{inventory_ingredient.unit_cost}}</td>
+                <td>{{inventory_ingredient.unit_weight}}</td>
+                <td>{{inventory_ingredient.current_stock}}</td>
+                <td>{{inventory_ingredient.minimum_stock_needed}}</td>
+                <td>{{inventory_ingredient.auto_ordering}}</td>
+                <td><button data-id="{{inventory_ingredient.pk}}" class="btn btn-info update_ingredient" data-toggle="modal" data-target="#inventory-ingredient-modal">Edit</button>
+                    <button data-id="{{inventory_ingredient.pk}}"  class="btn btn-danger btn-delete" >Delete</button></td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+
+<div class="col secondary-nav p-3">
+    <div class="row text-center">
+        <div class="col-md-3 col-sm-12">
+            <a href="#" id="creat-inventory-ingredient" data-toggle="modal" data-target="#inventory-ingredient-modal-create" >Create Inventory Ingredient</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'ingredients' %}" >Ingredients</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'timestamps' %}" >Timestamp History</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'employee reports' %}">Employee Reports</a>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var GET_SUPPLIERS = "{% url 'get suppliers' %}"
+    var UPDATE_INGREDIENT = "{% url 'update ingredient' 0%}"
+    var CREATE_INGREDIENT = "{% url 'create ingredient' %}"
+    var DELETE_INGREDIENT = "{% url 'delete ingredient' 0%}"
+</script>
+
+
+{% include 'epos/modals.html' %}
+<script type="text/javascript" src="{% static 'js/stock.js' %}"></script>
+{% endblock %}

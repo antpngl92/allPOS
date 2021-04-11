@@ -1,5 +1,6 @@
 from django.db import models
 from employee.models import Employee
+from datetime import datetime, date
 
 # Create your models here.
 class TimeStapm(models.Model):
@@ -22,3 +23,4 @@ class TimeStapm(models.Model):
 
     def __str__(self):
         return f"{self.employee} did a {self.activity_type} on {self.datestamp} at {self.timestamp}"
+

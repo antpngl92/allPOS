@@ -1,0 +1,94 @@
+{% extends 'epos/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/employee_reports.css' %}">
+
+<div class="row no-gutters mb-5" id="app">
+
+  <div class="col-md-5 col-sm-12  no-gutters report_option text-center"> {% csrf_token %}
+
+    <div class="report_settings settings_employee text-center mb-5 p-3"> {% csrf_token %}
+      <div class="h4 ">Report Target:</div>
+      <div class="form-check single_employee_radio text-center">
+        <input class="form-check-input" type="radio" name="pickEmployee" id="single_employee">
+        <label class="form-check-label" for="pickEmployee">
+          Single Employee
+        </label>
+      </div>
+
+      <div class="select_employee text-center mr-5 ml-5 hidden-element">
+        <select class="form-control select-employee mt-3 mb-3" id="sel1" required> </select>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="pickEmployee" id="all_employees">
+        <label class="form-check-label" for="pickEmployee">
+          All Employees
+        </label>
+      </div>
+      <small class="form-text text-muted hidden-element" style="color:red !important">Select an
+        Employee</small>
+    </div>
+
+    <div class="report_settings settings_date text-center mt-5 p-3">
+      <div class="h4 ">Report Timestamp:</div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="pickDate" id="single_day">
+        <label class="form-check-label" for="pickDate">
+          Single Day
+        </label>
+      </div>
+
+      <div class="select_specific_date text-center mt-3 mb-3 mr-5 ml-5 hidden-element">
+        <input type="date" id="date_for_report" name="report-date">
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="pickDate" id="time_period">
+        <label class="form-check-label" for="pickDate">
+          Time Period
+        </label>
+      </div>
+      <div class="select_time_period_date text-center mt-3 mb-3 mr-5 ml-5 hidden-element">
+        From
+        <input type="date" id="date_for_report_start" name="report-start">
+        To
+        <input type="date" id="date_for_report_end" name="report-end">
+      </div>
+
+      <small  class="form-text text-muted hidden-element" style="color:red !important">Select Date!</small>
+      <small  class="form-text text-muted hidden-element invalid_date" style="color:red !important">The "From" date cannot be after the "To" date!!!</small>
+    </div>
+
+
+
+    <button type='button' class='btn btn-info mt-5 generate_report_button'>Generate Report</button>
+  </div>
+
+  <div class="col-md-7 col-sm-12 no-gutters view_report">
+
+  </div>
+</div>
+
+<div class="col secondary-nav p-3">
+  <div class="row text-center">
+    <div class="col-md-3 col-sm-12">
+      <a href="{% url 'get rota' %}">View Weekly Rota</a>
+    </div>
+    <div class="col-md-3 col-sm-12">
+      <a href="{% url 'schedule' %}">Today's Schedule</a>
+    </div>
+    <div class="col-md-3 col-sm-12">
+      <a href="{% url 'timestamps' %}">Timestamp History</a>
+    </div>
+    <div class="col-md-3 col-sm-12">
+      <a href="{% url 'schedule' %}">Today's Schedule</a>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="{% static 'js/employee_report.js' %}"></script>
+<script>
+  var GET_EMPLOYEES = '{% url "get all employee" %}'
+  var GENERATE_REPORT = '{% url "generate report" %}'
+</script>
+{% endblock %}

@@ -2,22 +2,19 @@
 #week_input{
    width: 200px;
 }
-
-
-
-.schedule_table table tbody{
+.schedule_table table tbody, .timestamp_table table tbody, .current-stock table tbody{
    display: block;
    height: 37rem;
    overflow: auto;
 }
-.schedule_table table thead, .schedule_table table tbody tr {
+.schedule_table table thead, .schedule_table table tbody tr, .timestamp_table table thead, .timestamp_table table tbody tr, .current-stock table thead, .current-stock table tbody tr{
    display:table;
    width:100%;
    table-layout:fixed;
 }
-.schedule_table table thead{
+.schedule_table table thead, .timestamp_table table thead , .current-stock table thead{
    width: calc( 100% - 1em )
 }
-.schedule_table table{
+.schedule_table table, .timestamp_table table, .current-stock table{
    width: 100%;
 }

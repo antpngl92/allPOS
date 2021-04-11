@@ -9,19 +9,32 @@ from epos.views import (
     get_orders_list_API,
     get_order_API,
     get_TAX_API,
-    change_TAX_API
+    change_TAX_API,
     )
 from schedule.views import (
     todays_schedule, 
     get_rota,
     update_rota,
+    timestamp_view,
+    employee_reports_view,
     get_timestamps_API,
     get_schedule_for_rota_API,
     get_weekly_schedule_API,
     get_schedule_API,
     update_schedule_API,
     create_schedule_API,
-    delete_schedule_API
+    delete_schedule_API,
+    generate_report_API
+    )
+
+from stock.views import (
+    stock_view, 
+    ingredient_view,
+    stock_update_API,
+    stock_create_API,
+    stock_delete_API,
+    get_inventory_igredients_API
+    
     )
 
 urlpatterns = [
@@ -31,6 +44,11 @@ urlpatterns = [
     path('schedule/',todays_schedule, name="schedule"),
     path('rota/',get_rota, name="get rota"),
     path('update/rota/',update_rota, name="update rota"),
+    path('timestamps/', timestamp_view, name="timestamps"),
+    path('employee_reports/', employee_reports_view, name="employee reports"),
+    path('inventory-engridients/', stock_view, name="inventory ingredients"),
+    path('ingridients/', ingredient_view, name="ingredients"),
+
 
 
     path('category/<int:pk>',get_products_API,name='category'),
@@ -46,4 +64,10 @@ urlpatterns = [
     path('schedule/<int:pk>/update',update_schedule_API, name="update schedule"),
     path('schedule/create',create_schedule_API, name="create schedule"),
     path('schedule/delete/<int:pk>',delete_schedule_API, name="delete schedule"),
+    path('report/',generate_report_API, name="generate report"),
+    
+    path('stock/<int:pk>',stock_update_API,name='update ingredient'),
+    path('stock/create',stock_create_API,name='create ingredient'),
+    path('stock/<int:pk>/delete',stock_delete_API,name='delete ingredient'),
+    path('inventory-engridients-get-all',get_inventory_igredients_API,name='get inventory ingredients'),
 ]

@@ -205,7 +205,6 @@ def settings(request):
         tax = Tax.objects.latest('id')
     except Tax.DoesNotExist:
         tax = ""
-    print(tax)
     context = {
         'title' : title,
         'tax'   : tax

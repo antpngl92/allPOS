@@ -78,7 +78,7 @@ $(document).on('click', '.schedule-button', function () {
         url: GET_SCHEDULE.replace('0', schedule_id),
         success: function (d) {
 
-
+            
             var rendering_data = '' +
                 `<form class="needs-validation mt-5 ml-5" style="margin-top: 75px !important; width: 60%;" novalidate> <p hidden>{% csrf_token %}<p>
                 <div class="form-group row">\
@@ -126,9 +126,10 @@ $(document).on('click', '.schedule-button', function () {
             $('.view-edit-schedule').append(rendering_data)
 
             for (var i = 0; i < d['employees'].length; i++) {
-                if (employee_id == d['employees'][i][0])
+                if (employee_id == d['employees'][i][0]){
                     $('#sel1').append("<option selected value=" + d['employees'][i][0] + ">" + d['employees'][i][1] + " " + d['employees'][i][2] + "</option>")
-
+                    continue
+                }
                 $('#sel1').append("<option value=" + d['employees'][i][0] + ">" + d['employees'][i][1] + " " + d['employees'][i][2] + " </option>")
 
             }
@@ -191,6 +192,7 @@ $(document).on('click', '#update_schedule_button', function (e) {
 })
 
 $(document).on('click', '.create_schedule', function () {
+    $('.view-edit-schedule').html("")
     var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 
     var rendering_data = `<form class="needs-validation mt-5 ml-5" style="margin-top: 75px !important; width: 60%;" novalidate> <p hidden>{% csrf_token %}<p>

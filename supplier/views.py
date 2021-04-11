@@ -6,6 +6,12 @@ from django.db import IntegrityError
 # Create your views here.
 
 
+def get_suppliers_API(request):
+    suppliers = []
+    if request.method == 'GET':
+        suppliers = list(Supplier.objects.all().values())
+    return JsonResponse(suppliers, safe=False)
+
 def create_suplier_API(request):
     status = "Registration Successful"
     if request.method == "POST":
@@ -14,11 +20,6 @@ def create_suplier_API(request):
         supplier_email  = data[1]
         supplier_number = data[2]
         lead_time       = data[3]
-
-        # print(supplier_name)
-        # print(supplier_email)
-        # print(supplier_number)
-        # print(lead_time)
 
         supplier = Supplier(name=supplier_name,email=supplier_email,phone=supplier_number, lead_time_delivery=lead_time)
         try:

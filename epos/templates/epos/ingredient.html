@@ -1,0 +1,60 @@
+{% extends 'epos/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/update_rota.css' %}">
+<link rel="stylesheet" href="{% static 'css/secondary-nav.css' %}">
+<link rel="stylesheet" href="{% static 'css/stock.css' %}">
+    <div class="h3 text-center p-1 pb-0">Current Stock</div>
+
+<div class="current-stock table-responsive text-center mb-5">
+    <table class="table stock-table">
+        <thead>
+            <tr>
+                <th scope="col">Ingredient</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Related Inventory Ingredient</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ingredient in ingredients%}
+            <tr id="{{ingredient.pk}}">
+                <td scope="row" class="nn-2">{{ingredient.name}}</th>
+                <td>{{ingredient.quantity}}</td>
+                <td>{{ingredient.inventory_ingredient}}</td>
+                <td>
+                    <button data-id="{{ingredient.pk}}" class="btn btn-info update_ingredients" data-toggle="modal" data-target="#ingredient-modal">Edit</button>
+                    <button data-id="{{ingredient.pk}}"  class="btn btn-danger btn-delete-ing" >Delete</button>
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+
+<div class="col secondary-nav p-3">
+    <div class="row text-center">
+        <div class="col-md-3 col-sm-12">
+            <a href="#" id="creat-ingredient" data-toggle="modal" data-target="#ingredient-modal-create" >Create Ingredient</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'inventory ingredients' %}" >Inventory Ingredients</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'timestamps' %}" >Timestamp History</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'employee reports' %}">Employee Reports</a>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var GET_INVENTORY_INGREEDIENTS = "{% url 'get inventory ingredients' %}"
+</script>
+
+
+{% include 'epos/modals.html' %}
+<script type="text/javascript" src="{% static 'js/stock_ingredient.js' %}"></script>
+{% endblock %}

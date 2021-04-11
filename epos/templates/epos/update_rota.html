@@ -4,7 +4,7 @@
 
 <script src="https://unpkg.com/vue@next"></script>
 
-<div class="row no-gutters" id="app">
+<div class="row no-gutters mb-5" id="app">
 
     <div class="col-md-5   no-gutters list-of-schedule"> {% csrf_token %}
         <div class="row">
@@ -17,35 +17,38 @@
             </div>
         </div>
         <div class="schedule_table mt-5">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Employee</th>
-                    <th scope="col">Working Day</th>
-                    <th scope="col">Shift Starts</th>
-                    <th scope="col">Shift Ends</th>
-                    <th class="text-center" scope="col">Update</th>
-                    <th class="text-center" scope="col">Delete</th>
-                </tr>
-            </thead>
-            <tbody class="table-body">
-                {%for s in schedules%}
-                <tr>
-                    <td>{{s.employee.get_full_name}} </td>
-                    <td>{{s.work_date |date:'Y-m-d' }} </td>
-                    <td>{{s.start_work_hour |time:"H:i"}} </td>
-                    <td>{{s.end_work_hour}} </td>
-                    <td class="shedule_buttons">
-                        <button type='button' class='btn btn-info schedule-button' data-row="{{forloop.counter}}" data-employee="{{s.employee.id}}" id="{{s.id}}">Update</button>
-                    </td>
-                    <td>
-                        <button type='button' class='btn btn-info delete-schedule-button' data-row="{{forloop.counter}}" data-employee="{{s.employee.id}}" data-id="{{s.id}}">Delete</button>
-                    </td>
-                </tr>
-                {%endfor%}
-            </tbody>
-        </table>
-    </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Employee</th>
+                        <th scope="col">Working Day</th>
+                        <th scope="col">Shift Starts</th>
+                        <th scope="col">Shift Ends</th>
+                        <th class="text-center" scope="col">Update</th>
+                        <th class="text-center" scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                    {%for s in schedules%}
+                    <tr>
+                        <td>{{s.employee.get_full_name}} </td>
+                        <td>{{s.work_date |date:'Y-m-d' }} </td>
+                        <td>{{s.start_work_hour |time:"H:i"}} </td>
+                        <td>{{s.end_work_hour}} </td>
+                        <td class="shedule_buttons">
+                            <button type='button' class='btn btn-info schedule-button' data-row="{{forloop.counter}}"
+                                data-employee="{{s.employee.id}}" id="{{s.id}}">Update</button>
+                        </td>
+                        <td>
+                            <button type='button' class='btn btn-info delete-schedule-button'
+                                data-row="{{forloop.counter}}" data-employee="{{s.employee.id}}"
+                                data-id="{{s.id}}">Delete</button>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="col-md-7  no-gutters view-edit-schedule">
@@ -53,6 +56,22 @@
     </div>
 </div>
 
+<div class="col secondary-nav p-3">
+    <div class="row text-center">
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'get rota' %}">View Weekly Rota</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'schedule' %}">Today's Schedule</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'timestamps' %}">Timestamp History</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'employee reports' %}">Employee Reports</a>
+        </div>
+    </div>
+</div>
 <script type="text/javascript" src="{% static 'js/update_rota.js' %}"></script>
 <script>
     var GET_WEEKLY_SCHEDULE = "{% url 'get weekly schedule' %}"

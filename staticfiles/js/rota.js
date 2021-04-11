@@ -6,12 +6,13 @@ $(function () {
     // Default current month and year
     var year = date.getFullYear();
     var month = date.getMonth()
-
+    
     set_calendar_month_year(month, year, '.month1', '.year')
 
     // Get an array with all the days of the week required
     // Default current week
-    let week = set_week_days(date)
+    let week = set_week_days()
+
 
 
     // Get the list elements of the calendar from the DOM 
@@ -41,13 +42,16 @@ $(function () {
 
 // Append the week days to an array 
 // And return the array with the month days for this week
-function set_week_days(data_obj) {
+function set_week_days() {
+    var data_obj = new Date();
+    console.log(data_obj)
     var week_arr = []
     for (let i = 1; i <= 7; i++) {
-        let first = data_obj.getDate() - data_obj.getDay() + i
+        let first = data_obj.getDate() - (data_obj.getDay() || 7) + i
         let day = new Date(data_obj.setDate(first)).toISOString()
         week_arr.push(day)
     }
+    
     return week_arr
 }
 

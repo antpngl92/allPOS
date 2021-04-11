@@ -8,7 +8,9 @@ from datetime import date
 from django.http import JsonResponse
 from employee.models import Employee
 from django.core.exceptions import ObjectDoesNotExist
-# Create your views here.
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def todays_schedule(request):
     
     today   = date.today()
@@ -18,7 +20,7 @@ def todays_schedule(request):
         'schedules': schedules,
     }
     return render(request, 'epos/schedule.html', context)
-
+@login_required
 def get_rota(request):
     employees = Employee.objects.all()
     context = {
@@ -26,7 +28,7 @@ def get_rota(request):
         'title'     : 'Rota'
     }
     return render(request, 'epos/rota.html', context)
-
+@login_required
 def update_rota(request):
     context = {}
     weekdates = []
@@ -133,3 +135,89 @@ def delete_schedule_API(request, pk):
         return JsonResponse({'status':'Success'}, safe=False)
     return JsonResponse({'status':'Error'}, safe=False)
     
+@login_required
+def timestamp_view(request):
+    timestamps = TimeStapm.objects.all().order_by('-datestamp')
+    title = "Timestamps"
+    context = {
+        'timestamps' : timestamps,
+        'title'     : title
+    }
+    return render(request, 'epos/timestamp.html', context)
+
+@login_required
+def employee_reports_view(request):
+    title = "Employee Reports"
+    context = {
+        'title' : title 
+    }
+    return render(request, 'epos/employee_reports.html', context)
+
+
+@login_required
+def generate_report_API(request):
+    employees = [] 
+    days      = [] 
+    hours     = []
+    cost      = []
+    if request.method == "GET":
+        employee_pk = request.GET.get('employee') 
+        d = request.GET.get('date') 
+        date_from = request.GET.get('from') 
+        date_to = request.GET.get('to') 
+
+        if employee_pk != all:
+            emp = Employee.objects.get(pk=employee_pk)
+            employees.append(emp.get_full_short())
+            if d:
+                h = single_employee_single_day_working_hours(emp, d)
+                hours.append(h)
+                days.append(d)
+            else:
+              d, h =   single_employee_total_period_hours(emp,date_from,date_to)
+              days += days + d 
+              hours += h 
+
+        for h in range(len(hours)):
+            hours[h] = str(hours[h])[:7]
+
+
+
+        data = {
+           'emp' : employees,
+           'days': list(days),
+           'hours': list(hours)
+        }
+    
+    return JsonResponse(data, safe=False)
+
+def single_employee_single_day_working_hours(employee, d):
+
+    clockedIn = TimeStapm.objects.get(employee=employee, datestamp=d, activity_type=1)
+    clockedOut = TimeStapm.objects.get(employee=employee, datestamp=d, activity_type=2)
+        
+    return datetime.combine(date.today(), clockedOut.timestamp) - datetime.combine(date.today(), clockedIn.timestamp)
+
+
+def single_employee_total_period_hours(employee, date_from, date_to):
+
+    import datetime
+    import time
+
+    dates = [] 
+    hours = []
+
+    timestamps = TimeStapm.objects.filter(employee=employee, datestamp__range=[date_from, date_to])
+    
+    date = set()
+    for i in timestamps:
+        date.add(i.datestamp)
+    date = list(date)
+    date = sorted(date)
+    
+    for d in date:
+        dates.append(d)
+        hours.append(single_employee_single_day_working_hours(employee, d))
+
+    
+    return dates, hours

@@ -22,6 +22,170 @@
 </div>
 <!-- END Order Number Modal -->
 
+<!-- Automated Ordering Modal -->
+<div class="modal fade" id="automated-ordering-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="supplierModalLabel">Automated Ordering Settings</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body automated-ordering-modal-body">
+
+        <form class="needs-validation" novalidate>
+          <p hidden>{% csrf_token %} </p>
+
+          <div class="form-group row">
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Enable</label>
+            <ul class="list-group list-group-flush ml-4 uListO">
+              <li class='list-group-item'>
+                <div class='float-right'>
+                  <div class="checkbox checkbox-slider--b-flat">
+                    <label class="checkbox-auto">
+                      <input type="checkbox" id="enabled"><span></span>
+                    </label>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="form-group row">
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Email Confirmation</label>
+            <ul class="list-group list-group-flush mt-3 ml-4 uListO">
+              <li class='list-group-item'>
+                <div class='float-right'>
+                  <div class="checkbox checkbox-slider--b-flat">
+                    <label>
+                      <input type="checkbox" id="email-confirmation"><span></span>
+                    </label>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="form-group row">
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Record Automated Orders</label>
+            <ul class="list-group list-group-flush ml-4 uListO">
+              <li class='list-group-item'>
+                <div class='float-right'>
+                  <div class="checkbox checkbox-slider--b-flat">
+                    <label class="checkbox-auto">
+                      <input type="checkbox" id="record-orders"><span></span>
+                    </label>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+
+
+          <div class="form-group row">
+            <label for="email-text" class="col-sm-2 col-form-label col-form-label-sm">Email Text</label>
+            <div class="col-sm-10">
+              <textarea type="text" class="form-control form-control-sm" cols="30" rows="5" id="email-text"
+                placeholder="Enter an email template text" autofocus></textarea>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="update-automated-ordering-settings" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Automated Ordering Modal -->
+
+<!-- Supplier Modal -->
+<div class="modal fade" id="supplier-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="supplierModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body supplier-modal-body">
+
+        <form class="needs-validation" novalidate>
+          <p hidden>{% csrf_token %} </p>
+
+          <div class="form-group row">
+            <label for="supplier-name" class="col-sm-2 col-form-label col-form-label-sm">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control form-control-sm" size="30" id="supplier-name"
+                placeholder="Enter Supplier Name" autofocus />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="supplier-email" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control form-control-sm" size="30" id="supplier-email"
+                placeholder="Enter Supplier Email" autofocus />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="supplier-phone" class="col-sm-2 col-form-label col-form-label-sm">Phone Number</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control form-control-sm" size="30" id="supplier-phone"
+                placeholder="Enter Supplier Phone Number" autofocus />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="supplier-time" class="col-sm-2 col-form-label col-form-label-sm">Lead Time Delevery</label>
+            <div class="col-sm-10">
+              <input type="number" min="0" class="form-control form-control-sm" size="30" id="supplier-time"
+                placeholder="Enter Lead Time delivery" autofocus />
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="update-supplier-btn" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Supplier Modal -->
+
+<!-- Send Order Modal -->
+<div class="modal fade" id="send-order-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="sendOrderModelLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body modal-body-sending-status ">
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Send Order Modal -->
+
 <!-- Order Type Modal -->
 <div class="modal fade" id="order-type-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
@@ -48,6 +212,7 @@
 </div>
 <!-- END Order Type Modal -->
 
+<!-- Pay Order Modal -->
 <div class="modal fade" id="payment-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -292,12 +457,12 @@
       <div class="modal-body">
 
         <form class="needs-validation" novalidate>
-          <p hidden>{% csrf_token %}
-          <p>
+          <p hidden>{% csrf_token %} </p>
           <div class="form-group row">
             <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Name</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control form-control-sm" size="30"  id="ing-name" placeholder="Enter Ingredient Name" autofocus/>
+              <input type="text" class="form-control form-control-sm" size="30" id="ing-name"
+                placeholder="Enter Ingredient Name" autofocus />
             </div>
           </div>
 
@@ -343,23 +508,24 @@
           </div>
 
           <div class="form-group row">
-              <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Automated Ording</label>
-              <ul class="list-group list-group-flush uListO">
-                <li class='list-group-item' > 
-                  <div class='float-right'>
-                    <div class="checkbox checkbox-slider--b-flat">
-                      <label class="checkbox-auto">
-                      </label>
-                    </div>
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Automated Ording</label>
+            <ul class="list-group list-group-flush uListO">
+              <li class='list-group-item'>
+                <div class='float-right'>
+                  <div class="checkbox checkbox-slider--b-flat">
+                    <label class="checkbox-auto">
+                    </label>
                   </div>
-                </li>
-              </ul>
-            </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" id="update-inventory-ingredient-btn" data-pk="" class="btn btn-primary">Save changes</button>
+        <button type="button" id="update-inventory-ingredient-btn" data-pk="" class="btn btn-primary">Save
+          changes</button>
       </div>
     </div>
   </div>
@@ -367,8 +533,8 @@
 <!-- END Edit Inventory Ingredient Modal -->
 
 <!-- Create Inventory Ingredient Modal -->
-<div class="modal fade" id="inventory-ingredient-modal-create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+<div class="modal fade" id="inventory-ingredient-modal-create" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -380,20 +546,20 @@
       <div class="modal-body">
 
         <form class="needs-validation" novalidate>
-          <p hidden>{% csrf_token %}
-          <p>
+          <p hidden>{% csrf_token %} </p>
           <div class="form-group row">
             <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Name</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control form-control-sm" size="30"  id="ing-name-crt" placeholder="Enter Ingredient Name" autofocus/>
+              <input type="text" class="form-control form-control-sm" size="30" id="ing-name-crt"
+                placeholder="Enter Ingredient Name" autofocus />
             </div>
           </div>
 
           <div class="form-group row">
             <label for="suplier_choice" class="col-sm-2 col-form-label col-form-label-sm">Suplier</label>
             <div class="col-sm-10">
-              <select class="form-control select-supplier_crt form-control-sm" id="suplier_choice_crt" >
-                
+              <select class="form-control select-supplier_crt form-control-sm" id="suplier_choice_crt">
+
 
               </select>
             </div>
@@ -432,18 +598,18 @@
           </div>
 
           <div class="form-group row">
-              <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Automated Ording</label>
-              <ul class="list-group list-group-flush uListO">
-                <li class='list-group-item' > 
-                  <div class='float-right'>
-                    <div class="checkbox checkbox-slider--b-flat">
-                      <label class="checkbox-auto-crt">
-                      </label>
-                    </div>
+            <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Automated Ording</label>
+            <ul class="list-group list-group-flush uListO">
+              <li class='list-group-item'>
+                <div class='float-right'>
+                  <div class="checkbox checkbox-slider--b-flat">
+                    <label class="checkbox-auto-crt">
+                    </label>
                   </div>
-                </li>
-              </ul>
-            </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -455,13 +621,13 @@
 </div>
 <!-- END Edit Inventory Ingredient Modal -->
 
-<!-- Edit Ingredient Modal -->
+<!-- Edit/Create Ingredient Modal -->
 <div class="modal fade" id="ingredient-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><span class="ingredient_pk"></span><span
+        <h5 class="modal-title" id="ingredient-modal-header"><span class="ingredient_pk"></span><span
             class="ingredient_name"></span></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -470,12 +636,12 @@
       <div class="modal-body">
 
         <form class="needs-validation" novalidate>
-          <p hidden>{% csrf_token %}
-          <p>
+          <p hidden>{% csrf_token %} </p>
           <div class="form-group row">
             <label for="ing-name" class="col-sm-2 col-form-label col-form-label-sm">Name</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control form-control-sm" size="30"  id="ing2-name" placeholder="Enter Ingredient Name" autofocus/>
+              <input type="text" class="form-control form-control-sm" size="30" id="ing2-name"
+                placeholder="Enter Ingredient Name" autofocus />
             </div>
           </div>
 
@@ -490,15 +656,83 @@
           <div class="form-group row">
             <label for="suplier_choice" class="col-sm-2 col-form-label col-form-label-sm">RII</label>
             <div class="col-sm-10">
-              <select class="form-control select-related-inventory-ingredient form-control-sm" id="related-inventory-ingredient-choice">
+              <select class="form-control select-related-inventory-ingredient form-control-sm"
+                id="related-inventory-ingredient-choice">
 
               </select>
             </div>
           </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" id="update-ingredient-btn" data-pk="" class="btn btn-primary">Save changes</button>
+          <div class="modal-footer create-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" id="update-ingredient-btn" data-pk="" class="btn btn-primary">Save changes</button>
+            <button type="button" id="create-ingredient-btn" class="btn btn-primary">Save changes</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Edit Inventory Ingredient Modal -->
+
+<!-- Edit Product Modal -->
+<div class="modal fade" id="product-modal" tabindex="-1" role="dialog" aria-labelledby="product-modal-label"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="product-modal-header">
+          <span class="product-pk"></span>
+          <span class="product-name2"></span>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form class="needs-validation" novalidate>
+          <p hidden>{% csrf_token %} </p>
+
+          <div class="form-group row">
+            <label for="product-name-input" class="col-sm-2 col-form-label col-form-label-sm">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control form-control-sm" size="30" id="product-name-input"
+                placeholder="Enter Ingredient Name" autofocus />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="product-ingredinets-choice"
+              class="col-sm-2 col-form-label col-form-label-sm">Ingredients:</label>
+            <div class="col-sm-10">
+              <select data="items" style="height: 200px;" id="product-ingredinets-choice" multiple>
+
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="product-category" class="col-sm-2 col-form-label col-form-label-sm">Category</label>
+            <div class="col-sm-10">
+              <select class="form-control select-product-category" id="product-category">
+
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="product-price" class="col-sm-2 col-form-label col-form-label-sm">Retail Price</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control form-control-sm" id="product-price"
+                placeholder="Enter Product Retail Price" step=".01">
+            </div>
+          </div>
+
+          <div class="modal-footer create-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" id="update-product-btn" data-pk="" class="btn btn-primary">Save changes</button>
+            <button type="button" id="create-product-btn" class="btn btn-primary">Save changes</button>
+          </div>
       </div>
     </div>
   </div>

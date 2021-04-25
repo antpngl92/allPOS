@@ -44,7 +44,6 @@ $(function () {
 // And return the array with the month days for this week
 function set_week_days() {
     var data_obj = new Date();
-    console.log(data_obj)
     var week_arr = []
     for (let i = 1; i <= 7; i++) {
         let first = data_obj.getDate() - (data_obj.getDay() || 7) + i
@@ -79,13 +78,13 @@ function get_employees_schedule(week) {
         },
         url: GET_SCHEDULE_FOR_ROTA,
         success: function (data) {
-            console.log(data[0])
+
             for (var i = 0; i < data.length; i++) {
                 var employee = data[i]['employee_id']
                 var date = data[i]['work_date'].toString()
                 date = date.slice(8)
                 var employee_ul = $('#' + employee).children()
-                // console.log(employee_ul)
+
                 for (var j = 1; j < employee_ul.length; j++) {
                     if ($(employee_ul[j]).attr('class') == date) {
                         $(employee_ul[j]).css('color', '#133B66')

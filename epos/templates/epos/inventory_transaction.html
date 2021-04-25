@@ -1,0 +1,54 @@
+{% extends 'epos/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/update_rota.css' %}">
+<link rel="stylesheet" href="{% static 'css/secondary-nav.css' %}">
+<link rel="stylesheet" href="{% static 'css/stock.css' %}">
+
+<div class="inventory-ingredients-transactions current-stock table-responsive text-center mb-5">
+    <table class="table transactions-table">
+        <thead>
+            <tr>
+                <th scope="col">Inventory Ingredient</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Transaction</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Reason</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions%}
+            <tr id="{{inventory_ingredient.pk}}">
+                <td scope="row" class="nn-2">{{transaction.inventory_ingredient}}</th>
+                <td>{{transaction.quantity}}</td>
+                {% if transaction.transaction == 1%}
+                    <td>Taken from stock</td>
+                {% else %}
+                    <td>Added to stock</td>
+                {% endif %}
+                <td>{{transaction.date}}</td>
+                <td>{{transaction.time}}</td>
+                <td>{{transaction.reason}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+
+<div class="col secondary-nav p-3">
+    <div class="row text-center">
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'inventory ingredients' %}">View Inventory Ingredients</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'ingredients' %}" >View Ingredients for Products</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'products' %}" >View Products</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

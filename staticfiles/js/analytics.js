@@ -136,7 +136,6 @@ $(function () {
 })
 $(function () {
     $('.table-row-list').on('click-row.bs.table', function () {
-        console.log("a")
     })
 })
 // Get the list of all orders
@@ -150,17 +149,7 @@ function get_orders(csrftoken) {
         url: ORDERS_END_POINT,
         success: function (data) {
 
-            for (var i = data.length - 1; i >= 0; i--) {
-                var type = data[i]['order_type']
-                var curr_type = "Have In"
-
-                var paid = data[i]['paid']
-                var curr_paid = "Paid"
-
-                if (paid == false) curr_paid = "On Hold"
-                if (type == 1) curr_type = "Take Out"
-                
-                $('.analytics-order-list-modal-body').append('' +
+            $('.analytics-order-list-modal-body').append('' +
                     '   <table class="table orders-list-analytics">\
                         <thead>\
                             <tr class="table-row-orders">\
@@ -178,6 +167,18 @@ function get_orders(csrftoken) {
                         </tbody>\
                     </table>')
 
+            
+            for (var i = data.length - 1; i >= 0; i--) {
+                var type = data[i]['order_type']
+                var curr_type = "Have In"
+
+                var paid = data[i]['paid']
+                var curr_paid = "Paid"
+
+                if (paid == false) curr_paid = "On Hold"
+                if (type == 1) curr_type = "Take Out"
+                
+                
                 $('.orders-list-analytics tbody').append('' +
                     '<tr class="table-row-list" id=' + data[i]['id'] + '>\
                         <td scope="row" style="font-weight:bold";>'+ data[i]['id'] + '</td>\
@@ -219,9 +220,6 @@ function get_specific_order(csrftoken, order_id) {
         },
         url: ORDER_END_POINT.replace('0', order_id),
         success: function (data) {
-            console.log(data['q'].length)
-            console.log(data['q'])
-            console.log(data['rp'])
             $('.analytics-order-list-modal-body').append('' +
                 '<table class="table specific-order-products">\
                     <thead>\

@@ -33,7 +33,6 @@ $(document).on('click', '.get_weekly_schedule', function () {
             'data': week_number
         },
         success: function (d) {
-            console.log(d)
             $('.view-edit-schedule').html('')
             $('.table-body').html('')
             for (var i = 0; i < d['schedules'].length; i++) {

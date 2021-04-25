@@ -177,7 +177,6 @@ $(document).on('click', '#create-inventory-ingredient-btn', function(e){
         },
         url: CREATE_INGREDIENT,
         success: function (data) {
-            console.log(data)
             ingredient_auto = ingredient_auto.toString()
             ingredient_auto = ingredient_auto.substr(0,1).toUpperCase() + ingredient_auto.substr(1);
             $('.stock-table tbody').append(`
@@ -189,8 +188,7 @@ $(document).on('click', '#create-inventory-ingredient-btn', function(e){
                 <td>`+ingredient_stock+`</td>
                 <td>`+ingredient_stock_needed+`</td>
                 <td>`+ingredient_auto+`</td>
-                <td><
-                    button data-id="`+data['pk']+`" class="btn btn-info update_ingredient" data-toggle="modal" data-target="#inventory-ingredient-modal">Edit</button>
+                <td><button data-id="`+data['pk']+`" class="btn btn-info update_ingredient" data-toggle="modal" data-target="#inventory-ingredient-modal">Edit</button>
                     <button data-id="`+data['pk']+`"  class="btn btn-danger btn-delete" >Delete</button></td>
                 </td>
             </tr>`)

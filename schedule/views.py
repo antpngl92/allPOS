@@ -171,6 +171,7 @@ def generate_report_API(request):
             employees.append(emp.get_full_short())
             if d:
                 h = single_employee_single_day_working_hours(emp, d)
+                print(h)
                 hours.append(h)
                 days.append(d)
             else:
@@ -180,8 +181,6 @@ def generate_report_API(request):
 
         for h in range(len(hours)):
             hours[h] = str(hours[h])[:7]
-
-
 
         data = {
            'emp' : employees,

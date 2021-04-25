@@ -1,0 +1,43 @@
+{% extends 'epos/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/update_rota.css' %}">
+<link rel="stylesheet" href="{% static 'css/secondary-nav.css' %}">
+<link rel="stylesheet" href="{% static 'css/stock.css' %}">
+
+<div class="suppliers current-stock table-responsive text-center mb-5">
+    <table class="table supplier-table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Lead Time Delivery - days</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for supplier in suppliers%}
+            <tr id="{{supplier.pk}}">
+                <td scope="row" class="nn-2">{{supplier.name}}</th>
+                <td>{{supplier.email}}</td>
+                <td>{{supplier.phone}}</td>
+                <td>{{supplier.lead_time_delivery}}</td>
+                <td><button data-id="{{supplier.pk}}" class="btn btn-info update-supplier" data-toggle="modal" data-target="#supplier-modal">Edit</button>
+                    <button data-id="{{supplier.pk}}"  class="btn btn-danger btn-delete-supplier" >Delete</button>
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    var UPDATE_SUPPLIER = "{% url 'edit supplier' 0%}"
+    var DELETE_SUPPLIER = "{% url 'delete supplier' 0%}"
+</script>
+
+{% include 'epos/modals.html' %}
+<script type="text/javascript" src="{% static 'js/suppliers.js' %}"></script>
+{% endblock %}
+

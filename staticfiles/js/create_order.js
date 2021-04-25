@@ -4,7 +4,7 @@ $(document).on('click', '.product-butt', function () {
     var order_item_name = $(this).data('name') // Get Item Name
     var order_item_price = $(this).data('price') // Get Item Price
     var exist = check_if_exist(order_item_name) // Check if item is already in the order
-    // console.log(exist)
+
     // Calculate the price for an item 
     var order_item_quantity = 1;
     var product_total = (order_item_price * order_item_quantity).toFixed(2)
@@ -27,14 +27,11 @@ $(document).on('click', '.product-butt', function () {
     // Else, change the item quantity and item total price
     else {
         var row_num = exist; // Get the row number of the item that exists 
-        // console.log("Row num: "+ row_num)
         var number_as_int = parseInt($('tr#' + row_num + ' td.product-quantity').html()) // Current num of ordered items
-        // console.log("Current " + number_as_int)
         var quantity = number_as_int + 1; // increment the item counter + 1
         $('tr#' + row_num + ' td.product-quantity').html(quantity)                // Update the item counter for an item
         var price_as_number = parseFloat($('tr#' + row_num + ' td.product-unit-price span').html()) // Get the item unit price 
         var total_price = (price_as_number * quantity).toFixed(2);
-        // console.log(total_price)
         $('tr#' + row_num + ' td.product-total-price span').html(total_price)
     }
    
@@ -160,9 +157,12 @@ function create_order(payment_type){
     var products = []
     var products_quantity = []
 
+
     for (var i = 0; i < names.length; i++){
+
         products[i] = names.item(i).innerHTML
         products_quantity.push(quantity.item(i).innerHTML)
+
     }
 
     // Get the order details: number, type, total amount, etc. 

@@ -1,0 +1,67 @@
+{% extends 'epos/base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/update_rota.css' %}">
+<link rel="stylesheet" href="{% static 'css/secondary-nav.css' %}">
+<link rel="stylesheet" href="{% static 'css/stock.css' %}">
+<link rel="stylesheet" href="{% static 'css/checkbox.css' %}">
+
+
+<div class="h3 text-center p-1 pb-0">Products</div>
+
+<div class="products current-stock table-responsive text-center mb-5">
+    <table class="table products-table">
+        <thead>
+            <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Category</th>
+                <th scope="col">Retail price</th>
+                <th scope="col">Actual Cost</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products%}
+            <tr id="{{product.pk}}">
+                <td scope="row" class="nn-2">{{product.name}}</th>
+                <td>{{product.category}}</td>
+                <td>£{{product.retail_price}}</td>
+                <td>£{{product.actual_cost }}</td>
+                <td><button data-id="{{product.pk}}" class="btn btn-info update-product" data-toggle="modal" data-target="#product-modal">Edit</button>
+                    <button data-id="{{product.pk}}"  class="btn btn-danger btn-delete-product" >Delete</button>
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+
+<div class="col secondary-nav p-3">
+    <div class="row text-center">
+        <div class="col-md-3 col-sm-12">
+            <a href="#" id="creat-product" data-toggle="modal" data-target="#product-modal" >Create Product</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'inventory ingredients' %}" >View Inventory Ingredients</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'ingredients' %}" >View Ingredients for Product</a>
+        </div>
+        <div class="col-md-3 col-sm-12">
+            <a href="{% url 'inventory ingredients transactions' %}">Inventory Transactions</a>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var GET_PRODUCTS_INGREDIENTS = "{% url 'get products ingredients' %}"
+    var UPDATE_PRODUCT = "{% url 'update product' 0%}"
+    var CREATE_PRODUCT = "{% url 'create product' %}"
+    var DELETE_PRODUCT = "{% url 'delete product' 0%}"
+</script>
+
+{% include 'epos/modals.html' %}
+<script type="text/javascript" src="{% static 'js/products.js' %}"></script>
+{% endblock %}

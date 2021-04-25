@@ -5,6 +5,13 @@ from django.db import IntegrityError
 
 # Create your views here.
 
+def get_suppliers_view(request):
+    suppliers = Supplier.objects.all()
+    context = {
+        'title':'Suplliers',
+        'suppliers':suppliers
+    }
+    return render(request, 'epos/suppliers.html', context)
 
 def get_suppliers_API(request):
     suppliers = []
@@ -29,3 +36,29 @@ def create_suplier_API(request):
                 status = "Supplier with this name already exists"
     
     return JsonResponse({'status':status}, safe=False)
+
+def edit_supplier_API(request, pk):
+    if request.method == "POST":
+
+        name = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        time = request.POST['time']
+
+
+        supplier = Supplier.objects.get(pk=pk)
+
+        supplier.name = name
+        supplier.email = email
+        supplier.phone = phone 
+        supplier.lead_time_delivery = time
+        supplier.save()
+
+    return JsonResponse({}, safe=False)
+
+def delete_supplier_API(request, pk):
+    if request.method == "DELETE":
+        supplier = Supplier.objects.get(pk=pk)
+        supplier.delete()
+
+    return JsonResponse({}, safe=False)

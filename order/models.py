@@ -27,7 +27,7 @@ class Order(models.Model):
     employee        = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL)
     total_amount    = models.DecimalField(decimal_places=2, max_digits=6)
     paid            = models.BooleanField()
-    payment_method  = models.IntegerField(choices=PAYMENTMETHOD)
+    payment_method  = models.IntegerField(choices=PAYMENTMETHOD, null=True, blank=True)
 
 class Tax(models.Model):
     tax = models.DecimalField(decimal_places=2, max_digits=5)

@@ -4,10 +4,11 @@
 <link rel="stylesheet" href="{% static 'css/update_rota.css' %}">
 <link rel="stylesheet" href="{% static 'css/secondary-nav.css' %}">
 <link rel="stylesheet" href="{% static 'css/stock.css' %}">
-    <div class="h3 text-center p-1 pb-0">Current Stock</div>
+<link rel="stylesheet" href="{% static 'css/checkbox.css' %}">
+<div class="h3 text-center p-1 pb-0">Ingredients for products</div>
 
 <div class="current-stock table-responsive text-center mb-5">
-    <table class="table stock-table">
+    <table class="table inventory-table">
         <thead>
             <tr>
                 <th scope="col">Ingredient</th>
@@ -35,16 +36,16 @@
 <div class="col secondary-nav p-3">
     <div class="row text-center">
         <div class="col-md-3 col-sm-12">
-            <a href="#" id="creat-ingredient" data-toggle="modal" data-target="#ingredient-modal-create" >Create Ingredient</a>
+            <a href="#" id="creat-ingredient" data-toggle="modal" data-target="#ingredient-modal">Create Ingredient</a>
         </div>
         <div class="col-md-3 col-sm-12">
-            <a href="{% url 'inventory ingredients' %}" >Inventory Ingredients</a>
+            <a href="{% url 'inventory ingredients' %}" >View Inventory Ingredients</a>
         </div>
         <div class="col-md-3 col-sm-12">
-            <a href="{% url 'timestamps' %}" >Timestamp History</a>
+            <a href="{% url 'products' %}" >View Products</a>
         </div>
         <div class="col-md-3 col-sm-12">
-            <a href="{% url 'employee reports' %}">Employee Reports</a>
+            <a href="{% url 'inventory ingredients transactions' %}">Inventory Transactions</a>
         </div>
     </div>
 </div>
@@ -52,8 +53,10 @@
 
 <script>
     var GET_INVENTORY_INGREEDIENTS = "{% url 'get inventory ingredients' %}"
+    var UPDATE_INGREDIENT = "{% url 'upgrade ingredient' 0%}"
+    var CREATE_INGREDIENT = "{% url 'create ingredient2' %}"
+    var DELETE_INGREDIENT = "{% url 'delete ingredient2' 0%}"
 </script>
-
 
 {% include 'epos/modals.html' %}
 <script type="text/javascript" src="{% static 'js/stock_ingredient.js' %}"></script>

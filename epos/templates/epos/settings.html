@@ -2,6 +2,9 @@
 {% load static %}
 {% block content %}
 {% csrf_token %}
+
+
+
 <div class="row">
   <div class="col-sm column-1">
     <div class="tax-setting">
@@ -28,7 +31,7 @@
       <ul class="list-group list-group-flush mt-3 uListO">
         <li class='list-group-item' > View All Suppliers
           <div class='float-right'>
-            <a class='btn btn-info view_all_suppliers' href="#">View</a>
+            <a class='btn btn-info view_all_suppliers' href="{% url 'suppliers' %}">View</a>
           </div>
         </li>
       </ul>
@@ -36,20 +39,13 @@
 
     <div class="automatic-ordering">
       <ul class="list-group list-group-flush mt-3 uListO">
-        <li class='list-group-item' > Automatic Raw Goods Ordering
+        <li class='list-group-item' > Automated Ordering
           <div class='float-right'>
-            <div class="checkbox checkbox-slider--b-flat">
-              <label>
-                <input type="checkbox"><span></span>
-              </label>
-            </div>
+            <button type='button' class='btn btn-info automatic-ordering-settings-btn' data-toggle="modal" data-target="#automated-ordering-modal">Settings</button>
           </div>
         </li>
       </ul>
-      <div class="automatic-ordering-button-holder">
-        <button type='button' class='btn btn-info automatic-ordering-settings'>Settings</button>
-      </div>
-      </div>
+    </div>
 
 
   </div>
@@ -221,6 +217,8 @@
   var CHANGE_TAX      = "{% url 'change tax' 0%}";
   var CREATE_EMPLOYEE = "{% url 'create employee'%}";
   var CREATE_SUPPLIER = "{% url 'create supplier'%}";
+  var AUTOMATED_ORDERING_SETTINGS = "{% url 'automated ordering'%}";
+  var AUTOMATED_ORDERING_UPDATE_SETTINGS = "{% url 'update automated ordering'%}";
 </script>
 {% include 'epos/modals.html' %}
 <script type="text/javascript" src="{% static 'js/settings.js' %}"></script>

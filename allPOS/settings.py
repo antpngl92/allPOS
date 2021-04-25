@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
+
+from .email_settings import (
+    EMAIL_FROM_LOCAL_FILE,
+    PASSWORD_FROM_LOCAL_FILE
+)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_crontab',
 
     # Added apps
     'employee',
@@ -54,6 +61,13 @@ INSTALLED_APPS = [
     'schedule',
     'stock',
     'orderitem',
+    'emails',
+]
+
+# Cronjobs runs every day at 23:00
+# data for today won't be available until 23:00 at that day
+CRONJOBS = [
+    ('0 23 * * *', 'emails.cron.my_scheduled_job')
 ]
 
 MIDDLEWARE = [
@@ -146,4 +160,9 @@ AUTHENTICATION_BACKENDS = [
 ]
 AUTH_USER_MODEL = 'employee.Employee'
 
-
+# Email params
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = EMAIL_FROM_LOCAL_FILE
+EMAIL_HOST_PASSWORD = PASSWORD_FROM_LOCAL_FILE
+EMAIL_USE_TLS = True

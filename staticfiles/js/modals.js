@@ -1,10 +1,11 @@
-$('#modal-order-number-button').on('click', function(e){
+$(document).on('click','#modal-order-number-button', function(e){
     e.preventDefault();
     var input_val = $('#order-number-input').val()
     $('.order-number').html(input_val)
     $('.close').click()
 })
-$('#modal-order-type-button').on('click', function(e){
+
+$(document).on('click','#modal-order-type-button', function(e){
     e.preventDefault();
     var order_type  = $('input[type=radio][name=order-type]:checked').val()
     $('.order-type').html(order_type)  

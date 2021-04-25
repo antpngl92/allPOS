@@ -16,7 +16,6 @@ function get_tax() {
         url: GET_TAX,
         async: false,
         success: function (data) {
-            // console.log(data['tax'])
             tax_return = data['tax']
         }
     })
@@ -28,9 +27,6 @@ function get_tax() {
 // Add current TAX value to the modal form input field
 $(document).on('click', '.change-tax-btn', function () {
     var tax = get_tax()
-    // console.log(tax)
-    // console.log(tax.length)
-
     tax = tax_representation(tax)
 
     $('#tax-percentage-input').val(tax)
@@ -47,7 +43,6 @@ $(document).on('click', '#modal-tax-change-button', function () {
         },
         url: CHANGE_TAX.replace(0, (tax)),
         success: function (data) {
-            // console.log(data)
         }
     })
 })
@@ -81,7 +76,7 @@ $(document).on('click', '#create_employee_button', function (e) {
     e.preventDefault();
     data = []
     var valid = validateFormEmployee(data)
-    // console.log(data)
+    
     if (valid) {
         var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
         $.ajax({
@@ -249,7 +244,6 @@ $(document).on('click', '#create_supplier_button', function(e){
             },
             success: function (d) {
                 $('.validation_message').html('')
-                console.log(d)
                 if(d['status'] == "Supplier with this name already exists"){
                     $('.validation_message').append('<small id="nameSupplierHelp" class="supplier-exists-message" style="color: red !important;">This supplier already exists!</small>')
                     $('#supplier_name_input').css('border-color', 'red')
@@ -288,11 +282,6 @@ function validateFormSupplier(data){
     data.push(phone_number)
     data.push(lead_time)
 
-    // console.log(supplier_name)
-    // console.log(email)
-    // console.log(phone_number)
-    // console.log(lead_time)
-
     if(supplier_name == ""){
         $('#supplier_name_input').css('border-color', 'red')
         valid = false;
@@ -319,3 +308,67 @@ function validateFormSupplier(data){
 
     return valid
 }
+
+$(document).on('click', '.automatic-ordering-settings-btn', function(){
+    $.ajax({
+        method: "GET",
+        url: AUTOMATED_ORDERING_SETTINGS,
+        success: function (data) {
+           
+            var enable = data['enable']
+            var email_confirmation = data['email_confirmation']
+            var record_orders = data['record_orders']
+            var email_text = data['email_text']
+
+            if(enable){
+                $('#enabled').prop('checked', true)
+                
+            }
+            else{
+                $('#enabled').prop('checked', false)
+            }
+            if(email_confirmation){
+                $('#email-confirmation').prop('checked', true)
+            }
+            else{
+                $('#email-confirmation').prop('checked', false)
+            }
+            if(record_orders){
+                $('#record-orders').prop('checked', true)
+            }
+            else{
+                $('#record-orders').prop('checked', false)
+            }
+            $('#email-text').val(email_text)
+
+        }
+    })
+})
+
+$(document).on('click', '#update-automated-ordering-settings', function(){
+    var enable = $('#enabled').prop('checked')
+    var email_confirmation =$('#email-confirmation').prop('checked')
+    var record_orders = $('#record-orders').prop('checked')
+    var email_text = $('#email-text').val()
+
+    AUTOMATED_ORDERING_UPDATE_SETTINGS
+    $.ajax({
+        method: "POST",
+        beforeSend: function (xhr) {
+
+            xhr.setRequestHeader('X-CSRFToken', jQuery("[name=csrfmiddlewaretoken]").val());
+        },
+        data:{
+            'enable':enable,
+            'email_confirmation': email_confirmation,
+            'record_orders':record_orders,
+            'email_text':email_text
+        },
+        url: AUTOMATED_ORDERING_UPDATE_SETTINGS,
+        success: function (data) {
+
+            $('#automated-ordering-modal').modal('toggle')
+        }
+    })
+
+})

@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{% static 'css/update_rota.css' %}">
 <link rel="stylesheet" href="{% static 'css/secondary-nav.css' %}">
 <link rel="stylesheet" href="{% static 'css/stock.css' %}">
+<link rel="stylesheet" href="{% static 'css/checkbox.css' %}">
     <div class="h3 text-center p-1 pb-0">Current Stock</div>
 
 <div class="current-stock table-responsive text-center mb-5">
@@ -12,10 +13,10 @@
             <tr>
                 <th scope="col">Inventory Ingredient</th>
                 <th scope="col">Supplier</th>
-                <th scope="col">Unit Cost</th>
-                <th scope="col">Unit Weight</th>
-                <th scope="col">Current Stock</th>
-                <th scope="col">MInimum Stock Needed</th>
+                <th scope="col">Unit Cost - £</th>
+                <th scope="col">Unit Weight - kg</th>
+                <th scope="col">Current Stock - kg</th>
+                <th scope="col">Min. Stock Needed - kg</th>
                 <th scope="col">Auto Ordering</th>
                 <th scope="col">Edit</th>
             </tr>
@@ -44,13 +45,13 @@
             <a href="#" id="creat-inventory-ingredient" data-toggle="modal" data-target="#inventory-ingredient-modal-create" >Create Inventory Ingredient</a>
         </div>
         <div class="col-md-3 col-sm-12">
-            <a href="{% url 'ingredients' %}" >Ingredients</a>
+            <a href="{% url 'ingredients' %}" >View Ingredients for Products</a>
         </div>
         <div class="col-md-3 col-sm-12">
-            <a href="{% url 'timestamps' %}" >Timestamp History</a>
+            <a href="{% url 'products' %}" >View Products</a>
         </div>
         <div class="col-md-3 col-sm-12">
-            <a href="{% url 'employee reports' %}">Employee Reports</a>
+            <a href="{% url 'inventory ingredients transactions' %}">Inventory Transactions</a>
         </div>
     </div>
 </div>

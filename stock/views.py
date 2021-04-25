@@ -1,34 +1,54 @@
 from django.shortcuts import render
-from stock.models import InventoryIngredient, InventoryIngredientTransaction, AutomatedOrdering
-from ingredient.models import Ingredient
-from supplier.models import Supplier
+
 from django.http import JsonResponse
 from decimal import Decimal
-from django.contrib.auth.models import User
-from product.models import Product, Category
 
-# Create your views here.
+from product.models import (
+    Product,
+    Category
+)
+
+from ingredient.models import Ingredient
+
+from supplier.models import Supplier
+
+from stock.models import (
+    InventoryIngredient,
+    InventoryIngredientTransaction,
+    AutomatedOrdering
+)
+
+from django.core.exceptions import ObjectDoesNotExist
+
+
 def stock_view(request):
+
     inventory_ingredients = InventoryIngredient.objects.all()
 
-    context = { 
+    context = {
         'inventory_ingredients': inventory_ingredients,
-        'title'      : "Inventory Ingredients" 
+        'title': "Inventory Ingredients"
     }
 
     return render(request, 'epos/inventory_ingredient.html', context)
 
+
 def ingredient_view(request):
+
     ingredient = Ingredient.objects.all()
 
-    context = { 
-        'ingredients' : ingredient,
+    context = {
+        'ingredients': ingredient,
         'title': "Ingredients"
     }
+
     return render(request, 'epos/ingredient.html', context)
 
+
 def stock_create_API(request):
+
     if request.method == "POST":
+
         new_name = request.POST.get(
             'name'
         ).strip()
@@ -57,16 +77,19 @@ def stock_create_API(request):
             .strip('"')
         )
 
-        automated_ordering  = request.POST.get(
+        automated_ordering = request.POST.get(
             'automated'
         )
 
-        if automated_ordering == "true": 
-            automated_ordering = True 
+        if automated_ordering == "true":
+            automated_ordering = True
+
         else:
             automated_ordering = False
 
-        new_supplier = Supplier.objects.get(pk=new_supplier)
+        new_supplier = Supplier.objects.get(
+            pk=new_supplier
+        )
 
         new_inventory_ingredient = InventoryIngredient(
             name=new_name,
@@ -78,7 +101,7 @@ def stock_create_API(request):
             auto_ordering=automated_ordering
         )
         new_inventory_ingredient.save()
-  
+
         data = {
             'pk': new_inventory_ingredient.pk,
             'sup': new_supplier.name,
@@ -86,19 +109,25 @@ def stock_create_API(request):
 
     return JsonResponse(data, safe=False)
 
-def stock_delete_API(request,pk):
+
+def stock_delete_API(request, pk):
+
     if request.method == "DELETE":
-        inventory_ingredient = InventoryIngredient.objects.get(pk=pk)
+
+        inventory_ingredient = InventoryIngredient.objects.get(
+            pk=pk
+        )
+
         inventory_ingredient.delete()
         status = "Successful"
 
-    return JsonResponse({'status':status}, safe=False)
-    
-
+    return JsonResponse({'status': status}, safe=False)
 
 
 def stock_update_API(request, pk):
+
     if request.method == "POST":
+
         new_name = request.POST.get(
             'name'
         ).strip()
@@ -131,21 +160,27 @@ def stock_update_API(request, pk):
             ).strip()
         )
 
-        automated_ordering  = request.POST.get(
+        automated_ordering = request.POST.get(
             'automated'
         )
 
-        if automated_ordering == "true": 
-            automated_ordering = True 
+        if automated_ordering == "true":
+            automated_ordering = True
+
         else:
             automated_ordering = False
 
-   
-        new_supplier = Supplier.objects.get(pk=new_supplier)
-        
-        inventory_ingridient = InventoryIngredient.objects.get(pk=pk)
+        new_supplier = Supplier.objects.get(
+            pk=new_supplier
+        )
 
-        InventoryIngredient.objects.filter(pk=pk).update(
+        inventory_ingridient = InventoryIngredient.objects.get(
+            pk=pk
+        )
+
+        InventoryIngredient.objects.filter(
+            pk=pk
+        ).update(
             name=new_name,
             supplier=new_supplier,
             unit_cost=new_cost,
@@ -154,43 +189,55 @@ def stock_update_API(request, pk):
             minimum_stock_needed=new_min_stock,
             auto_ordering=automated_ordering
         )
-        # Create a inventory transaction only if the quantity of the stock was changed and 
-        # record whoc changed it
+
+        # Create a inventory transaction only if the quantity of the stock was
+        # changed and record whoc changed it
         if inventory_ingridient.current_stock != new_stock:
-            reason = f'{str(request.user.get_full_short())} took stock using control panel'
+            reason = f'{str(request.user.get_full_short())} \
+                took stock using control panel'
             transaction_type = 1
+
             if inventory_ingridient.current_stock < new_stock:
-                reason = f'{str(request.user.get_full_short())} added stock using control panel'
-                transaction_type =2
+                reason = f'{str(request.user.get_full_short())} \
+                    added stock using control panel'
+                transaction_type = 2
 
             transaction = InventoryIngredientTransaction(
-                inventory_ingredient=inventory_ingridient, 
+                inventory_ingredient=inventory_ingridient,
                 quantity=0.00,
-                transaction=transaction_type,   
-                reason=reason 
+                transaction=transaction_type,
+                reason=reason
             )
             transaction.save()
         status = "Successful"
 
-    return JsonResponse({'status':status}, safe=False)
+    return JsonResponse({'status': status}, safe=False)
 
 
 def get_inventory_igredients_API(request):
+
     if request.method == 'GET':
+
         data = {
-            'inventory_ingredients' : list(InventoryIngredient.objects.all().values())
+            'inventory_ingredients': list(
+                InventoryIngredient.objects.all().values()
+            )
         }
-    return JsonResponse(data, safe=False) 
+
+    return JsonResponse(data, safe=False)
+
 
 def ingredient_update_API(request, pk):
+
     if request.method == "POST":
+
         name = request.POST.get(
             'name'
         ).strip()
-        
+
         quantity = Decimal(
             request.POST.get(
-            'quantity'
+                'quantity'
             )
         )
 
@@ -198,7 +245,7 @@ def ingredient_update_API(request, pk):
             'rii_pk'
         )
 
-        ingredient_pk = pk 
+        ingredient_pk = pk
 
         rii = InventoryIngredient.objects.get(
             pk=rii_pk
@@ -211,13 +258,16 @@ def ingredient_update_API(request, pk):
         )
 
         data = {
-            'rii_name':rii.name
+            'rii_name': rii.name
         }
 
-    return JsonResponse(data,safe=False)
+    return JsonResponse(data, safe=False)
+
 
 def ingredient_create_API(request):
+
     if request.method == "POST":
+
         name = request.POST.get(
             'name'
         ).strip()
@@ -244,45 +294,85 @@ def ingredient_create_API(request):
         ingr.save()
 
         data = {
-            'rii_name':rii.name,
+            'rii_name': rii.name,
             'pk': ingr.pk
         }
-    return JsonResponse(data,safe=False)
+    return JsonResponse(data, safe=False)
+
 
 def ingredient_delete_API(request, pk):
+
     if request.method == "DELETE":
-        ingredient = Ingredient.objects.get(pk=pk)
+
+        ingredient = Ingredient.objects.get(
+            pk=pk
+        )
+
         ingredient.delete()
 
-    return JsonResponse({},safe=False)
+    return JsonResponse({}, safe=False)
 
 
 def get_ingredients_for_products_API(request):
+
     if request.method == "GET":
+
         ingredients = Ingredient.objects.all()
         product_pk = ""
+
         try:
             product_pk = request.GET['pk']
-        except :
+
+        except ObjectDoesNotExist:
             pass
         category = Category.objects.all()
-        if product_pk == None or product_pk == "":
+        if product_pk is None or product_pk == "":
             data = {
-                'ingredients' : list(ingredients.values('id','name')),
-                'categories':list(category.values('pk', 'name')),
+                'ingredients': list(
+                    ingredients.values(
+                        'id',
+                        'name'
+                    )
+                ),
+                'categories': list(
+                    category.values(
+                        'pk',
+                        'name'
+                    )
+                ),
             }
+
         else:
-            product = Product.objects.get(pk=product_pk)
+            product = Product.objects.get(
+                pk=product_pk
+            )
+
             data = {
-                'ingredients' : list(ingredients.values('id','name')),
-                'ingridients_product' : list(product.ingredient.values('pk')),
+                'ingredients': list(
+                    ingredients.values(
+                        'id',
+                        'name'
+                    )
+                ),
+                'ingridients_product': list(
+                    product.ingredient.values(
+                        'pk'
+                    )
+                ),
                 'product_category': product.category.pk,
-                'categories':list(category.values('pk', 'name')),
+                'categories': list(
+                    category.values(
+                        'pk',
+                        'name'
+                        )
+                ),
                 'name': product.name,
                 'product_labels': product.food_allergen_labels,
                 'retail_price': product.retail_price
-                }
+            }
+
     return JsonResponse(data, safe=False)
+
 
 def update_product_API(request, pk):
     if request.method == "POST":
@@ -302,7 +392,7 @@ def update_product_API(request, pk):
         ingredients = ingredients.values(
             'pk'
         )
-       
+
         category = request.POST.get(
             'category'
         )
@@ -321,19 +411,20 @@ def update_product_API(request, pk):
             pk=pk
         )
 
-        product.name=name
-        
+        product.name = name
+
         product.ingredient.clear()
         for i in ingredients:
             print(i)
             product.ingredient.add(i['pk'])
 
-        product.category=category
-        product.retail_price=price
+        product.category = category
+        product.retail_price = price
         product.save()
         data = {}
 
     return JsonResponse(data, safe=False)
+
 
 def create_product_API(request):
     if request.method == "POST":
@@ -349,11 +440,11 @@ def create_product_API(request):
         ingredients = Ingredient.objects.filter(
             name__in=ingredients
         )
-        
+
         ingredients = ingredients.values(
             'pk'
         )
-        
+
         category = request.POST.get(
             'category'
         )
@@ -377,57 +468,102 @@ def create_product_API(request):
 
         for i in ingredients:
             product.ingredient.add(i['pk'])
-            
+
         product.save()
         data = {
-            'pk':product.pk,
-            'cost':product.actual_cost
+            'pk': product.pk,
+            'cost': product.actual_cost
         }
 
     return JsonResponse(data, safe=False)
 
 
-def delete_product_API(request,pk):
+def delete_product_API(request, pk):
+
     if request.method == "DELETE":
-        product = Product.objects.get(pk=pk)
+
+        product = Product.objects.get(
+            pk=pk
+        )
+
         product.delete()
+
     return JsonResponse({}, safe=False)
 
+
 def inventory_transactions_view(request):
-    
-    inventory_ingredient_transactions = InventoryIngredientTransaction.objects.all().order_by('-id')
+
+    inventory_ingredient_transactions = \
+        InventoryIngredientTransaction.objects.all().order_by(
+            '-id'
+        )
 
     context = {
         'transactions': inventory_ingredient_transactions,
         'title': "Inventory Ingredients Transactions"
     }
 
-    return render(request, 'epos/inventory_transaction.html', context) 
+    return render(request, 'epos/inventory_transaction.html', context)
+
 
 def get_automated_ordering_settings_API(request):
+
     if request.method == "GET":
-        automated_ordering = AutomatedOrdering.objects.get(pk=1)
+
+        automated_ordering = AutomatedOrdering.objects.get(
+            pk=1
+        )
 
         data = {
-            'enable':automated_ordering.enable,
-            'email_confirmation':automated_ordering.email_confirmation,
-            'record_orders': automated_ordering.record_orders, 
-            'email_text': automated_ordering.email_text
+            'enable': automated_ordering.enable,
+            'email_confirmation': automated_ordering.email_confirmation,
+            'record_orders': automated_ordering.record_orders,
+            'subject': automated_ordering.subject,
+            'email_greeting_text': automated_ordering.email_greeting_text,
+            'email_footer_text': automated_ordering.email_footer_text
         }
+
     return JsonResponse(data, safe=False)
 
-def update_autmated_ordering_settings_API(request):
-    if request.method == "POST":
-        enable = request.POST.get('enable')
-        email_confirmation = request.POST.get('email_confirmation')
-        record_orders = request.POST.get('record_orders')
-        email_text = request.POST.get('email_text')
 
-        automated_ordering = AutomatedOrdering.objects.get(pk=1)
+def update_autmated_ordering_settings_API(request):
+
+    if request.method == "POST":
+
+        enable = request.POST.get(
+            'enable'
+        )
+
+        email_confirmation = request.POST.get(
+            'email_confirmation'
+        )
+
+        record_orders = request.POST.get(
+            'record_orders'
+        )
+
+        subject = request.POST.get(
+            'subject'
+        )
+
+        email_greeting_text = request.POST.get(
+            'email_greeting_text'
+        )
+
+        email_footer_text = request.POST.get(
+            'email_footer_text'
+        )
+
+        automated_ordering = AutomatedOrdering.objects.get(
+            pk=1
+        )
+
         automated_ordering.enable = enable.capitalize()
         automated_ordering.email_confirmation = email_confirmation.capitalize()
         automated_ordering.record_orders = record_orders.capitalize()
-        automated_ordering.email_text = email_text
+        automated_ordering.subject = subject
+        automated_ordering.email_greeting_text = email_greeting_text
+        automated_ordering.email_footer_text = email_footer_text
         automated_ordering.save()
 
     return JsonResponse({}, safe=False)

@@ -17,10 +17,27 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TimeStapm',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('activity_type', models.IntegerField(choices=[(1, 'Clock In'), (2, 'Clock Out')], default=1)),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                    )
+                 ),
+                ('activity_type', models.IntegerField(
+                    choices=[
+                        (1, 'Clock In'),
+                        (2, 'Clock Out')
+                    ],
+                    default=1
+                    )
+                 ),
                 ('timestamp', models.DateTimeField(auto_now_add=True)),
-                ('employee', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to=settings.AUTH_USER_MODEL)),
+                ('employee', models.ForeignKey(
+                    on_delete=django.db.models.deletion.DO_NOTHING,
+                    to=settings.AUTH_USER_MODEL
+                    )
+                 ),
             ],
         ),
     ]

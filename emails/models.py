@@ -12,3 +12,15 @@ class OrderEmail(models.Model):
         blank=True,
     )
 
+    email_subject = models.CharField(
+        max_length=200,
+        blank=True,
+    )
+
+    email_body = models.TextField(
+        max_length=2000,
+        blank=True,
+    )
+
+    def __str__(self):
+        return self.send_to

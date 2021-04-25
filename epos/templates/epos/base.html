@@ -16,35 +16,23 @@
   <script src="https://kit.fontawesome.com/c7f301a7fb.js" crossorigin="anonymous"></script>
   <!-- Chart Js-->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-  {% if title == "Settings" or title == "Stock" %}
-    <!-- SETTINGS CSS-->
-    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
-    <link rel="stylesheet" href="{% static 'css/checkbox.css' %}">
-  {% endif %}
-  {% if title == "Rota"%}
-    <!-- SETTINGS CSS-->
-    <link rel="stylesheet" href="{% static 'css/rota.css' %}">
+
+  {% if title == "Settings" %}
+  <link rel="stylesheet" href="{% static 'css/settings.css' %}">
   {% endif %}
 
   <!-- Navbar CSS-->
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
   <!-- EPOS CSS-->
   <link rel="stylesheet" href="{% static 'css/epos.css' %}">
-  {% if title == "Analytics"%}
-  <!-- ANALYTICS CSS-->
-  <link rel="stylesheet" href="{% static 'css/analytics.css' %}">
-  {% endif %}
 
-  {% if title == "Employees"%}
-    <link rel="stylesheet" href="{% static 'css/employees.css' %}">
-  {% endif %}
+
 
   {% if title == "Scheduler" or title == "Rota" or title == "Update Rota" or title == "Timestamps" or title == "Employee Reports"%}
     <link rel="stylesheet" href="{% static 'css/secondary-nav.css' %}">
   {% endif %}  
-  {% if title == "Update Rota" or title == "Timestamps" %}
-    <link rel="stylesheet" href="{% static 'css/update_rota.css' %}">
-  {% endif %}
+
 
   <title>{{ title }}</title>
 </head>

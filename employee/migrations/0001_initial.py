@@ -14,7 +14,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Employee',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                    )
+                 ),
                 ('first_name', models.CharField(max_length=20)),
                 ('second_name', models.CharField(blank=True, max_length=20)),
                 ('last_name', models.CharField(max_length=20)),
@@ -23,17 +29,58 @@ class Migration(migrations.Migration):
                 ('tel_number', models.CharField(blank=True, max_length=12)),
                 ('email', models.EmailField(blank=True, max_length=254)),
                 ('position', models.CharField(max_length=20)),
-                ('hourly_pay_rate', models.DecimalField(blank=True, decimal_places=2, max_digits=5, null=True)),
+                ('hourly_pay_rate', models.DecimalField(
+                    blank=True,
+                    decimal_places=2,
+                    max_digits=5,
+                    null=True
+                    )
+                 ),
                 ('start_date', models.DateField(blank=True, null=True)),
                 ('end_date', models.DateField(blank=True, null=True)),
                 ('is_employeed', models.BooleanField(blank=True, null=True)),
-                ('nin', models.CharField(blank=True, max_length=9, null=True, unique=True)),
-                ('permission_level', models.IntegerField(choices=[(1, 'Manager'), (2, 'Superviser'), (3, 'Employee')], default=3)),
-                ('profile_picture', models.ImageField(default='staticfiles/img/employee_profile_picture/default.png', upload_to='staticfiles/img/employee_profile_picture/')),
-                ('pin', models.IntegerField(unique=True, verbose_name='Pincode')),
-                ('password', models.CharField(blank=True, max_length=100)),
-                ('date_joined', models.DateTimeField(auto_now_add=True, verbose_name='date joined')),
-                ('last_login', models.DateTimeField(auto_now_add=True, verbose_name='last login')),
+                ('nin', models.CharField(
+                    blank=True,
+                    max_length=9,
+                    null=True,
+                    unique=True
+                    )
+                 ),
+                ('permission_level', models.IntegerField(
+                    choices=[
+                        (1, 'Manager'),
+                        (2, 'Superviser'),
+                        (3, 'Employee')
+                    ],
+                    default=3
+                    )
+                 ),
+                ('profile_picture', models.ImageField(
+                    default='staticfiles/img/employee_profile_picture/\
+                    default.png',
+                    upload_to='staticfiles/img/employee_profile_picture/'
+                    )
+                 ),
+                ('pin', models.IntegerField(
+                    unique=True,
+                    verbose_name='Pincode'
+                    )
+                 ),
+                ('password', models.CharField(
+                    blank=True,
+                    max_length=100
+                    )
+                 ),
+                ('date_joined', models.DateTimeField(
+                    auto_now_add=True,
+                    verbose_name='date joined'
+                    )
+                 ),
+                ('last_login', models.DateTimeField(
+                    auto_now_add=True,
+                    verbose_name='last login'
+                    )
+                 ),
                 ('is_admin', models.BooleanField(default=False)),
                 ('is_active', models.BooleanField(default=True)),
                 ('is_staff', models.BooleanField(default=False)),

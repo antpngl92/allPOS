@@ -1,6 +1,9 @@
 {% extends 'epos/base.html' %}
 {% load static %}
 {% block content %}
+
+<link rel="stylesheet" href="{% static 'css/employees.css' %}">
+
 <div class="row no-gutters">
     <div class="col-md-6   no-gutters list-of-employees"> {% csrf_token %}
         <ul class="list-group list-group-flush mt-3 employee-list">

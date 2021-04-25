@@ -13,41 +13,106 @@ from supplier.models import Supplier
 
 from emails.models import OrderEmail
 
+from employee.models import Employee
+
+from allPOS.email_settings import EMAIL_FROM_LOCAL_FILE
+
+import datetime 
+from django.utils import timezone
+
 def automated_ordering_service():
 
     automated_ordering = AutomatedOrdering.objects.get(
         pk=1
     )
 
-    text = automated_ordering.email_text
-
     if not automated_ordering.enable:
         return 
     
     target_inventory_ingredients = find_missing_ingredients()
 
-    if automated_ordering.record_orders:
-        generated_email_objects = generate_order_email_objects(
-            ingredient_targets=target_inventory_ingredients
-        )
     
-    send_emails(
-        email_targets=generated_email_objects
+    generated_email_objects = generate_order_email_objects(
+        automated_ordering_object=automated_ordering,
+        ingredient_targets=target_inventory_ingredients
     )
     
+    send_automated_ordering_emails(
+        email_targets=generated_email_objects
+    )
+
+    if automated_ordering.email_confirmation:
+        send_manager_notification_for_automated_order(
+            email_targets=generated_email_objects
+        )
+
+    if not automated_ordering.record_orders:
+        for generated_email_object in generated_email_objects:
+            generated_email_object.delete()
+
 
     
-def send_emails(
+
+def send_manager_notification_for_automated_order(
+    *,
+    email_targets : OrderEmail
+):
+
+    managers = Employee.objects.filter(
+        permission_level=1
+    )
+
+    recepients = []
+    
+    for i in managers:
+        recepients.append(i.email)
+
+    email_objects = email_targets
+    
+    message = ""
+    
+    ordinal_numbers = ['1st', '2nd','3rd','4th','5th','6th','7th','8th','9th','10th','11th','12th','13th','14th']
+    index_ordinal_numbers = 0
+    for email_object in email_objects:
+        message += ordinal_numbers[index_ordinal_numbers] + " email:" + "\n\n"
+        message += "Sent to: " + email_object.send_to  + "\n"
+        message += "----------------- EMAIL BODY -------------------------------------------\n"
+        message += email_object.email_body + "\n\n"
+        message += "========================================================================\n"
+        index_ordinal_numbers += 1
+
+   
+
+    send_mail(
+            "Orders Made today:", 
+            message, 
+            EMAIL_FROM_LOCAL_FILE, 
+            recepients
+        )
+
+def send_automated_ordering_emails(
     *,
     email_targets : List[OrderEmail]
 ):
 
+    for email_target in email_targets:
+        message = email_target.email_body
+        recepient = [email_target.send_to]
+        send_mail(
+            email_target.email_subject, 
+            message, 
+            EMAIL_FROM_LOCAL_FILE, 
+            recepient
+        )
 
-    
+
+
 def generate_order_email_objects(
     *,
+    automated_ordering_object : AutomatedOrdering,
     ingredient_targets : List[InventoryIngredient]
 ) -> List[OrderEmail]:
+
     suppliers_needed = []
     generated_email_objects = []
 
@@ -57,23 +122,35 @@ def generate_order_email_objects(
         if supplier not in suppliers_needed:
             suppliers_needed.append(supplier)
 
-    print(suppliers_needed)
-    for supplier in suppliers_needed:
+    email_subject = automated_ordering_object.subject    
 
+    for supplier in suppliers_needed:
+        email_body = ""
+        automated_ordering_object.email_text = ""
         ingredients = ingredient_targets.filter(
             supplier=supplier
         )   
 
+        for i in ingredients:
+            automated_ordering_object.email_text += i.name + ": " + str(i.unit_weight) + "gr. \n"
+        automated_ordering_object.save()
+
+        email_body += automated_ordering_object.email_greeting_text
+        email_body += "\n\n" + automated_ordering_object.email_text
+        email_body += "\n\n" + automated_ordering_object.email_footer_text
 
         order_email = OrderEmail.objects.create(
             send_to=supplier.email,
+            email_subject=email_subject,
+            email_body=email_body
         )
         order_email.ingredients.set(ingredients)
         order_email.save()
         generated_email_objects.append(order_email)
 
-    return generated_email_objects
 
+    return generated_email_objects
+    
 def find_missing_ingredients() -> List[InventoryIngredient]:
     
     ingredients = InventoryIngredient.objects.filter(

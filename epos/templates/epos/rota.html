@@ -1,6 +1,7 @@
 {% extends 'epos/base.html' %}
 {% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/rota.css' %}">
 <div class="calendar text-center mb-5">
     <div class="month"> {% csrf_token %}
         <ul>

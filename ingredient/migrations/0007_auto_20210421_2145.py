@@ -15,6 +15,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='ingredient',
             name='inventory_ingredient',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='stock.inventoryingredient'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='stock.inventoryingredient'
+                                    ),
         ),
     ]

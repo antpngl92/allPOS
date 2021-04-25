@@ -15,11 +15,33 @@ class Migration(migrations.Migration):
     operations = [
         migrations.CreateModel(
             name='OrderItem',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('retail_price', models.DecimalField(decimal_places=2, max_digits=4)),
-                ('actual_cost', models.DecimalField(decimal_places=2, max_digits=4)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='product.product')),
-            ],
+            fields=[(
+                    'id',
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID'
+                                    )
+                    ),
+                    ('retail_price',
+                     models.DecimalField(
+                         decimal_places=2,
+                         max_digits=4
+                                        )
+                     ),
+                    ('actual_cost',
+                     models.DecimalField(
+                         decimal_places=2,
+                         max_digits=4
+                                        )
+                     ),
+                    ('product',
+                     models.ForeignKey(
+                         on_delete=django.db.models.deletion.DO_NOTHING,
+                         to='product.product'
+                                    )
+                     ),
+                    ],
         ),
     ]

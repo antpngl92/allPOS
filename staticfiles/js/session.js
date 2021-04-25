@@ -1,4 +1,4 @@
-var timeoutInMiliseconds = 60000000; // change to 60 000
+var timeoutInMiliseconds = 60000000; // change to 60 000  for 1 min
 var timeoutId; 
   
 function startTimer() { 

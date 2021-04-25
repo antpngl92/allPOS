@@ -14,6 +14,10 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='inventoryingredient',
             name='supplier',
-            field=models.ManyToManyField(blank=True, null=True, to='supplier.Supplier'),
+            field=models.ManyToManyField(
+                blank=True,
+                null=True,
+                to='supplier.Supplier'
+            ),
         ),
     ]

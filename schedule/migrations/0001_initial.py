@@ -17,11 +17,21 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Schedule',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                    )
+                 ),
                 ('work_date', models.DateField()),
                 ('start_work_hour', models.TimeField()),
                 ('end_work_hour', models.TimeField()),
-                ('employee', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to=settings.AUTH_USER_MODEL)),
+                ('employee', models.ForeignKey(
+                    on_delete=django.db.models.deletion.DO_NOTHING,
+                    to=settings.AUTH_USER_MODEL
+                    )
+                 ),
             ],
         ),
     ]

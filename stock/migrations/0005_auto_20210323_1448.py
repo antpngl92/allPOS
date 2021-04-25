@@ -19,6 +19,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='inventoryingredient',
             name='supplier',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='supplier.supplier'),
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                to='supplier.supplier'
+            ),
         ),
     ]

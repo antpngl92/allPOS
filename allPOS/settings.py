@@ -66,9 +66,11 @@ INSTALLED_APPS = [
 
 # Cronjobs runs every day at 23:00
 # data for today won't be available until 23:00 at that day
+# https://crontab.guru/#*/1_*_*_*_*
 CRONJOBS = [
-    ('0 23 * * *', 'emails.cron.my_scheduled_job')
+    ('*/1 * * * *', 'emails.cron.my_scheduled_job', '>> /home/anton/Desktop/cron.logf')
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -13,12 +13,19 @@ class Migration(migrations.Migration):
     operations = [
         migrations.CreateModel(
             name='Supplier',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=30)),
-                ('email', models.CharField(max_length=30)),
-                ('phone', models.CharField(max_length=20)),
-                ('lead_time_delivery', models.IntegerField()),
-            ],
+            fields=[(
+                    'id',
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID'
+                                    )
+                    ),
+                    ('name', models.CharField(max_length=30)),
+                    ('email', models.CharField(max_length=30)),
+                    ('phone', models.CharField(max_length=20)),
+                    ('lead_time_delivery', models.IntegerField()),
+                    ],
         ),
     ]

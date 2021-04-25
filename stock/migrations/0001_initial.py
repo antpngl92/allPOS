@@ -16,25 +16,69 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='InventoryIngredient',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=20)),
-                ('unit_cost', models.DecimalField(decimal_places=2, max_digits=4)),
-                ('unit_weight', models.DecimalField(decimal_places=3, max_digits=5)),
-                ('current_stock', models.DecimalField(decimal_places=3, max_digits=5)),
-                ('minimum_stock_needed', models.DecimalField(decimal_places=3, max_digits=5)),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                    )
+                 ),
+                ('name', models.CharField(
+                    max_length=20
+                    )
+                 ),
+                ('unit_cost', models.DecimalField(
+                    decimal_places=2,
+                    max_digits=4
+                    )
+                 ),
+                ('unit_weight', models.DecimalField(
+                    decimal_places=3,
+                    max_digits=5
+                    )
+                 ),
+                ('current_stock', models.DecimalField(
+                    decimal_places=3,
+                    max_digits=5
+                    )
+                 ),
+                ('minimum_stock_needed', models.DecimalField(
+                    decimal_places=3,
+                    max_digits=5
+                    )
+                 ),
                 ('supplier', models.ManyToManyField(to='supplier.Supplier')),
             ],
         ),
         migrations.CreateModel(
             name='InventoryIngredientTransaction',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('quantity', models.DecimalField(decimal_places=3, max_digits=5)),
-                ('transaction', models.IntegerField(choices=[(1, 'Take from stock'), (2, 'Add to stock')])),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                    )
+                 ),
+                ('quantity', models.DecimalField(
+                    decimal_places=3,
+                    max_digits=5
+                    )
+                 ),
+                ('transaction', models.IntegerField(
+                    choices=[
+                        (1, 'Take from stock'),
+                        (2, 'Add to stock')]
+                    )
+                 ),
                 ('date', models.DateField(auto_now_add=True)),
                 ('time', models.TimeField(auto_now_add=True)),
                 ('reason', models.CharField(max_length=100)),
-                ('inventory_ingredient', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='stock.inventoryingredient')),
+                ('inventory_ingredient', models.ForeignKey(
+                    on_delete=django.db.models.deletion.DO_NOTHING,
+                    to='stock.inventoryingredient'
+                    )
+                 ),
             ],
         ),
     ]

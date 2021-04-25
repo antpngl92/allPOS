@@ -3,17 +3,25 @@ from django.contrib.auth.models import AbstractBaseUser
 
 from employee.models import Employee
 
+
 class EmployeeBackend(ModelBackend):
 
-    def authenticate(self,request, pin):
+    def authenticate(self, request, pin):
+
         try:
-            return Employee.objects.get(pin=pin)
+            return Employee.objects.get(
+                pin=pin
+            )
+
         except Employee.DoesNotExist:
             return None
 
     def get_user(self, user_pk):
+
         try:
-            return Employee.objects.get(pk=user_pk)
-        except: 
-            User.DoesNotExist
+            return Employee.objects.get(
+                pk=user_pk
+            )
+
+        except AbstractBaseUser.DoesNotExist:
             return None

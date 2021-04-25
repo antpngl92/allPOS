@@ -318,7 +318,9 @@ $(document).on('click', '.automatic-ordering-settings-btn', function(){
             var enable = data['enable']
             var email_confirmation = data['email_confirmation']
             var record_orders = data['record_orders']
-            var email_text = data['email_text']
+            var subject = data['subject']
+            var email_greeting_text = data['email_greeting_text']
+            var email_footer_text = data['email_footer_text']
 
             if(enable){
                 $('#enabled').prop('checked', true)
@@ -339,7 +341,10 @@ $(document).on('click', '.automatic-ordering-settings-btn', function(){
             else{
                 $('#record-orders').prop('checked', false)
             }
-            $('#email-text').val(email_text)
+
+            $('#email-subject').val(subject)
+            $('#email-greeting').val(email_greeting_text)
+            $('#email-footer').val(email_footer_text)
 
         }
     })
@@ -349,7 +354,9 @@ $(document).on('click', '#update-automated-ordering-settings', function(){
     var enable = $('#enabled').prop('checked')
     var email_confirmation =$('#email-confirmation').prop('checked')
     var record_orders = $('#record-orders').prop('checked')
-    var email_text = $('#email-text').val()
+    var subject = $('#email-subject').val()
+    var email_greeting_text = $('#email-greeting').val()
+    var email_footer_text = $('#email-footer').val()
 
     AUTOMATED_ORDERING_UPDATE_SETTINGS
     $.ajax({
@@ -362,7 +369,9 @@ $(document).on('click', '#update-automated-ordering-settings', function(){
             'enable':enable,
             'email_confirmation': email_confirmation,
             'record_orders':record_orders,
-            'email_text':email_text
+            'subject':subject,
+            'email_greeting_text': email_greeting_text,
+            'email_footer_text':email_footer_text
         },
         url: AUTOMATED_ORDERING_UPDATE_SETTINGS,
         success: function (data) {

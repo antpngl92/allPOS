@@ -13,6 +13,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='order',
             name='payment_method',
-            field=models.IntegerField(blank=True, choices=[(1, 'Cash'), (2, 'Card')], null=True),
+            field=models.IntegerField(
+                blank=True,
+                choices=[
+                    (1, 'Cash'),
+                    (2, 'Card')
+                ],
+                null=True
+            ),
         ),
     ]

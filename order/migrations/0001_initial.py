@@ -17,16 +17,53 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Order',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('order_type', models.IntegerField(choices=[(1, 'Takeaway'), (2, 'Have in')])),
-                ('order_numer', models.IntegerField(blank=True)),
-                ('date', models.DateField(auto_now_add=True)),
-                ('time', models.TimeField(auto_now_add=True)),
-                ('total_amount', models.DecimalField(decimal_places=2, max_digits=6)),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                    )
+                 ),
+                ('order_type', models.IntegerField(
+                    choices=[
+                        (1, 'Takeaway'),
+                        (2, 'Have in')
+                        ]
+                    )
+                 ),
+                ('order_numer', models.IntegerField(
+                    blank=True
+                    )
+                 ),
+                ('date', models.DateField(
+                    auto_now_add=True
+                    )
+                 ),
+                ('time', models.TimeField(
+                    auto_now_add=True
+                    )
+                 ),
+                ('total_amount', models.DecimalField(
+                    decimal_places=2,
+                    max_digits=6
+                    )
+                 ),
                 ('paid', models.BooleanField()),
-                ('payment_method', models.IntegerField(choices=[(1, 'Cash'), (2, 'Card')])),
-                ('employee', models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
-                ('products', models.ManyToManyField(to='orderitem.OrderItem')),
+                ('payment_method', models.IntegerField(
+                    choices=[
+                        (1, 'Cash'),
+                        (2, 'Card')
+                        ]
+                    )
+                 ),
+                ('employee', models.ManyToManyField(
+                    to=settings.AUTH_USER_MODEL
+                    )
+                 ),
+                ('products', models.ManyToManyField(
+                    to='orderitem.OrderItem'
+                    )
+                 ),
             ],
         ),
     ]

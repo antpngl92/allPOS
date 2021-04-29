@@ -16,6 +16,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='order',
             name='employee',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='employee.employee'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                to='employee.employee'
+            ),
         ),
     ]

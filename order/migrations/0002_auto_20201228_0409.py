@@ -20,7 +20,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='order',
             name='employee',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.DO_NOTHING, to='employee.employee'),
+            field=models.ForeignKey(
+                default=None,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                to='employee.employee'
+            ),
             preserve_default=False,
         ),
     ]

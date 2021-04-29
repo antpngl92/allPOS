@@ -1,0 +1,73 @@
+[
+    {
+        "model": "order.order",
+        "pk": 297,
+        "fields": {
+            "order_type": 1,
+            "order_numer": 0,
+            "date": "2021-04-28",
+            "time": "18:24:33.760",
+            "employee": 34,
+            "total_amount": "5.20",
+            "paid": true,
+            "payment_method": 1,
+            "products": [
+                969,
+                970
+            ]
+        }
+    },
+    {
+        "model": "order.order",
+        "pk": 298,
+        "fields": {
+            "order_type": 1,
+            "order_numer": 0,
+            "date": "2021-04-28",
+            "time": "18:24:43.773",
+            "employee": 34,
+            "total_amount": "5.20",
+            "paid": true,
+            "payment_method": 1,
+            "products": [
+                971,
+                972
+            ]
+        }
+    },
+    {
+        "model": "order.order",
+        "pk": 299,
+        "fields": {
+            "order_type": 1,
+            "order_numer": 0,
+            "date": "2021-04-28",
+            "time": "18:25:39.738",
+            "employee": 34,
+            "total_amount": "87.20",
+            "paid": true,
+            "payment_method": 1,
+            "products": [
+                973,
+                974,
+                975,
+                976,
+                977,
+                978,
+                979,
+                980,
+                981,
+                982,
+                983,
+                984
+            ]
+        }
+    },
+    {
+        "model": "order.tax",
+        "pk": 19,
+        "fields": {
+            "tax": "10.00"
+        }
+    }
+]

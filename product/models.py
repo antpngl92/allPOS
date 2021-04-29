@@ -1,25 +1,26 @@
 from django.db import models
 from ingredient.models import Ingredient
 
+
 class Product(models.Model):
 
     name = models.CharField(
         max_length=40
     )
     ingredient = models.ManyToManyField(
-        Ingredient, 
-        blank=True, 
+        Ingredient,
+        blank=True,
         related_name='product'
     )
     category = models.ForeignKey(
-        'Category', 
-        null=True, 
-        blank=True, 
+        'Category',
+        null=True,
+        blank=True,
         on_delete=models.DO_NOTHING
     )
 
     retail_price = models.DecimalField(
-        decimal_places=2, 
+        decimal_places=2,
         max_digits=5
     )
 
@@ -27,16 +28,17 @@ class Product(models.Model):
         return self.name
 
     @property
-    def actual_cost(self):    
-        ingridients = Ingredient.objects.filter(product=self)
+    def actual_cost(self):
+        ingridients = self.ingredient.all()
         actual_cost = 0
         for i in ingridients:
             quantity = i.quantity
-            inventory_ingredient = i.inventory_ingredient                       # get the inventory ingredient 
-            inventory_ingredient_unit_cost = inventory_ingredient.unit_cost     # get the inventory ingredient unit cost 
-            actual_cost += quantity * inventory_ingredient_unit_cost
+            inventory_ingredient = i.inventory_ingredient
+            inventory_ingredient_unit_cost = inventory_ingredient.unit_cost
+
+            actual_cost = (actual_cost + (quantity * inventory_ingredient_unit_cost)/inventory_ingredient_unit_cost)
         return round(actual_cost, 2)
-    
+
 
 class Category(models.Model):
     name = models.CharField(
@@ -44,10 +46,10 @@ class Category(models.Model):
     )
     slug = models.SlugField()
     parent = models.ForeignKey(
-        'self', 
-        blank=True, 
-        null=True, 
-        related_name='children', 
+        'self',
+        blank=True,
+        null=True,
+        related_name='children',
         on_delete=models.CASCADE
     )
     slug = models.SlugField(
@@ -55,10 +57,6 @@ class Category(models.Model):
     )
 
     class Meta:
-
-        #enforcing that there can not be two categories under a parent with same slug
-        # __str__ method elaborated later in post.  use __unicode__ in place of
-        # __str__ if you are using python 2
         unique_together = ('slug', 'parent',)
         verbose_name_plural = "categories"
         ordering = ['id']

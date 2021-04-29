@@ -16,9 +16,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='OrderEmail',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                    )
+                 ),
                 ('datetime', models.DateTimeField(auto_now_add=True)),
-                ('ingredients', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='stock.inventoryingredient')),
+                ('ingredients', models.ForeignKey(
+                    on_delete=django.db.models.deletion.DO_NOTHING,
+                    to='stock.inventoryingredient'
+                    )
+                 ),
             ],
         ),
     ]

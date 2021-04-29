@@ -13,7 +13,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='product',
             name='retail_price',
-            field=models.DecimalField(decimal_places=2, default=0, max_digits=4),
+            field=models.DecimalField(
+                decimal_places=2,
+                default=0,
+                max_digits=4
+            ),
             preserve_default=False,
         ),
     ]

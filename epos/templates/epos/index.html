@@ -124,7 +124,7 @@
             <div class="products-buttons">
                 <div class="row products-buttons-row no-gutters">
                     {% for p in products %}
-                        <button type="button" data-id={{p.id}} data-name='{{p.name}}' data-price={{ p.retail_price| floatformat:2}} class="product-butt">{{p.name}} <span>£{{ p.retail_price| floatformat:2}}</span> </button>
+                        <button type="button" data-id={{p.id}} data-name='{{p.name}}' data-price={{ p.retail_price| floatformat:2}} class="product-butt">{{ p|truncatechars:20 }} <span>£{{ p.retail_price| floatformat:2}}</span> </button>
                     {%endfor%}
                 </div>
 

@@ -49,37 +49,23 @@ def stock_create_API(request):
 
     if request.method == "POST":
 
-        new_name = request.POST.get(
-            'name'
-        ).strip()
-
-        new_supplier = request.POST.get(
-            'supplier'
-        )
+        new_name = request.POST.get('name').strip()
+        new_supplier = request.POST.get('supplier')
 
         new_cost = Decimal(
-            request.POST.get('cost')
-            .strip('"')
+            request.POST.get('cost').strip('"')
         )
-
         new_weight = Decimal(
-            request.POST.get('weight')
-            .strip('"')
+            request.POST.get('weight').strip('"')
         )
-
         new_stock = Decimal(
-            request.POST.get('stock')
-            .strip('"')
+            request.POST.get('stock').strip('"')
         )
-
         new_min_stock = Decimal(
-            request.POST.get('min_stock')
-            .strip('"')
+            request.POST.get('min_stock').strip('"')
         )
 
-        automated_ordering = request.POST.get(
-            'automated'
-        )
+        automated_ordering = request.POST.get('automated')
 
         if automated_ordering == "true":
             automated_ordering = True
@@ -87,9 +73,7 @@ def stock_create_API(request):
         else:
             automated_ordering = False
 
-        new_supplier = Supplier.objects.get(
-            pk=new_supplier
-        )
+        new_supplier = Supplier.objects.get(pk=new_supplier)
 
         new_inventory_ingredient = InventoryIngredient(
             name=new_name,
@@ -114,9 +98,7 @@ def stock_delete_API(request, pk):
 
     if request.method == "DELETE":
 
-        inventory_ingredient = InventoryIngredient.objects.get(
-            pk=pk
-        )
+        inventory_ingredient = InventoryIngredient.objects.get(pk=pk)
 
         inventory_ingredient.delete()
         status = "Successful"
@@ -128,41 +110,24 @@ def stock_update_API(request, pk):
 
     if request.method == "POST":
 
-        new_name = request.POST.get(
-            'name'
-        ).strip()
+        new_name = request.POST.get('name').strip()
 
-        new_supplier = request.POST.get(
-            'supplier'
-        )
+        new_supplier = request.POST.get('supplier')
 
         new_cost = Decimal(
-            request.POST.get(
-                'cost'
-            ).strip()
+            request.POST.get('cost').strip()
         )
-
         new_weight = Decimal(
-            request.POST.get(
-                'weight'
-            ).strip()
+            request.POST.get('weight').strip()
         )
-
         new_stock = Decimal(
-            request.POST.get(
-                'stock'
-            ).strip()
+            request.POST.get('stock').strip()
         )
-
         new_min_stock = Decimal(
-            request.POST.get(
-                'min_stock'
-            ).strip()
+            request.POST.get('min_stock').strip()
         )
 
-        automated_ordering = request.POST.get(
-            'automated'
-        )
+        automated_ordering = request.POST.get('automated')
 
         if automated_ordering == "true":
             automated_ordering = True
@@ -170,13 +135,9 @@ def stock_update_API(request, pk):
         else:
             automated_ordering = False
 
-        new_supplier = Supplier.objects.get(
-            pk=new_supplier
-        )
+        new_supplier = Supplier.objects.get(pk=new_supplier)
 
-        inventory_ingridient = InventoryIngredient.objects.get(
-            pk=pk
-        )
+        inventory_ingridient = InventoryIngredient.objects.get(pk=pk)
 
         InventoryIngredient.objects.filter(
             pk=pk
@@ -231,25 +192,17 @@ def ingredient_update_API(request, pk):
 
     if request.method == "POST":
 
-        name = request.POST.get(
-            'name'
-        ).strip()
+        name = request.POST.get('name').strip()
 
         quantity = Decimal(
-            request.POST.get(
-                'quantity'
-            )
+            request.POST.get('quantity')
         )
 
-        rii_pk = request.POST.get(
-            'rii_pk'
-        )
+        rii_pk = request.POST.get('rii_pk')
 
         ingredient_pk = pk
 
-        rii = InventoryIngredient.objects.get(
-            pk=rii_pk
-        )
+        rii = InventoryIngredient.objects.get(pk=rii_pk)
 
         Ingredient.objects.filter(pk=ingredient_pk).update(
             name=name,
@@ -268,23 +221,15 @@ def ingredient_create_API(request):
 
     if request.method == "POST":
 
-        name = request.POST.get(
-            'name'
-        ).strip()
+        name = request.POST.get('name').strip()
 
         quantity = Decimal(
-            request.POST.get(
-                'quantity'
-            ).strip()
+            request.POST.get('quantity').strip()
         )
 
-        rii_pk = request.POST.get(
-            'rii_pk'
-        )
+        rii_pk = request.POST.get('rii_pk')
 
-        rii = InventoryIngredient.objects.get(
-            pk=rii_pk
-        )
+        rii = InventoryIngredient.objects.get(pk=rii_pk)
 
         ingr = Ingredient(
             name=name,
@@ -304,10 +249,7 @@ def ingredient_delete_API(request, pk):
 
     if request.method == "DELETE":
 
-        ingredient = Ingredient.objects.get(
-            pk=pk
-        )
-
+        ingredient = Ingredient.objects.get(pk=pk)
         ingredient.delete()
 
     return JsonResponse({}, safe=False)
@@ -316,58 +258,33 @@ def ingredient_delete_API(request, pk):
 def get_ingredients_for_products_API(request):
 
     if request.method == "GET":
-
         ingredients = Ingredient.objects.all()
+
         product_pk = ""
 
         try:
-            product_pk = request.GET['pk']
+            product_pk = request.GET.get('pk')
 
         except ObjectDoesNotExist:
             pass
-        category = Category.objects.all()
+        category = Category.objects.values('pk', 'name')
+
         if product_pk is None or product_pk == "":
             data = {
-                'ingredients': list(
-                    ingredients.values(
-                        'id',
-                        'name'
-                    )
-                ),
-                'categories': list(
-                    category.values(
-                        'pk',
-                        'name'
-                    )
-                ),
+                'ingredients': list(ingredients.values('id', 'name')),
+                'categories': list(category.values('pk', 'name')),
             }
 
         else:
             product = Product.objects.get(
                 pk=product_pk
             )
-
             data = {
-                'ingredients': list(
-                    ingredients.values(
-                        'id',
-                        'name'
-                    )
-                ),
-                'ingridients_product': list(
-                    product.ingredient.values(
-                        'pk'
-                    )
-                ),
+                'ingredients': list(ingredients.values('id', 'name')),
+                'ingridients_product': list(product.ingredient.values('pk')),
                 'product_category': product.category.pk,
-                'categories': list(
-                    category.values(
-                        'pk',
-                        'name'
-                        )
-                ),
+                'categories': list(category.values('pk', 'name')),
                 'name': product.name,
-                'product_labels': product.food_allergen_labels,
                 'retail_price': product.retail_price
             }
 
@@ -377,45 +294,28 @@ def get_ingredients_for_products_API(request):
 def update_product_API(request, pk):
     if request.method == "POST":
 
-        name = request.POST.get(
-            'name'
-        ).strip()
+        name = request.POST.get('name').strip()
 
-        ingredients = request.POST.getlist(
-            'ingredients[]'
-        )
+        ingredients = request.POST.getlist('ingredients[]')
 
-        ingredients = Ingredient.objects.filter(
-            name__in=ingredients
-        )
+        ingredients = Ingredient.objects.filter(name__in=ingredients)
 
-        ingredients = ingredients.values(
-            'pk'
-        )
+        ingredients = ingredients.values('pk')
 
-        category = request.POST.get(
-            'category'
-        )
+        category = request.POST.get('category')
 
-        category = Category.objects.get(
-            name=category
-        )
+        category = Category.objects.get(name=category)
 
         price = Decimal(
-            request.POST.get(
-                'price'
-            )
+            request.POST.get('price')
         )
 
-        product = Product.objects.get(
-            pk=pk
-        )
+        product = Product.objects.get(pk=pk)
 
         product.name = name
 
         product.ingredient.clear()
         for i in ingredients:
-            print(i)
             product.ingredient.add(i['pk'])
 
         product.category = category
@@ -429,34 +329,20 @@ def update_product_API(request, pk):
 def create_product_API(request):
     if request.method == "POST":
 
-        name = request.POST.get(
-            'name'
-        ).strip()
+        name = request.POST.get('name').strip()
 
-        ingredients = request.POST.getlist(
-            'igredients[]'
-        )
+        ingredients = request.POST.getlist('igredients[]')
 
-        ingredients = Ingredient.objects.filter(
-            name__in=ingredients
-        )
+        ingredients = Ingredient.objects.filter(name__in=ingredients)
 
-        ingredients = ingredients.values(
-            'pk'
-        )
+        ingredients = ingredients.values('pk')
 
-        category = request.POST.get(
-            'category'
-        )
+        category = request.POST.get('category')
 
-        category = Category.objects.get(
-            name=category
-        )
+        category = Category.objects.get(name=category)
 
         price = Decimal(
-            request.POST.get(
-                'price'
-            )
+            request.POST.get('price')
         )
 
         product = Product(
@@ -482,10 +368,7 @@ def delete_product_API(request, pk):
 
     if request.method == "DELETE":
 
-        product = Product.objects.get(
-            pk=pk
-        )
-
+        product = Product.objects.get(pk=pk)
         product.delete()
 
     return JsonResponse({}, safe=False)
@@ -494,9 +377,7 @@ def delete_product_API(request, pk):
 def inventory_transactions_view(request):
 
     inventory_ingredient_transactions = \
-        InventoryIngredientTransaction.objects.all().order_by(
-            '-id'
-        )
+        InventoryIngredientTransaction.objects.all().order_by('-id')
 
     context = {
         'transactions': inventory_ingredient_transactions,
@@ -510,9 +391,7 @@ def get_automated_ordering_settings_API(request):
 
     if request.method == "GET":
 
-        automated_ordering = AutomatedOrdering.objects.get(
-            pk=1
-        )
+        automated_ordering = AutomatedOrdering.objects.get(pk=1)
 
         data = {
             'enable': automated_ordering.enable,
@@ -530,33 +409,19 @@ def update_autmated_ordering_settings_API(request):
 
     if request.method == "POST":
 
-        enable = request.POST.get(
-            'enable'
-        )
+        enable = request.POST.get('enable')
 
-        email_confirmation = request.POST.get(
-            'email_confirmation'
-        )
+        email_confirmation = request.POST.get('email_confirmation')
 
-        record_orders = request.POST.get(
-            'record_orders'
-        )
+        record_orders = request.POST.get('record_orders')
 
-        subject = request.POST.get(
-            'subject'
-        )
+        subject = request.POST.get('subject')
 
-        email_greeting_text = request.POST.get(
-            'email_greeting_text'
-        )
+        email_greeting_text = request.POST.get('email_greeting_text')
 
-        email_footer_text = request.POST.get(
-            'email_footer_text'
-        )
+        email_footer_text = request.POST.get('email_footer_text')
 
-        automated_ordering = AutomatedOrdering.objects.get(
-            pk=1
-        )
+        automated_ordering = AutomatedOrdering.objects.get(pk=1)
 
         automated_ordering.enable = enable.capitalize()
         automated_ordering.email_confirmation = email_confirmation.capitalize()

@@ -16,7 +16,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Product',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                    )
+                 ),
                 ('name', models.CharField(max_length=20)),
                 ('dairy', models.BooleanField(default=False)),
                 ('vegan', models.BooleanField(default=False)),
@@ -24,16 +30,32 @@ class Migration(migrations.Migration):
                 ('peanuts', models.BooleanField(default=False)),
                 ('fish', models.BooleanField(default=False)),
                 ('egg', models.BooleanField(default=False)),
-                ('ingredient', models.ManyToManyField(to='ingredient.Ingredient')),
+                ('ingredient', models.ManyToManyField(
+                    to='ingredient.Ingredient'
+                    )
+                 ),
             ],
         ),
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID'
+                    )
+                 ),
                 ('name', models.CharField(max_length=200)),
                 ('slug', models.SlugField(unique=True)),
-                ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='product.category')),
+                ('parent', models.ForeignKey(
+                    blank=True,
+                    null=True,
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name='children',
+                    to='product.category'
+                    )
+                 ),
             ],
             options={
                 'verbose_name_plural': 'categories',

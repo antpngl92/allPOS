@@ -173,17 +173,17 @@ $(document).on('click', '#create-product-btn', function () {
 
             $('.products-table tbody').append(
                 ` 
-        <tr id="`+ data['pk'] + `">
-            <td scope="row" class="nn-2">`+ name + `</th>
-            <td>`+ category + `</td>
-            <td>£`+ price + `</td>
-            <td>£`+ data['cost'] + `</td>
-            <td>
-                <button data-id="`+ data['pk'] + `" class="btn btn-info update-product" data-toggle="modal" data-target="#product-modal">Edit</button>
-                <button data-id="`+ data['pk'] + `"  class="btn btn-danger btn-delete-product" >Delete</button>
-            </td>
-        </tr>
-        `
+                <tr id="`+ data['pk'] + `">
+                    <td scope="row" class="nn-2">`+ name + `</th>
+                    <td>`+ category + `</td>
+                    <td>£`+ price + `</td>
+                    <td>£`+ data['cost'] + `</td>
+                    <td>
+                        <button data-id="`+ data['pk'] + `" class="btn btn-info update-product" data-toggle="modal" data-target="#product-modal">Edit</button>
+                        <button data-id="`+ data['pk'] + `"  class="btn btn-danger btn-delete-product" >Delete</button>
+                    </td>
+                </tr>
+                `
             )
             $('#product-modal').modal('toggle');
         }

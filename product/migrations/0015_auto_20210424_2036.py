@@ -15,11 +15,21 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='food_allergen_labels',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='product.foodallergenlabels'),
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                to='product.foodallergenlabels'
+            ),
         ),
         migrations.AlterField(
             model_name='product',
             name='ingredient',
-            field=models.ManyToManyField(blank=True, null=True, related_name='product', to='ingredient.Ingredient'),
+            field=models.ManyToManyField(
+                blank=True,
+                null=True,
+                related_name='product',
+                to='ingredient.Ingredient'
+            ),
         ),
     ]

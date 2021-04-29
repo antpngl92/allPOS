@@ -11,5 +11,6 @@ class OrderEmailAdmin(admin.ModelAdmin):
           'send_to',
           'email_subject'
      ]
-     
+
+
 admin.site.register(OrderEmail, OrderEmailAdmin)

@@ -18,6 +18,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='product',
             name='food_allergen_labels',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='product.foodallergenlabels'),
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                to='product.foodallergenlabels'
+            ),
         ),
     ]

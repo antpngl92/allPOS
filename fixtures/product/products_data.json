@@ -1,0 +1,289 @@
+[
+    {
+        "model": "product.product",
+        "pk": 16,
+        "fields": {
+            "name": "Latte",
+            "category": 8,
+            "retail_price": "2.60",
+            "ingredient": [
+                17,
+                19,
+                23
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 17,
+        "fields": {
+            "name": "Cappuccino",
+            "category": 8,
+            "retail_price": "2.60",
+            "ingredient": [
+                17,
+                19,
+                23
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 18,
+        "fields": {
+            "name": "Flat White",
+            "category": 8,
+            "retail_price": "2.60",
+            "ingredient": [
+                17,
+                19,
+                23
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 19,
+        "fields": {
+            "name": "Eggs and Avo Toast",
+            "category": 10,
+            "retail_price": "4.70",
+            "ingredient": [
+                24,
+                29,
+                33,
+                34
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 20,
+        "fields": {
+            "name": "Plain Croissant",
+            "category": 12,
+            "retail_price": "1.00",
+            "ingredient": [
+                37
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 21,
+        "fields": {
+            "name": "Pain on Chocolate",
+            "category": 12,
+            "retail_price": "1.50",
+            "ingredient": [
+                36
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 22,
+        "fields": {
+            "name": "Can Coke",
+            "category": 9,
+            "retail_price": "2.00",
+            "ingredient": [
+                35
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 23,
+        "fields": {
+            "name": "Bottle Still Water",
+            "category": 9,
+            "retail_price": "1.00",
+            "ingredient": [
+                27
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 24,
+        "fields": {
+            "name": "Sour Dough Bread",
+            "category": 12,
+            "retail_price": "3.20",
+            "ingredient": [
+                38
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 25,
+        "fields": {
+            "name": "One English Muffin",
+            "category": 12,
+            "retail_price": "1.20",
+            "ingredient": [
+                25
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 26,
+        "fields": {
+            "name": "Egg Muffin and Bacon",
+            "category": 10,
+            "retail_price": "2.20",
+            "ingredient": [
+                25,
+                28,
+                29,
+                30,
+                32
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 27,
+        "fields": {
+            "name": "Hot Chocolate",
+            "category": 8,
+            "retail_price": "2.00",
+            "ingredient": [
+                17,
+                23,
+                40
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 28,
+        "fields": {
+            "name": "Single Espresso",
+            "category": 8,
+            "retail_price": "1.60",
+            "ingredient": [
+                18,
+                23
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 29,
+        "fields": {
+            "name": "Double Espresso",
+            "category": 8,
+            "retail_price": "1.80",
+            "ingredient": [
+                19,
+                23
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 30,
+        "fields": {
+            "name": "English Breakfast Tea",
+            "category": 8,
+            "retail_price": "1.40",
+            "ingredient": [
+                20,
+                22
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 31,
+        "fields": {
+            "name": "Green Tea",
+            "category": 8,
+            "retail_price": "1.40",
+            "ingredient": [
+                22,
+                23
+            ]
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 32,
+        "fields": {
+            "name": "Machiato",
+            "category": 8,
+            "retail_price": "2.00",
+            "ingredient": [
+                19,
+                20
+            ]
+        }
+    },
+    {
+        "model": "product.category",
+        "pk": 8,
+        "fields": {
+            "name": "Hot Drinks",
+            "parent": null,
+            "slug": "hot_drinks"
+        }
+    },
+    {
+        "model": "product.category",
+        "pk": 9,
+        "fields": {
+            "name": "Soft Drinks",
+            "parent": null,
+            "slug": "soft_drinks"
+        }
+    },
+    {
+        "model": "product.category",
+        "pk": 10,
+        "fields": {
+            "name": "Sandwitches",
+            "parent": null,
+            "slug": "sandwitches"
+        }
+    },
+    {
+        "model": "product.category",
+        "pk": 11,
+        "fields": {
+            "name": "Cakes",
+            "parent": null,
+            "slug": "cakes"
+        }
+    },
+    {
+        "model": "product.category",
+        "pk": 12,
+        "fields": {
+            "name": "Pastry",
+            "parent": null,
+            "slug": "pastry"
+        }
+    },
+    {
+        "model": "product.category",
+        "pk": 13,
+        "fields": {
+            "name": "Kitchen",
+            "parent": null,
+            "slug": "kitchen"
+        }
+    },
+    {
+        "model": "product.category",
+        "pk": 14,
+        "fields": {
+            "name": "Others",
+            "parent": null,
+            "slug": "others"
+        }
+    }
+]

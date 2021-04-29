@@ -15,6 +15,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='orderemail',
             name='ingredients',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='stock.inventoryingredient'),
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                to='stock.inventoryingredient'
+            ),
         ),
     ]

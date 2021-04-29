@@ -19,8 +19,8 @@
                         <table class="table borderless">
                             {% for i, q in item.items|dictsortreversed:1 %}
                             {% if forloop.counter < 11 %} <tr>
-                                <td class="product-name">{{i}}</td>
-                                <td class="quantity-sold">{{q}}</td>
+                                <td class="product-name" data-name="{{i}}">{{i}}</td>
+                                <td class="quantity-sold"data-name="{{i}}-count">{{q}}</td>
                                 </tr>
                                 {% endif %}
 

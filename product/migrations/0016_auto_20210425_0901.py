@@ -18,7 +18,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='ingredient',
-            field=models.ManyToManyField(blank=True, related_name='product', to='ingredient.Ingredient'),
+            field=models.ManyToManyField(
+                blank=True,
+                related_name='product',
+                to='ingredient.Ingredient'
+            ),
         ),
         migrations.AlterField(
             model_name='product',

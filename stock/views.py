@@ -267,6 +267,7 @@ def get_ingredients_for_products_API(request):
 
         except ObjectDoesNotExist:
             pass
+
         category = Category.objects.values('pk', 'name')
 
         if product_pk is None or product_pk == "":
@@ -276,9 +277,7 @@ def get_ingredients_for_products_API(request):
             }
 
         else:
-            product = Product.objects.get(
-                pk=product_pk
-            )
+            product = Product.objects.get(pk=product_pk)
             data = {
                 'ingredients': list(ingredients.values('id', 'name')),
                 'ingridients_product': list(product.ingredient.values('pk')),
@@ -292,16 +291,13 @@ def get_ingredients_for_products_API(request):
 
 
 def update_product_API(request, pk):
+
     if request.method == "POST":
 
         name = request.POST.get('name').strip()
-
         ingredients = request.POST.getlist('ingredients[]')
-
         ingredients = Ingredient.objects.filter(name__in=ingredients)
-
         ingredients = ingredients.values('pk')
-
         category = request.POST.get('category')
 
         category = Category.objects.get(name=category)
@@ -330,13 +326,9 @@ def create_product_API(request):
     if request.method == "POST":
 
         name = request.POST.get('name').strip()
-
         ingredients = request.POST.getlist('igredients[]')
-
         ingredients = Ingredient.objects.filter(name__in=ingredients)
-
         ingredients = ingredients.values('pk')
-
         category = request.POST.get('category')
 
         category = Category.objects.get(name=category)
@@ -376,8 +368,7 @@ def delete_product_API(request, pk):
 
 def inventory_transactions_view(request):
 
-    inventory_ingredient_transactions = \
-        InventoryIngredientTransaction.objects.all().order_by('-id')
+    inventory_ingredient_transactions = InventoryIngredientTransaction.objects.all().order_by('-id')
 
     context = {
         'transactions': inventory_ingredient_transactions,
@@ -410,15 +401,10 @@ def update_autmated_ordering_settings_API(request):
     if request.method == "POST":
 
         enable = request.POST.get('enable')
-
         email_confirmation = request.POST.get('email_confirmation')
-
         record_orders = request.POST.get('record_orders')
-
         subject = request.POST.get('subject')
-
         email_greeting_text = request.POST.get('email_greeting_text')
-
         email_footer_text = request.POST.get('email_footer_text')
 
         automated_ordering = AutomatedOrdering.objects.get(pk=1)

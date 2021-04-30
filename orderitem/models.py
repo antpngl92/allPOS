@@ -3,14 +3,8 @@ from product.models import Product
 
 
 class OrderItem(models.Model):
-    product = models.ForeignKey(
-        Product,
-        on_delete=models.DO_NOTHING
-    )
-    product_name = models.CharField(
-        max_length=30,
-        blank=True
-    )
+    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    product_name = models.CharField(max_length=30, blank=True)
     quantity = models.IntegerField()
 
     def save(self, *args, **kwargs):

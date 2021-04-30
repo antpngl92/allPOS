@@ -25,9 +25,7 @@ class EmployeeModelManager(BaseUserManager):
         )
 
         user.set_unusable_password()
-        user.save(
-            using=self._db
-        )
+        user.save(using=self._db)
 
         return user
 
@@ -52,9 +50,7 @@ class EmployeeModelManager(BaseUserManager):
         user.is_staff = True
         user.is_superuser = True
         user.set_unusable_password()
-        user.save(
-            using=self._db
-        )
+        user.save(using=self._db)
 
         return user
 
@@ -70,112 +66,31 @@ class Employee(AbstractBaseUser):
         (EMPLOYEE, 'Employee')
     )
 
-    first_name = models.CharField(
-        max_length=20
-    )
+    first_name = models.CharField(max_length=20)
+    second_name = models.CharField(blank=True, max_length=20)
+    last_name = models.CharField(max_length=20)
+    date_of_birth = models.DateField(blank=True, null=True)
+    address = models.CharField(max_length=60, blank=True)
+    tel_number = models.CharField(blank=True, max_length=12)
+    email = models.EmailField(blank=True)
 
-    second_name = models.CharField(
-        blank=True,
-        max_length=20
-    )
+    position = models.CharField(blank=False, max_length=20)
+    hourly_pay_rate = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    start_date = models.DateField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
+    is_employeed = models.BooleanField(blank=True, null=True)
+    nin = models.CharField(max_length=9, blank=True, null=True, unique=True)
+    permission_level = models.IntegerField(choices=AUTHORIZATION, default=EMPLOYEE)
+    pin = models.IntegerField('Pincode', unique=True)
+    password = models.CharField(blank=True, max_length=100)
 
-    last_name = models.CharField(
-        max_length=20
-    )
+    date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
+    last_login = models.DateTimeField(verbose_name='last login', auto_now_add=True)
+    is_admin = models.BooleanField(default=False)
 
-    date_of_birth = models.DateField(
-        blank=True,
-        null=True
-    )
-
-    address = models.CharField(
-        max_length=60,
-        blank=True
-    )
-
-    tel_number = models.CharField(
-        blank=True,
-        max_length=12
-    )
-
-    email = models.EmailField(
-        blank=True
-    )
-
-    position = models.CharField(
-        blank=False,
-        max_length=20
-    )
-
-    hourly_pay_rate = models.DecimalField(
-        max_digits=5,
-        decimal_places=2,
-        null=True,
-        blank=True
-    )
-
-    start_date = models.DateField(
-        blank=True,
-        null=True
-    )
-
-    end_date = models.DateField(
-        blank=True,
-        null=True
-    )
-
-    is_employeed = models.BooleanField(
-        blank=True,
-        null=True
-    )
-
-    nin = models.CharField(
-        max_length=9,
-        blank=True,
-        null=True,
-        unique=True
-    )
-
-    permission_level = models.IntegerField(
-        choices=AUTHORIZATION,
-        default=EMPLOYEE
-    )
-
-    pin = models.IntegerField(
-        'Pincode',
-        unique=True
-    )
-
-    password = models.CharField(
-        blank=True,
-        max_length=100
-    )
-
-    date_joined = models.DateTimeField(
-        verbose_name='date joined',
-        auto_now_add=True
-    )
-
-    last_login = models.DateTimeField(
-        verbose_name='last login',
-        auto_now_add=True
-    )
-
-    is_admin = models.BooleanField(
-        default=False
-    )
-
-    is_active = models.BooleanField(
-        default=True
-    )
-
-    is_staff = models.BooleanField(
-        default=False
-    )
-
-    is_superuser = models.BooleanField(
-        default=False
-    )
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     objects = EmployeeModelManager()
 

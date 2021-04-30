@@ -12,28 +12,11 @@ class TimeStapm(models.Model):
         (CLOCKOUT, 'Clock Out')
     )
 
-    employee = models.ForeignKey(
-        Employee,
-        null=True,
-        on_delete=models.SET_NULL
-    )
-
-    activity_type = models.IntegerField(
-        choices=TIMESTAMP,
-        default=CLOCKIN
-    )
-
-    datestamp = models.DateField(
-        auto_now_add=True
-    )
-
-    timestamp = models.TimeField(
-        auto_now_add=True
-    )
-
-    on_shift = models.BooleanField(
-        default=False
-    )
+    employee = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL)
+    activity_type = models.IntegerField(choices=TIMESTAMP, default=CLOCKIN)
+    datestamp = models.DateField(auto_now_add=True)
+    timestamp = models.TimeField(auto_now_add=True)
+    on_shift = models.BooleanField(default=False)
 
     def to_date(self):
         return self.timestamp.date

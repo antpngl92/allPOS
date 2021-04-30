@@ -9,51 +9,23 @@ from stock.models import (
 
 class InventoryIngredientAdmin(admin.ModelAdmin):
 
-    list_display = (
-         'pk',
-         'name',
-         'unit_cost',
-         'unit_weight',
-         'current_stock',
-         'minimum_stock_needed'
-     )
+    list_display = ('pk', 'name', 'unit_cost', 'unit_weight', 'current_stock', 'minimum_stock_needed')
 
 
-admin.site.register(
-     InventoryIngredient,
-     InventoryIngredientAdmin
-)
+admin.site.register(InventoryIngredient, InventoryIngredientAdmin)
 
 
 class InventoryIngredientTransactionAdmin(admin.ModelAdmin):
 
-    list_display = (
-          'inventory_ingredient',
-          'transaction',
-          'quantity',
-          'reason',
-          'date',
-          'time'
-    )
+    list_display = ('inventory_ingredient', 'transaction', 'quantity', 'reason', 'date', 'time')
 
 
-admin.site.register(
-     InventoryIngredientTransaction,
-     InventoryIngredientTransactionAdmin
-)
+admin.site.register(InventoryIngredientTransaction, InventoryIngredientTransactionAdmin)
 
 
 class AutomatedOrderingAdmin(admin.ModelAdmin):
 
-    list_display = (
-          'enable',
-          'email_confirmation',
-          'record_orders',
-          'email_text'
-    )
+    list_display = ('enable', 'email_confirmation', 'record_orders','email_text')
 
 
-admin.site.register(
-     AutomatedOrdering,
-     AutomatedOrderingAdmin
-)
+admin.site.register(AutomatedOrdering, AutomatedOrderingAdmin)

@@ -4,25 +4,10 @@ from ingredient.models import Ingredient
 
 class Product(models.Model):
 
-    name = models.CharField(
-        max_length=40
-    )
-    ingredient = models.ManyToManyField(
-        Ingredient,
-        blank=True,
-        related_name='product'
-    )
-    category = models.ForeignKey(
-        'Category',
-        null=True,
-        blank=True,
-        on_delete=models.DO_NOTHING
-    )
-
-    retail_price = models.DecimalField(
-        decimal_places=2,
-        max_digits=5
-    )
+    name = models.CharField(max_length=40)
+    ingredient = models.ManyToManyField(Ingredient, blank=True, related_name='product')
+    category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.DO_NOTHING)
+    retail_price = models.DecimalField(decimal_places=2, max_digits=5)
 
     def __str__(self):
         return self.name
@@ -41,20 +26,10 @@ class Product(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(
-        max_length=200
-    )
+    name = models.CharField(max_length=200)
     slug = models.SlugField()
-    parent = models.ForeignKey(
-        'self',
-        blank=True,
-        null=True,
-        related_name='children',
-        on_delete=models.CASCADE
-    )
-    slug = models.SlugField(
-        unique=True
-    )
+    parent = models.ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
+    slug = models.SlugField(unique=True)
 
     class Meta:
         unique_together = ('slug', 'parent',)

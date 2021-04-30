@@ -117,30 +117,23 @@ def clock_in_out_API(request):
 
         status = "Unsuccessful"
         pin = request.POST['pin']
-        employee = Employee.objects.get(
-            pin=pin
-        )
+        employee = Employee.objects.get(pin=pin)
 
         today = datetime.date.today()
         todays_time_stamp_exist = True
         now = datetime.time
 
-        # Get the latest timestamp
         try:
             timestamp = TimeStapm.objects.filter(
                 employee=employee,
                 datestamp=today
             )
-
-            timestamp = timestamp.latest(
-                'timestamp'
-            )
+            timestamp = timestamp.latest('timestamp')
 
         except ObjectDoesNotExist:
             todays_time_stamp_exist = False
 
-        # If the employee doesn't have a
-        # timestamp for today create a clock in timestamp
+
         if todays_time_stamp_exist is False:
             timestamp_clock_in = TimeStapm(
                 employee=employee,
@@ -153,8 +146,6 @@ def clock_in_out_API(request):
             timestamp_clock_in.save()
             status = "Clocked In!"
 
-        # If employee has timestamp for today
-        # Check if employee is clocked in, if it is, clock out
         else:
             if timestamp.activity_type == 1:
                 timestamp_clock_out = TimeStapm(
@@ -168,7 +159,6 @@ def clock_in_out_API(request):
                 timestamp_clock_out.save()
                 status = "Clocked Out!"
 
-            # If employee is clocked out, clock in
             else:
                 timestamp_clock_in = TimeStapm(
                     employee=employee,
@@ -191,9 +181,7 @@ def create_employee_API(request):
 
     if request.method == "POST":
 
-        data = request.POST.getlist(
-            'data[]'
-        )
+        data = request.POST.getlist('data[]')
 
         first_name = data[0]
         middle_name = data[1]
@@ -269,34 +257,27 @@ def get_employee_API(request, pk):
 
     if request.method == "GET":
 
-        employee = Employee.objects.filter(
-            pk=pk
-        )
-
-        data = serializers.serialize(
-            'json',
-            employee
-        )
+        employee = Employee.objects.filter(pk=pk)
+        data = serializers.serialize('json',employee)
 
     return JsonResponse(data, safe=False)
 
 
 @login_required
 def delete_employee_API(request, pk):
-
+    status = "Unsuccess"
     if request.method == "DELETE":
 
-        employee = Employee.objects.get(
-            pk=pk
-        )
-
+        employee = Employee.objects.get(pk=pk)
         employee.delete()
-    return JsonResponse({'status': 'Success'}, safe=False)
+        status = "Success"
+
+    return JsonResponse({'status': status}, safe=False)
 
 
 @login_required
 def edit_employee_API(request, pk):
-
+    status = "Unsuccess"
     if request.method == "PUT":
 
         data = QueryDict(request.body)
@@ -356,8 +337,9 @@ def edit_employee_API(request, pk):
             pin=pin,
             password=password
         )
+        status = "Success"
 
-    return JsonResponse({'status': 'Success'}, safe=False)
+    return JsonResponse({'status': status}, safe=False)
 
 
 def get_all_employees_API(request):
@@ -365,12 +347,6 @@ def get_all_employees_API(request):
     if request.method == "GET":
 
         employees = Employee.objects.all()
-        employees = list(
-            employees.values_list(
-                'id',
-                'first_name',
-                'last_name',
-            )
-        )
+        employees = list(employees.values_list('id','first_name','last_name'))
 
     return JsonResponse(employees, safe=False)

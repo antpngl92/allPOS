@@ -18,12 +18,7 @@ from schedule.models import Schedule
 def todays_schedule(request):
 
     today = date.today()
-
-    schedules = Schedule.objects.filter(
-        work_date=today
-    ).order_by(
-        'employee'
-    )
+    schedules = Schedule.objects.filter(work_date=today).order_by('employee')
 
     context = {
         'title': 'Scheduler',
@@ -61,14 +56,7 @@ def update_rota(request):
         )
         weekdates.append(week_date)
 
-    schedules = Schedule.objects.filter(
-        work_date__range=[
-            weekdates[1],
-            weekdates[0]
-        ]
-    ).order_by(
-        'work_date'
-    )
+    schedules = Schedule.objects.filter(work_date__range=[weekdates[1],weekdates[0]]).order_by('work_date')
 
     context = {
         'title': 'Update Rota',
@@ -108,17 +96,10 @@ def get_schedule_for_rota_API(request):
 
     if request.method == "GET":
 
-        week = request.GET.getlist(
-            'week[]'
-        )
-
+        week = request.GET.getlist('week[]')
         week = [w[:10] for w in week]
 
-        schedules = Schedule.objects.filter(
-            work_date__in=week
-        ).order_by(
-            "employee"
-        )
+        schedules = Schedule.objects.filter(work_date__in=week).order_by("employee")
         schedules = list(schedules.values())
 
     return JsonResponse(schedules, safe=False)
@@ -142,15 +123,7 @@ def get_weekly_schedule_API(request):
 
             weekdates.append(week_date)
 
-        schedules = Schedule.objects.filter(
-            work_date__range=[
-                weekdates[1],
-                weekdates[0]
-            ]
-        ).order_by(
-                'work_date'
-        )
-
+        schedules = Schedule.objects.filter(work_date__range=[weekdates[1],weekdates[0]]).order_by('work_date')
         schedules = list(
             schedules.values_list(
                 'id',
@@ -169,9 +142,7 @@ def get_schedule_API(request, pk):
 
     if request.method == "GET":
 
-        schedule = Schedule.objects.filter(
-            pk=pk
-        )
+        schedule = Schedule.objects.filter(pk=pk)
 
         schedule = list(
             schedule.values_list(
@@ -206,9 +177,7 @@ def update_schedule_API(request, pk):
 
     if request.method == "POST":
 
-        data = request.POST.getlist(
-            'data[]'
-        )
+        data = request.POST.getlist('data[]')
 
         schedule_id = data[0]
         employee_id = data[1]
@@ -216,13 +185,8 @@ def update_schedule_API(request, pk):
         shift_start = data[3]
         shift_end = data[4]
 
-        employee = Employee.objects.get(
-            pk=employee_id
-        )
-
-        schedule = Schedule.objects.get(
-            pk=schedule_id
-        )
+        employee = Employee.objects.get(pk=employee_id)
+        schedule = Schedule.objects.get(pk=schedule_id)
 
         schedule.employee = employee
         schedule.work_date = shift_date
@@ -237,15 +201,10 @@ def create_schedule_API(request):
 
     if request.method == "POST":
 
-        data = request.POST.getlist(
-            'data[]'
-        )
+        data = request.POST.getlist('data[]')
 
         employee_id = data[0]
-
-        employee = Employee.objects.get(
-            pk=employee_id
-        )
+        employee = Employee.objects.get(pk=employee_id)
 
         shift_date = data[1]
         shift_start = data[2]
@@ -264,11 +223,10 @@ def create_schedule_API(request):
 
 
 def delete_schedule_API(request, pk):
-    if request.method == "DELETE":
-        schedule = Schedule.objects.get(
-            pk=pk
-        )
 
+    if request.method == "DELETE":
+
+        schedule = Schedule.objects.get(pk=pk)
         schedule.delete()
 
     return JsonResponse({'status': 'Success'}, safe=False)
@@ -276,15 +234,15 @@ def delete_schedule_API(request, pk):
 
 @login_required
 def timestamp_view(request):
-    timestamps = TimeStapm.objects.all().order_by(
-        '-datestamp'
-    )
 
+    timestamps = TimeStapm.objects.all().order_by('-datestamp')
     title = "Timestamps"
+
     context = {
         'timestamps': timestamps,
         'title': title
     }
+
     return render(request, 'epos/timestamp.html', context)
 
 
@@ -293,9 +251,7 @@ def employee_reports_view(request):
 
     title = "Employee Reports"
 
-    context = {
-        'title': title
-    }
+    context = {'title': title}
 
     return render(request, 'epos/employee_reports.html', context)
 
@@ -309,46 +265,23 @@ def generate_report_API(request):
 
     if request.method == "GET":
 
-        employee_pk = request.GET.get(
-            'employee'
-        )
-
-        d = request.GET.get(
-            'date'
-        )
-
-        date_from = request.GET.get(
-            'from'
-        )
-
-        date_to = request.GET.get(
-            'to'
-        )
+        employee_pk = request.GET.get('employee')
+        d = request.GET.get('date')
+        date_from = request.GET.get('from')
+        date_to = request.GET.get('to')
 
         if employee_pk != all:
 
-            emp = Employee.objects.get(
-                pk=employee_pk
-            )
-
-            employees.append(
-                emp.get_full_short()
-            )
+            emp = Employee.objects.get(pk=employee_pk)
+            employees.append(emp.get_full_short())
 
             if d:
-                h = single_employee_single_day_working_hours(
-                    emp,
-                    d
-                )
+                h = single_employee_single_day_working_hours(emp,d)
 
                 hours.append(h)
                 days.append(d)
             else:
-                d, h = single_employee_total_period_hours(
-                    emp,
-                    date_from,
-                    date_to
-                )
+                d, h = single_employee_total_period_hours(emp,date_from,date_to)
 
                 days += days + d
                 hours += h
@@ -379,13 +312,7 @@ def single_employee_single_day_working_hours(employee, d):
         activity_type=2
     )
 
-    return datetime.combine(
-        date.today(),
-        clockedOut.timestamp
-    ) - datetime.combine(
-        date.today(),
-        clockedIn.timestamp
-        )
+    return datetime.combine(date.today(), clockedOut.timestamp) - datetime.combine(date.today(), clockedIn.timestamp)
 
 
 def single_employee_total_period_hours(employee, date_from, date_to):
@@ -406,11 +333,6 @@ def single_employee_total_period_hours(employee, date_from, date_to):
 
     for d in date:
         dates.append(d)
-        hours.append(
-            single_employee_single_day_working_hours(
-                employee,
-                d
-            )
-        )
+        hours.append(single_employee_single_day_working_hours(employee,d))
 
     return dates, hours

@@ -51,9 +51,7 @@ def send_manager_notification_for_automated_order(
     email_targets: OrderEmail
 ):
 
-    managers = Employee.objects.filter(
-        permission_level=1
-    )
+    managers = Employee.objects.filter(permission_level=1)
 
     recepients = []
 
@@ -65,20 +63,10 @@ def send_manager_notification_for_automated_order(
     message = ""
 
     ordinal_numbers = [
-        '1st',
-        '2nd',
-        '3rd',
-        '4th',
-        '5th',
-        '6th',
-        '7th',
-        '8th',
-        '9th',
-        '10th',
-        '11th',
-        '12th',
-        '13th',
-        '14th'
+        '1st', '2nd', '3rd', '4th',
+        '5th', '6th', '7th', '8th',
+        '9th', '10th', '11th', '12th',
+        '13th','14th'
     ]
 
     index_ordinal_numbers = 0
@@ -140,8 +128,7 @@ def generate_order_email_objects(
         )
 
         for i in ingredients:
-            automated_ordering_object.email_text += \
-                i.name + ": " + str(i.unit_weight) + "gr. \n"
+            automated_ordering_object.email_text += i.name + ": " + str(i.unit_weight) + "gr. \n"
         automated_ordering_object.save()
 
         email_body += automated_ordering_object.email_greeting_text

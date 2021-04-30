@@ -52,35 +52,29 @@ def home_view(request):
 def analytics_view(request):
     today = date.today()
 
-    # Get all the orders for today
-    orders = Order.objects.filter(
-        date=today
-    )
+    orders = Order.objects.filter(date=today)
 
     ordered_items = defaultdict(dict)
 
     for order in orders:
-        # For each order get products list
+
         products_in_order = order.products.filter()
 
-        # for each product of the product list
-        for product_in_order in products_in_order:
+        for product in products_in_order:
 
-            # get product name
-            temp_name = product_in_order.product_name
-            temp_quantity = product_in_order.quantity
+            temp_name = product.product_name
+            temp_quantity = product.quantity
 
-            # if order name doesn't exist as a key in the dictironary
-            # set a key-value in the dictionary
             if ordered_items[temp_name] == {}:
                 ordered_items[temp_name] = temp_quantity
 
-            # otherwise, update the value with the given order-name-key
+
             else:
                 ordered_items[temp_name] = \
                  ordered_items[temp_name] + temp_quantity
 
     ordered_items = dict(ordered_items)
+
     week_days = [
         "Monday",
         "Tuesday",
@@ -90,14 +84,14 @@ def analytics_view(request):
         "Saturday",
         "Sunday"
     ]
-    today_week_day = get_today_week_day(today)  # Get numeric day of the week
 
-    # get list of week days, where todays date is at last index
+    today_week_day = get_today_week_day(today)
+
     weeek_days_list = get_list_week_days(week_days, today_week_day)
 
-    # Get revenue for each day for the last 2 weeks
     this_week_daily_revenue = []
     last_week_daily_revenue = []
+
     for i in range(0, 14):
         temp_date = today - timedelta(days=i)
         orders = Order.objects.filter(date=temp_date)
@@ -115,6 +109,7 @@ def analytics_view(request):
         'weeek_days_list': weeek_days_list,
         'title': "Analytics"
     }
+
     return render(request, 'epos/analytics.html', context)
 
 
@@ -160,13 +155,8 @@ def get_today_week_day(today):
 def get_products_API(request, pk):
     if request.method == "GET":
 
-        products = Product.objects.filter(
-            category=pk
-        )
-
-        products = list(
-            products.values()
-        )
+        products = Product.objects.filter(category=pk)
+        products = list(products.values())
 
     return JsonResponse(products, safe=False)
 
@@ -175,57 +165,35 @@ def get_products_API(request, pk):
 def create_order_API(request):
     if request.method == "POST":
 
-        products = request.POST.getlist(
-            'products[]'
-        )
+        products = request.POST.getlist('products[]')
+        products_quantity = request.POST.getlist('products_quantity[]')
+        order_number = request.POST.get('order_number')
+        order_type = request.POST.get('order_type')
+        order_total = request.POST.get('order_total')
 
-        products_quantity = request.POST.getlist(
-            'products_quantity[]'
-        )
-
-        order_number = request.POST.get(
-            'order_number'
-        )
-
-        order_type = request.POST.get(
-            'order_type'
-        )
-
-        order_total = request.POST.get(
-            'order_total'
-        )
-
-        # Convert Product string to str list
         products_str_arr = []
-        for p in products:
-            products_str_arr.append(p)
+        for product in products:
+            products_str_arr.append(product)
 
-        # Convert quantity str list to int
         products_quantity_int_arr = []
-        for p in products_quantity:
-            products_quantity_int_arr.append(int(p))
+        for quantiry in products_quantity:
+            products_quantity_int_arr.append(int(quantiry))
 
-        # Create order_items with the products and their quantities
         order_items = []
         products_arr = []
         for i in range(len(products)):
             temp_product_name = products_str_arr[i]
-
-            # Temp Product
             prod = Product.objects.get(name=temp_product_name)
 
-            # Temp quantity
             prod_quan = products_quantity_int_arr[i]
 
-            # Create new order items for the ordered products
             order_item = OrderItem(
                 product=prod,
                 quantity=prod_quan
             )
 
-            # Store all products for the order in an array
             products_arr.append(prod)
-            # Store all order items for the order in an array
+
             order_items.append(order_item)
             order_item.save()
 
@@ -236,7 +204,7 @@ def create_order_API(request):
         if p_type == "Card":
             p_type = 2
 
-        # Create Order
+
         current_user = request.user
         order = Order(
             order_type=o_type,
@@ -247,19 +215,17 @@ def create_order_API(request):
             payment_method=p_type
         )
         order.save()
-        order.products.set(order_items)  # Set the order_items for this order
+        order.products.set(order_items)
         order.save()
-        # Each order item of a Order
-        for oi in order_items:
-            # Has 1 or more of the same products
-            temp_product_quantity = oi.quantity
-            # temp_product is a Product model instance
-            temp_product = oi.product
-            # get all ingredients for each Product
+
+        for order_item in order_items:
+
+            temp_product_quantity = order_item.quantity
+            temp_product = order_item.product
+
             ingredients_for_product = temp_product.ingredient.all()
-            for i in ingredients_for_product:  # For each ingredient in Product
-                # For each Inventory Ingridient in Ingredient
-                # Create a transaction
+            for i in ingredients_for_product: 
+
                 transaction = InventoryIngredientTransaction(
                     inventory_ingredient=i.inventory_ingredient,
                     quantity=i.quantity*temp_product_quantity,
@@ -267,8 +233,7 @@ def create_order_API(request):
                     reason="For order "+order_number
                 )
                 transaction.save()
-                # Exctract used Ingridient quantity
-                # for each Order Item from Inventory Ingredient
+
                 i.inventory_ingredient.current_stock = (
                     i.inventory_ingredient.current_stock -
                     i.quantity*temp_product_quantity
@@ -296,13 +261,16 @@ def get_orders_list_API(request):
     orders = []
     if request.method == 'GET':
         orders = Order.objects.all()
+
     return JsonResponse(list(orders.values()), safe=False)
 
 
 def settings(request):
+
     title = "Settings"
     try:
         tax = Tax.objects.latest('id')
+
     except Tax.DoesNotExist:
         tax = ""
 
@@ -310,19 +278,24 @@ def settings(request):
         'title': title,
         'tax': tax
     }
+
     return render(request, 'epos/settings.html', context)
 
 
 def get_TAX_API(request):
+
     try:
         tax = Tax.objects.latest('id')
         tax = tax.tax
+
     except Tax.DoesNotExist:
         tax = 0.00
+
     return JsonResponse({'tax': tax}, safe=False)
 
 
 def change_TAX_API(request, tax):
+
     if request.method == "POST":
         tax = Tax(tax=tax)
         tax.save()

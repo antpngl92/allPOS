@@ -84,14 +84,11 @@ def send_manager_notification_for_automated_order(
     index_ordinal_numbers = 0
 
     for email_object in email_objects:
-        message += ordinal_numbers[index_ordinal_numbers] +\
-            " email:" + "\n\n"
+        message += ordinal_numbers[index_ordinal_numbers] + " email:" + "\n\n"
         message += "Sent to: " + email_object.send_to + "\n"
-        message += \
-            "----------------- EMAIL BODY -------------------------------------------\n"
+        message += "----------------- EMAIL BODY -------------------------------------------\n"
         message += email_object.email_body + "\n\n"
-        message += \
-            "========================================================================\n"
+        message += "========================================================================\n"
         index_ordinal_numbers += 1
 
     send_mail(

@@ -139,4 +139,4 @@ class AutomatedOrdering(SingletonModel):
 
     def __str__(self):
         status = 'enabled' if self.enable else 'disabled'
-        return f'Autometed orderins is {status}'
+        return f'Automated ordering is {status}'
